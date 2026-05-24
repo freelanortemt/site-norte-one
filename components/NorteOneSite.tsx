@@ -213,10 +213,15 @@ export function NorteOneSite() {
   }, []);
 
   return (
-    <main ref={heroRef} className="relative overflow-hidden bg-obsidian text-soft">
+    <main ref={heroRef} className="relative overflow-hidden bg-obsidian text-soft [&>footer]:relative [&>footer]:z-10 [&>section]:relative [&>section]:z-10">
       <motion.div className="cursor-glow hidden lg:block" style={{ left: springX, top: springY }} />
       <div className="noise pointer-events-none fixed inset-0 z-50 opacity-[0.035]" />
-      <div className="tech-grid pointer-events-none absolute inset-x-0 top-0 h-[980px] opacity-70" />
+      <div className="animated-dark-bg pointer-events-none" aria-hidden="true">
+        <div className="animated-dark-bg__grid" />
+        <div className="animated-dark-bg__particles" />
+        <div className="animated-dark-bg__scan" />
+      </div>
+      <div className="tech-grid pointer-events-none absolute inset-x-0 top-0 z-[1] h-[980px] opacity-45" />
 
       <header className="fixed left-0 right-0 top-0 z-40 border-b border-white/[0.07] bg-obsidian/62 backdrop-blur-2xl">
         <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8">
