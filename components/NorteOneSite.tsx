@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import {
@@ -24,17 +25,18 @@ import {
 } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { services } from "@/lib/services";
 
-const services = [
-  { title: "Sites Premium", icon: PanelsTopLeft, text: "Experiencias digitais de alto impacto, pensadas para autoridade, conversão e performance." },
-  { title: "Chatbots Inteligentes", icon: Bot, text: "Atendimento automatizado com fluxos comerciais, contexto e linguagem natural." },
-  { title: "Automação com IA", icon: BrainCircuit, text: "Processos mais rápidos, inteligentes e conectados ao que sua empresa já usa." },
-  { title: "Cartões NFC", icon: RadioTower, text: "Networking moderno com cartões digitais, páginas de contato e rastreabilidade." },
-  { title: "Branding Digital", icon: Palette, text: "Identidade visual, narrativa e presença para marcas que precisam ser lembradas." },
-  { title: "Presença Digital", icon: Globe2, text: "Ecossistema completo para gerar confianca antes do primeiro contato." },
-  { title: "Sistemas Personalizados", icon: Cpu, text: "Dashboards, paineis e operações sob medida para negócios em crescimento." },
-  { title: "Landing Pages", icon: Rocket, text: "Paginas estrategicas, rapidas e orientadas a campanhas de alta conversão." }
-];
+const serviceIcons = {
+  "sites-premium": PanelsTopLeft,
+  "chatbots-inteligentes": Bot,
+  "automacao-com-ia": BrainCircuit,
+  "cartoes-nfc": RadioTower,
+  "branding-digital": Palette,
+  "presenca-digital": Globe2,
+  "sistemas-personalizados": Cpu,
+  "landing-pages": Rocket
+};
 
 const differentiators = [
   "Design premium com percepção imediata de valor",
@@ -358,7 +360,7 @@ export function NorteOneSite() {
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {services.map((service, index) => {
-              const Icon = service.icon;
+              const Icon = serviceIcons[service.slug as keyof typeof serviceIcons];
               return (
                 <motion.article
                   data-reveal
@@ -374,7 +376,15 @@ export function NorteOneSite() {
                     <span className="text-xs text-titanium">{String(index + 1).padStart(2, "0")}</span>
                   </div>
                   <h3 className="font-display text-xl font-semibold">{service.title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-soft/62">{service.text}</p>
+                  <p className="mt-4 text-sm leading-7 text-soft/62">{service.summary}</p>
+                  <Link
+                    href={`/servicos/${service.slug}`}
+                    className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-gold transition hover:text-soft"
+                    aria-label={`Saiba mais sobre ${service.title}`}
+                  >
+                    Saiba mais
+                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                  </Link>
                 </motion.article>
               );
             })}
