@@ -11,7 +11,6 @@ import {
   Cpu,
   Fingerprint,
   Globe2,
-  Layers3,
   MessageSquareText,
   Orbit,
   Palette,
@@ -42,8 +41,8 @@ const differentiators = [
   "Design premium com percepção imediata de valor",
   "Inteligência artificial aplicada a vendas e atendimento",
   "Automações modernas para reduzir trabalho manual",
-  "Suporte estrategico do conceito ao lançamento",
-  "Experiencia visual refinada em todos os dispositivos",
+  "Suporte estratégico do conceito ao lançamento",
+  "Experiência visual refinada em todos os dispositivos",
   "Foco real em autoridade, conversão e resultado"
 ];
 
@@ -66,7 +65,7 @@ function MagneticButton({
       className={
         variant === "primary"
           ? "group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-soft px-6 text-sm font-semibold text-obsidian shadow-gold transition hover:bg-white"
-          : "group inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.045] px-6 text-sm font-semibold text-soft backdrop-blur-xl transition hover:border-gold/50 hover:bg-white/[0.075]"
+          : "group inline-flex h-12 items-center justify-center gap-2 rounded-full border border-black/10 bg-white/70 px-6 text-sm font-semibold text-soft shadow-sm backdrop-blur-xl transition hover:border-gold/50 hover:bg-white"
       }
     >
       {children}
@@ -91,11 +90,11 @@ function FloatingDashboard() {
       initial={{ opacity: 0, y: 34, rotateX: 12 }}
       animate={{ opacity: 1, y: 0, rotateX: 0 }}
       transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-      className="premium-border relative mx-auto w-full max-w-[560px] rounded-[28px] bg-[#101014]/80 p-3 shadow-panel"
+      className="premium-border relative mx-auto w-full max-w-[560px] rounded-[28px] bg-white/70 p-3 shadow-panel backdrop-blur-2xl"
     >
-      <div className="absolute -inset-16 -z-10 bg-[radial-gradient(circle,rgba(200,169,107,0.24),transparent_58%)] blur-3xl" />
+      <div className="absolute -inset-16 -z-10 bg-[radial-gradient(circle,rgba(200,169,107,0.18),transparent_58%)] blur-3xl" />
       <div className="glass-panel overflow-hidden rounded-[22px]">
-        <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+        <div className="flex items-center justify-between border-b border-black/10 px-5 py-4">
           <div className="flex items-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-[#ff6b6b]" />
             <span className="h-2.5 w-2.5 rounded-full bg-[#ffd166]" />
@@ -105,7 +104,7 @@ function FloatingDashboard() {
         </div>
 
         <div className="grid gap-3 p-4 sm:grid-cols-[1.1fr_0.9fr]">
-          <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
+          <div className="rounded-2xl border border-black/10 bg-graphite/70 p-4">
             <div className="mb-7 flex items-center justify-between">
               <div>
                 <p className="text-xs text-titanium">Pipeline digital</p>
@@ -122,7 +121,7 @@ function FloatingDashboard() {
                   initial={{ height: 12 }}
                   animate={{ height }}
                   transition={{ duration: 1, delay: 0.6 + index * 0.08 }}
-                  className="flex-1 rounded-t-md bg-gradient-to-t from-gold/30 to-gold"
+                  className="flex-1 rounded-t-md bg-gradient-to-t from-gold/35 to-gold"
                 />
               ))}
             </div>
@@ -137,7 +136,7 @@ function FloatingDashboard() {
               <motion.div
                 key={label}
                 whileHover={{ x: 4 }}
-                className="rounded-2xl border border-white/10 bg-white/[0.045] p-4"
+                className="rounded-2xl border border-black/10 bg-white/70 p-4"
               >
                 <div className="flex items-center justify-between gap-3">
                   <div>
@@ -151,8 +150,8 @@ function FloatingDashboard() {
           </div>
         </div>
 
-        <div className="border-t border-white/10 p-4">
-          <div className="rounded-2xl border border-gold/15 bg-gold/[0.06] p-4">
+        <div className="border-t border-black/10 p-4">
+          <div className="rounded-2xl border border-gold/20 bg-gold/[0.08] p-4">
             <div className="flex items-start gap-3">
               <div className="rounded-full bg-gold/15 p-2 text-gold">
                 <MessageSquareText className="h-5 w-5" />
@@ -217,15 +216,15 @@ export function NorteOneSite() {
   return (
     <main ref={heroRef} className="relative overflow-hidden bg-obsidian text-soft [&>footer]:relative [&>footer]:z-10 [&>section]:relative [&>section]:z-10">
       <motion.div className="cursor-glow hidden lg:block" style={{ left: springX, top: springY }} />
-      <div className="noise pointer-events-none fixed inset-0 z-50 opacity-[0.035]" />
+      <div className="noise pointer-events-none fixed inset-0 z-50 opacity-[0.018]" />
       <div className="animated-dark-bg pointer-events-none" aria-hidden="true">
         <div className="animated-dark-bg__grid" />
         <div className="animated-dark-bg__particles" />
         <div className="animated-dark-bg__scan" />
       </div>
-      <div className="tech-grid pointer-events-none absolute inset-x-0 top-0 z-[1] h-[980px] opacity-45" />
+      <div className="tech-grid pointer-events-none absolute inset-x-0 top-0 z-[1] h-[980px] opacity-55" />
 
-      <header className="fixed left-0 right-0 top-0 z-40 border-b border-white/[0.07] bg-obsidian/62 backdrop-blur-2xl">
+      <header className="fixed left-0 right-0 top-0 z-40 border-b border-black/[0.07] bg-obsidian/78 backdrop-blur-2xl">
         <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8">
           <a href="#inicio" className="flex items-center gap-3" aria-label="Norte One">
             <Image
@@ -242,7 +241,7 @@ export function NorteOneSite() {
             </div>
           </a>
 
-          <div className="hidden items-center gap-8 text-sm text-soft/68 lg:flex">
+          <div className="hidden items-center gap-8 text-sm text-soft/62 lg:flex">
             <a className="transition hover:text-soft" href="#sobre">Sobre</a>
             <a className="transition hover:text-soft" href="#servicos">Serviços</a>
             <a className="transition hover:text-soft" href="#demonstracao">Demo</a>
@@ -251,7 +250,7 @@ export function NorteOneSite() {
 
           <a
             href="#contato"
-            className="hidden rounded-full border border-gold/25 bg-gold/10 px-5 py-2.5 text-sm font-semibold text-gold transition hover:border-gold/60 hover:bg-gold/15 sm:inline-flex"
+            className="hidden rounded-full border border-black/10 bg-soft px-5 py-2.5 text-sm font-semibold text-obsidian shadow-sm transition hover:-translate-y-0.5 hover:bg-gold sm:inline-flex"
           >
             Falar agora
           </a>
@@ -259,14 +258,14 @@ export function NorteOneSite() {
       </header>
 
       <section id="inicio" className="relative min-h-screen px-5 pb-24 pt-32 sm:px-8 lg:pt-40">
-        <motion.div style={{ y }} className="absolute right-[-180px] top-20 h-[480px] w-[480px] rounded-full border border-gold/10 opacity-50 blur-[1px]" />
+        <motion.div style={{ y }} className="absolute right-[-180px] top-20 h-[480px] w-[480px] rounded-full border border-gold/20 opacity-40 blur-[1px]" />
         <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <motion.div
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="mb-8 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.055] px-4 py-2 text-sm text-soft/76 backdrop-blur-xl"
+              className="mb-8 inline-flex items-center gap-3 rounded-full border border-black/10 bg-white/70 px-4 py-2 text-sm text-soft/68 shadow-sm backdrop-blur-xl"
             >
               <span className="h-2 w-2 rounded-full bg-gold shadow-[0_0_18px_rgba(200,169,107,0.9)]" />
               Tecnologia, IA, Design e Resultados
@@ -308,7 +307,7 @@ export function NorteOneSite() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1.1, delay: 0.55 }}
-              className="mt-14 grid max-w-2xl grid-cols-3 gap-3 border-t border-white/10 pt-6"
+              className="mt-14 grid max-w-2xl grid-cols-3 gap-3 border-t border-black/10 pt-6"
             >
               {["IA aplicada", "UX premium", "Automação"].map((item) => (
                 <div key={item}>
@@ -338,10 +337,10 @@ export function NorteOneSite() {
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
               {[
                 ["Design", "interfaces memoráveis"],
-                ["Inteligência", "IA conectada ao negocio"],
+                ["Inteligência", "IA conectada ao negócio"],
                 ["Resultados", "presença que converte"]
               ].map(([title, text]) => (
-                <div key={title} className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                <div key={title} className="rounded-2xl border border-black/10 bg-white/65 p-4 shadow-sm">
                   <p className="font-display text-lg text-gold">{title}</p>
                   <p className="mt-2 text-sm leading-6 text-soft/62">{text}</p>
                 </div>
@@ -367,7 +366,7 @@ export function NorteOneSite() {
                   key={service.title}
                   whileHover={{ y: -8 }}
                   transition={{ type: "spring", stiffness: 260, damping: 24 }}
-                  className="group premium-border rounded-[24px] bg-white/[0.035] p-6"
+                  className="group premium-border rounded-[24px] bg-white/70 p-6 shadow-panel backdrop-blur-xl"
                 >
                   <div className="mb-10 flex items-center justify-between">
                     <div className="rounded-2xl border border-gold/20 bg-gold/[0.08] p-3 text-gold">
@@ -397,7 +396,7 @@ export function NorteOneSite() {
           <div data-reveal className="mb-12 flex flex-col justify-between gap-7 lg:flex-row lg:items-end">
             <div className="max-w-3xl">
               <SectionLabel>Demonstração visual</SectionLabel>
-              <h2 className="font-display text-4xl font-semibold sm:text-6xl">Interfaces que parecem produto, nao promessa.</h2>
+              <h2 className="font-display text-4xl font-semibold sm:text-6xl">Interfaces que parecem produto, não promessa.</h2>
             </div>
             <p className="max-w-md text-base leading-7 text-soft/62">
               Mockups premium para website, dashboard IA, chatbot, painel administrativo e cartão NFC, todos pensados para vender valor em segundos.
@@ -414,12 +413,12 @@ export function NorteOneSite() {
                 <Orbit className="h-7 w-7 text-gold" />
               </div>
               <div className="grid gap-4 md:grid-cols-3">
-                <div className="rounded-3xl border border-white/10 bg-black/30 p-5 md:col-span-2">
-                  <div className="h-44 rounded-2xl bg-[radial-gradient(circle_at_30%_20%,rgba(200,169,107,0.34),transparent_34%),linear-gradient(135deg,rgba(245,245,243,0.12),rgba(245,245,243,0.03))]" />
-                  <div className="mt-5 h-3 w-2/3 rounded-full bg-white/15" />
-                  <div className="mt-3 h-3 w-1/2 rounded-full bg-white/10" />
+                <div className="rounded-3xl border border-black/10 bg-white/70 p-5 shadow-sm md:col-span-2">
+                  <div className="h-44 rounded-2xl bg-[radial-gradient(circle_at_30%_20%,rgba(200,169,107,0.22),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.86),rgba(239,236,230,0.7))]" />
+                  <div className="mt-5 h-3 w-2/3 rounded-full bg-black/10" />
+                  <div className="mt-3 h-3 w-1/2 rounded-full bg-black/5" />
                 </div>
-                <div className="rounded-3xl border border-white/10 bg-white/[0.045] p-5">
+                <div className="rounded-3xl border border-black/10 bg-white/70 p-5 shadow-sm">
                   <Fingerprint className="mb-10 h-9 w-9 text-gold" />
                   <p className="font-display text-2xl font-semibold">NFC</p>
                   <p className="mt-3 text-sm leading-6 text-soft/62">Contato inteligente em um toque.</p>
@@ -427,9 +426,9 @@ export function NorteOneSite() {
               </div>
               <div className="mt-4 grid gap-4 md:grid-cols-3">
                 {["Website premium", "Chatbot ativo", "Painel admin"].map((item) => (
-                  <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                  <div key={item} className="rounded-2xl border border-black/10 bg-white/70 p-4 shadow-sm">
                     <p className="text-sm font-medium">{item}</p>
-                    <div className="mt-4 h-2 rounded-full bg-white/10">
+                    <div className="mt-4 h-2 rounded-full bg-black/10">
                       <div className="h-2 w-4/5 rounded-full bg-gold" />
                     </div>
                   </div>
@@ -465,7 +464,7 @@ export function NorteOneSite() {
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
             {differentiators.map((item) => (
-              <div data-reveal key={item} className="flex gap-4 rounded-2xl border border-white/10 bg-white/[0.035] p-5">
+              <div data-reveal key={item} className="flex gap-4 rounded-2xl border border-black/10 bg-white/70 p-5 shadow-sm">
                 <ShieldCheck className="mt-0.5 h-5 w-5 flex-none text-gold" />
                 <p className="text-sm leading-7 text-soft/72">{item}</p>
               </div>
@@ -484,7 +483,7 @@ export function NorteOneSite() {
           <div className="relative grid gap-4 lg:grid-cols-5">
             <div className="absolute left-0 right-0 top-12 hidden h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent lg:block" />
             {process.map((step, index) => (
-              <div data-reveal key={step} className="relative rounded-[24px] border border-white/10 bg-white/[0.035] p-6 backdrop-blur-xl">
+              <div data-reveal key={step} className="relative rounded-[24px] border border-black/10 bg-white/70 p-6 shadow-sm backdrop-blur-xl">
                 <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-full border border-gold/30 bg-obsidian text-gold">
                   {index + 1}
                 </div>
@@ -499,7 +498,7 @@ export function NorteOneSite() {
       </section>
 
       <section id="contato" className="px-5 py-24 sm:px-8">
-        <div data-reveal className="premium-border relative mx-auto max-w-7xl overflow-hidden rounded-[36px] bg-[#111115] px-6 py-20 text-center sm:px-12">
+        <div data-reveal className="premium-border relative mx-auto max-w-7xl overflow-hidden rounded-[36px] bg-white/80 px-6 py-20 text-center shadow-panel backdrop-blur-2xl sm:px-12">
           <div className="absolute inset-0 bg-radial-gold opacity-80" />
           <div className="relative mx-auto max-w-4xl">
             <p className="mb-5 text-sm uppercase tracking-[0.32em] text-gold">Próximo nível</p>
@@ -516,7 +515,7 @@ export function NorteOneSite() {
         </div>
       </section>
 
-      <footer className="border-t border-white/10 px-5 py-10 sm:px-8">
+      <footer className="border-t border-black/10 px-5 py-10 sm:px-8">
         <div className="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Image
