@@ -225,19 +225,19 @@ export function NorteOneSite() {
       <div className="tech-grid pointer-events-none absolute inset-x-0 top-0 z-[1] h-[980px] opacity-55" />
 
       <header className="fixed left-0 right-0 top-0 z-40 border-b border-black/[0.07] bg-obsidian/78 backdrop-blur-2xl">
-        <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8">
+        <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-8">
           <a href="#inicio" className="flex items-center gap-3" aria-label="Norte One">
             <Image
-              src="/brand/norte-one-logo.jpeg"
-              width={44}
-              height={44}
+              src="/brand/norte-one-logo-premium.png"
+              width={48}
+              height={48}
               alt="Logo Norte One"
-              className="rounded-full border border-gold/30 object-cover"
+              className="h-11 w-11 rounded-full border border-gold/30 object-cover shadow-sm sm:h-12 sm:w-12"
               priority
             />
             <div>
-              <p className="font-display text-sm font-semibold uppercase tracking-[0.28em]">Norte One</p>
-              <p className="text-[11px] uppercase tracking-[0.24em] text-titanium">Tech Studio</p>
+              <p className="font-display text-xs font-semibold uppercase tracking-[0.22em] sm:text-sm sm:tracking-[0.28em]">Norte One</p>
+              <p className="text-[10px] uppercase tracking-[0.18em] text-titanium sm:text-[11px] sm:tracking-[0.24em]">Tech Studio</p>
             </div>
           </a>
 
@@ -257,15 +257,15 @@ export function NorteOneSite() {
         </nav>
       </header>
 
-      <section id="inicio" className="relative min-h-screen px-5 pb-24 pt-32 sm:px-8 lg:pt-40">
+      <section id="inicio" className="relative px-4 pb-14 pt-24 sm:px-8 sm:pb-20 sm:pt-32 lg:min-h-screen lg:pt-36">
         <motion.div style={{ y }} className="absolute right-[-180px] top-20 h-[480px] w-[480px] rounded-full border border-gold/20 opacity-40 blur-[1px]" />
-        <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="mx-auto grid max-w-7xl items-center gap-9 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
           <div>
             <motion.div
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="mb-8 inline-flex items-center gap-3 rounded-full border border-black/10 bg-white/70 px-4 py-2 text-sm text-soft/68 shadow-sm backdrop-blur-xl"
+              className="mb-5 inline-flex items-center gap-3 rounded-full border border-black/10 bg-white/70 px-4 py-2 text-sm text-soft/68 shadow-sm backdrop-blur-xl sm:mb-8"
             >
               <span className="h-2 w-2 rounded-full bg-gold shadow-[0_0_18px_rgba(200,169,107,0.9)]" />
               Tecnologia, IA, Design e Resultados
@@ -275,7 +275,7 @@ export function NorteOneSite() {
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.95, delay: 0.08 }}
-              className="max-w-4xl font-display text-[clamp(2.85rem,5.25vw,5.55rem)] font-semibold leading-[0.96] tracking-normal"
+              className="max-w-4xl font-display text-[clamp(2.45rem,5.25vw,5.55rem)] font-semibold leading-[0.96] tracking-normal"
             >
               Tecnologia inteligente para empresas que querem <span className="gold-text">crescer.</span>
             </motion.h1>
@@ -284,7 +284,7 @@ export function NorteOneSite() {
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.95, delay: 0.16 }}
-              className="mt-8 max-w-2xl text-lg leading-8 text-soft/68 sm:text-xl"
+              className="mt-5 max-w-2xl text-base leading-7 text-soft/68 sm:mt-8 sm:text-xl sm:leading-8"
             >
               Sites premium, IA, automações e soluções digitais modernas para negócios que querem autoridade e resultados.
             </motion.p>
@@ -293,7 +293,7 @@ export function NorteOneSite() {
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.95, delay: 0.24 }}
-              className="mt-10 flex flex-col gap-3 sm:flex-row"
+              className="mt-7 flex flex-col gap-3 sm:mt-10 sm:flex-row"
             >
               <MagneticButton href="#contato">
                 Solicitar demonstração
@@ -307,7 +307,7 @@ export function NorteOneSite() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1.1, delay: 0.55 }}
-              className="mt-14 grid max-w-2xl grid-cols-3 gap-3 border-t border-black/10 pt-6"
+              className="mt-8 hidden max-w-2xl grid-cols-3 gap-3 border-t border-black/10 pt-5 sm:mt-14 sm:grid sm:pt-6"
             >
               {["IA aplicada", "UX premium", "Automação"].map((item) => (
                 <div key={item}>
@@ -322,7 +322,7 @@ export function NorteOneSite() {
         </div>
       </section>
 
-      <section id="sobre" className="relative px-5 py-24 sm:px-8">
+      <section id="sobre" className="relative px-4 py-14 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.82fr_1.18fr]">
           <div data-reveal>
             <SectionLabel>Sobre</SectionLabel>
@@ -350,7 +350,7 @@ export function NorteOneSite() {
         </div>
       </section>
 
-      <section id="servicos" className="px-5 py-24 sm:px-8">
+      <section id="servicos" className="px-4 py-14 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <div data-reveal className="mb-12 max-w-3xl">
             <SectionLabel>Serviços</SectionLabel>
@@ -391,7 +391,7 @@ export function NorteOneSite() {
         </div>
       </section>
 
-      <section id="demonstracao" className="px-5 py-24 sm:px-8">
+      <section id="demonstracao" className="px-4 py-14 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <div data-reveal className="mb-12 flex flex-col justify-between gap-7 lg:flex-row lg:items-end">
             <div className="max-w-3xl">
@@ -439,11 +439,11 @@ export function NorteOneSite() {
             <div data-reveal className="space-y-4">
               <div className="glass-panel rounded-[28px] p-6">
                 <Image
-                  src="/brand/norte-one-logo.jpeg"
+                  src="/brand/norte-one-logo-premium.png"
                   alt="Logo Norte One"
-                  width={180}
-                  height={180}
-                  className="mx-auto rounded-full border border-gold/30 shadow-gold"
+                  width={220}
+                  height={220}
+                  className="mx-auto w-40 rounded-full border border-gold/30 object-cover shadow-gold sm:w-48"
                 />
                 <p className="mt-6 text-center font-display text-2xl font-semibold">Brand signal premium</p>
               </div>
@@ -456,7 +456,7 @@ export function NorteOneSite() {
         </div>
       </section>
 
-      <section className="px-5 py-24 sm:px-8">
+      <section className="px-4 py-14 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.85fr_1.15fr]">
           <div data-reveal>
             <SectionLabel>Diferenciais</SectionLabel>
@@ -473,7 +473,7 @@ export function NorteOneSite() {
         </div>
       </section>
 
-      <section id="processo" className="px-5 py-24 sm:px-8">
+      <section id="processo" className="px-4 py-14 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <div data-reveal className="mb-14 max-w-3xl">
             <SectionLabel>Processo</SectionLabel>
@@ -497,8 +497,8 @@ export function NorteOneSite() {
         </div>
       </section>
 
-      <section id="contato" className="px-5 py-24 sm:px-8">
-        <div data-reveal className="premium-border relative mx-auto max-w-7xl overflow-hidden rounded-[36px] bg-white/80 px-6 py-20 text-center shadow-panel backdrop-blur-2xl sm:px-12">
+      <section id="contato" className="px-4 py-14 sm:px-8 sm:py-20 lg:py-24">
+        <div data-reveal className="premium-border relative mx-auto max-w-7xl overflow-hidden rounded-[28px] bg-white/80 px-5 py-14 text-center shadow-panel backdrop-blur-2xl sm:rounded-[36px] sm:px-12 sm:py-20">
           <div className="absolute inset-0 bg-radial-gold opacity-80" />
           <div className="relative mx-auto max-w-4xl">
             <p className="mb-5 text-sm uppercase tracking-[0.32em] text-gold">Próximo nível</p>
@@ -515,15 +515,15 @@ export function NorteOneSite() {
         </div>
       </section>
 
-      <footer className="border-t border-black/10 px-5 py-10 sm:px-8">
+      <footer className="border-t border-black/10 px-4 py-8 sm:px-8 sm:py-10">
         <div className="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Image
-              src="/brand/norte-one-logo.jpeg"
+              src="/brand/norte-one-logo-premium.png"
               alt="Logo Norte One"
-              width={54}
-              height={54}
-              className="rounded-full border border-gold/30"
+              width={58}
+              height={58}
+              className="h-14 w-14 rounded-full border border-gold/30 object-cover"
             />
             <div>
               <p className="font-display text-sm font-semibold uppercase tracking-[0.28em]">Norte One</p>

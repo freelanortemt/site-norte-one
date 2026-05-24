@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/brand/norte-one-logo.jpeg",
+        url: "/brand/norte-one-logo-premium.png",
         width: 1254,
         height: 1254,
         alt: "Logo Norte One"
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
     ]
   },
   icons: {
-    icon: "/brand/norte-one-logo.jpeg",
-    apple: "/brand/norte-one-logo.jpeg"
+    icon: "/brand/norte-one-logo-premium.png",
+    apple: "/brand/norte-one-logo-premium.png"
   }
 };
 
