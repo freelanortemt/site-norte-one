@@ -25,6 +25,7 @@ import {
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { services } from "@/lib/services";
+import { assetPath, brandLogo } from "@/lib/site";
 
 const serviceIcons = {
   "sites-premium": PanelsTopLeft,
@@ -228,7 +229,7 @@ export function NorteOneSite() {
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-8">
           <a href="#inicio" className="flex items-center gap-3" aria-label="Norte One">
             <Image
-              src="/brand/norte-one-logo-premium.png"
+              src={brandLogo}
               width={48}
               height={48}
               alt="Logo Norte One"
@@ -368,7 +369,16 @@ export function NorteOneSite() {
                   transition={{ type: "spring", stiffness: 260, damping: 24 }}
                   className="group premium-border rounded-[24px] bg-white/70 p-6 shadow-panel backdrop-blur-xl"
                 >
-                  <div className="mb-10 flex items-center justify-between">
+                  <div className="mb-6 overflow-hidden rounded-2xl border border-black/10 bg-white/70">
+                    <Image
+                      src={assetPath(service.visual)}
+                      alt={`Visual estratégico de ${service.title}`}
+                      width={720}
+                      height={520}
+                      className="aspect-[1.55] w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <div className="mb-7 flex items-center justify-between">
                     <div className="rounded-2xl border border-gold/20 bg-gold/[0.08] p-3 text-gold">
                       <Icon className="h-6 w-6" />
                     </div>
@@ -439,7 +449,7 @@ export function NorteOneSite() {
             <div data-reveal className="space-y-4">
               <div className="glass-panel rounded-[28px] p-6">
                 <Image
-                  src="/brand/norte-one-logo-premium.png"
+                  src={brandLogo}
                   alt="Logo Norte One"
                   width={220}
                   height={220}
@@ -519,7 +529,7 @@ export function NorteOneSite() {
         <div className="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Image
-              src="/brand/norte-one-logo-premium.png"
+              src={brandLogo}
               alt="Logo Norte One"
               width={58}
               height={58}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { brandLogo } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://norteone.com.br"),
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/brand/norte-one-logo-premium.png",
+        url: brandLogo,
         width: 1254,
         height: 1254,
         alt: "Logo Norte One"
@@ -34,8 +35,8 @@ export const metadata: Metadata = {
     ]
   },
   icons: {
-    icon: "/brand/norte-one-logo-premium.png",
-    apple: "/brand/norte-one-logo-premium.png"
+    icon: brandLogo,
+    apple: brandLogo
   }
 };
 

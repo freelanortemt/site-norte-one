@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 import { getServiceBySlug, services } from "@/lib/services";
+import { assetPath, brandLogo } from "@/lib/site";
 
 type ServicePageProps = {
   params: Promise<{ slug: string }>;
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
       description: service.summary,
       images: [
         {
-          url: "/brand/norte-one-logo-premium.png",
+          url: brandLogo,
           width: 1254,
           height: 1254,
           alt: "Logo Norte One"
@@ -62,7 +63,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-8">
           <Link href="/#inicio" className="flex items-center gap-3" aria-label="Norte One">
             <Image
-              src="/brand/norte-one-logo-premium.png"
+              src={brandLogo}
               width={46}
               height={46}
               alt="Logo Norte One"
@@ -87,7 +88,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
       <section className="relative z-10 px-4 pb-12 pt-24 sm:px-8 sm:pb-20 lg:pt-36">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
+          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
             <div>
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold/20 bg-gold/[0.07] px-3 py-1 text-xs font-medium uppercase tracking-[0.26em] text-gold">
                 <Sparkles className="h-3.5 w-3.5" />
@@ -99,7 +100,15 @@ export default async function ServicePage({ params }: ServicePageProps) {
               <p className="mt-5 max-w-2xl text-base leading-7 text-soft/70 sm:mt-7 sm:text-xl sm:leading-8">{service.description}</p>
             </div>
 
-            <div className="premium-border rounded-[32px] bg-white/75 p-6 shadow-panel backdrop-blur-2xl sm:p-8">
+            <div className="premium-border rounded-[32px] bg-white/75 p-4 shadow-panel backdrop-blur-2xl sm:p-6">
+              <Image
+                src={assetPath(service.visual)}
+                alt={`Visual premium de ${service.title}`}
+                width={720}
+                height={520}
+                className="mb-6 aspect-[1.55] w-full rounded-[24px] border border-black/10 object-cover"
+                priority
+              />
               <p className="text-sm uppercase tracking-[0.26em] text-titanium">Ideal para</p>
               <p className="mt-4 text-2xl font-semibold leading-9">{service.idealFor}</p>
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
