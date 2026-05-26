@@ -16,7 +16,7 @@ export const services: ServiceDetail[] = [
     slug: "sites-premium",
     title: "Sites Premium",
     eyebrow: "Presença digital de alto impacto",
-    visual: "/visuals/sites-premium.svg",
+    visual: "/visuals/sites-premium.png",
     summary: "Experiências digitais de alto impacto, pensadas para autoridade, conversão e performance.",
     description:
       "Criamos sites institucionais e comerciais com acabamento premium, narrativa estratégica e performance técnica. A proposta é fazer sua empresa parecer mais forte, confiável e desejável desde o primeiro clique.",
@@ -40,7 +40,7 @@ export const services: ServiceDetail[] = [
     slug: "chatbots-inteligentes",
     title: "Chatbots Inteligentes",
     eyebrow: "Atendimento com IA",
-    visual: "/visuals/chatbots-inteligentes.svg",
+    visual: "/visuals/chatbots-inteligentes.png",
     summary: "Atendimento automatizado com fluxos comerciais, contexto e linguagem natural.",
     description:
       "Desenvolvemos chatbots inteligentes para qualificar leads, responder dúvidas, orientar clientes e acelerar atendimentos. O foco é criar uma experiência fluida, útil e alinhada ao posicionamento da sua empresa.",
@@ -64,7 +64,7 @@ export const services: ServiceDetail[] = [
     slug: "automacao-com-ia",
     title: "Automação com IA",
     eyebrow: "Operações mais inteligentes",
-    visual: "/visuals/automacao-com-ia.svg",
+    visual: "/visuals/automacao-com-ia.png",
     summary: "Processos mais rápidos, inteligentes e conectados ao que sua empresa já usa.",
     description:
       "Automatizamos rotinas comerciais, administrativas e operacionais com inteligência artificial. Conectamos ferramentas, organizamos dados e criamos fluxos para reduzir trabalho manual e aumentar previsibilidade.",
@@ -88,7 +88,7 @@ export const services: ServiceDetail[] = [
     slug: "cartoes-nfc",
     title: "Cartões NFC",
     eyebrow: "Networking premium em um toque",
-    visual: "/visuals/cartoes-nfc.svg",
+    visual: "/visuals/cartoes-nfc.png",
     summary: "Networking moderno com cartões digitais, páginas de contato e rastreabilidade.",
     description:
       "Criamos cartões NFC e páginas digitais de apresentação para transformar contatos presenciais em experiências modernas. O cartão leva clientes e parceiros para uma página profissional com links, contatos e informações essenciais.",
@@ -112,7 +112,7 @@ export const services: ServiceDetail[] = [
     slug: "branding-digital",
     title: "Branding Digital",
     eyebrow: "Marca com percepção premium",
-    visual: "/visuals/branding-digital.svg",
+    visual: "/visuals/branding-digital.png",
     summary: "Identidade visual, narrativa e presença para marcas que precisam ser lembradas.",
     description:
       "Construímos uma presença de marca mais consistente para o ambiente digital, com identidade, linguagem, direção visual e materiais que elevam a percepção de valor.",
@@ -136,7 +136,7 @@ export const services: ServiceDetail[] = [
     slug: "presenca-digital",
     title: "Presença Digital",
     eyebrow: "Ecossistema digital completo",
-    visual: "/visuals/presenca-digital.svg",
+    visual: "/visuals/presenca-digital.png",
     summary: "Ecossistema completo para gerar confiança antes do primeiro contato.",
     description:
       "Organizamos a presença digital da empresa para que site, perfis, páginas, links e canais de contato trabalhem juntos. A ideia é criar uma jornada mais confiável e coerente para quem descobre sua marca.",
@@ -160,7 +160,7 @@ export const services: ServiceDetail[] = [
     slug: "sistemas-personalizados",
     title: "Sistemas Personalizados",
     eyebrow: "Software sob medida",
-    visual: "/visuals/sistemas-personalizados.svg",
+    visual: "/visuals/sistemas-personalizados.png",
     summary: "Dashboards, painéis e operações sob medida para negócios em crescimento.",
     description:
       "Desenvolvemos sistemas, painéis administrativos e dashboards personalizados para empresas que precisam operar melhor, visualizar indicadores e centralizar processos importantes.",
@@ -184,7 +184,7 @@ export const services: ServiceDetail[] = [
     slug: "landing-pages",
     title: "Landing Pages",
     eyebrow: "Campanhas com conversão",
-    visual: "/visuals/landing-pages.svg",
+    visual: "/visuals/landing-pages.png",
     summary: "Páginas estratégicas, rápidas e orientadas a campanhas de alta conversão.",
     description:
       "Criamos landing pages para campanhas, lançamentos, tráfego pago e ofertas específicas. Cada página é desenhada para comunicar rápido, eliminar ruído e conduzir o visitante para uma ação clara.",
