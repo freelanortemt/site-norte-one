@@ -49,6 +49,41 @@ const differentiators = [
 
 const process = ["Estratégia", "Design", "Desenvolvimento", "Automação", "Lançamento"];
 
+const portfolioCases = [
+  {
+    name: "Aurora Prime Imóveis",
+    segment: "Imobiliária de alto padrão",
+    image: "/portfolio/aurora-prime-imoveis.png",
+    scope: "Website institucional, catálogo premium, filtros por perfil e captação via WhatsApp.",
+    details: ["Venda de imóveis de luxo", "Mapa de oportunidades", "Leads qualificados"],
+    metrics: ["Meta: +42% consultas", "Ticket: alto padrão", "Praça: Cuiabá MT"]
+  },
+  {
+    name: "Mendes & Valença Advocacia",
+    segment: "Escritório jurídico empresarial",
+    image: "/portfolio/mendes-valenca-advocacia.png",
+    scope: "Presença digital sóbria com áreas de atuação, perfil da banca e jornada de consulta.",
+    details: ["Autoridade jurídica", "Página de consulta", "Comunicação institucional"],
+    metrics: ["Meta: +31% reuniões", "Perfil: empresarial", "Praça: Centro Sul"]
+  },
+  {
+    name: "OdontoVitta Clinic",
+    segment: "Clínica odontológica premium",
+    image: "/portfolio/odontovitta-clinic.png",
+    scope: "Site de conversão com tratamentos, agendamento online e experiência mobile refinada.",
+    details: ["Agenda digital", "Tratamentos destacados", "Confiança visual"],
+    metrics: ["Meta: +47% agendamentos", "Foco: estética dental", "Mobile: prioridade"]
+  },
+  {
+    name: "Santé Prime Clinic",
+    segment: "Clínica médica particular",
+    image: "/portfolio/sante-prime-clinic.png",
+    scope: "Interface para especialidades, corpo clínico, agendamento e portal do paciente.",
+    details: ["Especialidades médicas", "Portal do paciente", "UX para saúde"],
+    metrics: ["Meta: +36% pré-consultas", "Foco: particular", "Jornada: paciente"]
+  }
+];
+
 function MagneticButton({
   children,
   href,
@@ -246,6 +281,7 @@ export function NorteOneSite() {
             <a className="transition hover:text-soft" href="#sobre">Sobre</a>
             <a className="transition hover:text-soft" href="#servicos">Serviços</a>
             <a className="transition hover:text-soft" href="#demonstracao">Demo</a>
+            <a className="transition hover:text-soft" href="#portfolio">Portfólio</a>
             <a className="transition hover:text-soft" href="#processo">Processo</a>
           </div>
 
@@ -462,6 +498,71 @@ export function NorteOneSite() {
                 <p className="mt-5 text-lg font-semibold">Motion discreto, brilho preciso e hierarquia clara.</p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="portfolio" className="overflow-hidden px-4 py-14 sm:px-8 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl">
+          <div data-reveal className="mb-10 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+            <div className="max-w-3xl">
+              <SectionLabel>Portfólio visual</SectionLabel>
+              <h2 className="font-display text-4xl font-semibold sm:text-6xl">
+                Mockups realistas para segmentos que precisam vender confiança.
+              </h2>
+            </div>
+            <p className="max-w-md text-base leading-7 text-soft/62">
+              Vitrines digitais com nome, contexto e acabamento de projeto pronto para apresentar autoridade antes do primeiro contato.
+            </p>
+          </div>
+        </div>
+
+        <div data-reveal className="portfolio-marquee -mx-4 sm:-mx-8">
+          <div className="portfolio-marquee__track">
+            {[...portfolioCases, ...portfolioCases].map((item, index) => (
+              <article
+                key={`${item.name}-${index}`}
+                className="group w-[82vw] max-w-[760px] shrink-0 overflow-hidden rounded-[28px] border border-black/10 bg-white/78 p-3 shadow-panel backdrop-blur-2xl sm:w-[640px] sm:p-4 lg:w-[720px]"
+                aria-hidden={index >= portfolioCases.length}
+              >
+                <div className="overflow-hidden rounded-[22px] border border-black/10 bg-white">
+                  <Image
+                    src={assetPath(item.image)}
+                    alt={`Mockup premium do projeto ${item.name}`}
+                    width={960}
+                    height={620}
+                    className="aspect-[1.55] w-full object-cover transition duration-700 group-hover:scale-[1.035]"
+                  />
+                </div>
+                <div className="grid gap-5 px-2 pb-3 pt-5 sm:grid-cols-[1fr_0.86fr] sm:px-3 sm:pb-4 sm:pt-6">
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">{item.segment}</p>
+                      <span className="rounded-full border border-black/10 bg-white/80 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-titanium">
+                        Projeto conceito
+                      </span>
+                    </div>
+                    <h3 className="mt-2 font-display text-2xl font-semibold sm:text-3xl">{item.name}</h3>
+                    <p className="mt-3 text-sm leading-7 text-soft/62">{item.scope}</p>
+                  </div>
+                  <div className="grid content-start gap-2">
+                    <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+                      {item.metrics.map((metric) => (
+                        <div key={metric} className="rounded-2xl border border-gold/20 bg-gold/[0.07] px-3 py-3">
+                          <p className="text-[11px] font-semibold leading-4 text-soft/74">{metric}</p>
+                        </div>
+                      ))}
+                    </div>
+                    {item.details.map((detail) => (
+                      <div key={detail} className="flex items-center gap-3 rounded-2xl border border-black/10 bg-white/70 px-4 py-3 text-sm text-soft/70">
+                        <span className="h-1.5 w-1.5 rounded-full bg-gold shadow-[0_0_12px_rgba(200,169,107,0.75)]" />
+                        {detail}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>

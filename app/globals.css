@@ -183,6 +183,55 @@ body {
   pointer-events: none;
 }
 
+.portfolio-marquee {
+  position: relative;
+  overflow: hidden;
+  padding: 0.25rem 0 1.5rem;
+}
+
+.portfolio-marquee::before,
+.portfolio-marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  width: min(16vw, 180px);
+  pointer-events: none;
+}
+
+.portfolio-marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(246, 245, 242, 0.98), transparent);
+}
+
+.portfolio-marquee::after {
+  right: 0;
+  background: linear-gradient(270deg, rgba(246, 245, 242, 0.98), transparent);
+}
+
+.portfolio-marquee__track {
+  display: flex;
+  width: max-content;
+  gap: 1rem;
+  padding-inline: 1rem;
+  animation: portfolio-drift 42s linear infinite;
+  will-change: transform;
+}
+
+.portfolio-marquee:hover .portfolio-marquee__track {
+  animation-play-state: paused;
+}
+
+@keyframes portfolio-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -202,6 +251,7 @@ body {
   .animated-dark-bg__grid,
   .animated-dark-bg__particles,
   .animated-dark-bg__scan,
+  .portfolio-marquee__track,
   .tech-grid {
     animation: none !important;
   }
