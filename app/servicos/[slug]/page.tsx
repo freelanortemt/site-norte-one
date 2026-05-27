@@ -59,7 +59,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
       </div>
       <div className="noise pointer-events-none fixed inset-0 z-50 opacity-[0.018]" />
 
-      <header className="fixed left-0 right-0 top-0 z-40 border-b border-black/[0.07] bg-obsidian/78 backdrop-blur-2xl">
+      <header className="fixed left-0 right-0 top-0 z-40 border-b border-white/10 bg-obsidian/78 backdrop-blur-2xl">
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-8">
           <Link href="/#inicio" className="flex items-center gap-3" aria-label="Norte One">
             <Image
@@ -78,7 +78,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
           <Link
             href="/#servicos"
-            className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-3 py-2 text-xs font-semibold text-soft shadow-sm backdrop-blur-xl transition hover:border-gold/50 hover:bg-white hover:text-gold sm:px-5 sm:py-2.5 sm:text-sm"
+            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-graphite/70 px-3 py-2 text-xs font-semibold text-soft shadow-sm backdrop-blur-xl transition hover:border-gold/50 hover:bg-graphite hover:text-gold sm:px-5 sm:py-2.5 sm:text-sm"
           >
             <ArrowLeft className="h-4 w-4" />
             Ver soluções
@@ -100,20 +100,20 @@ export default async function ServicePage({ params }: ServicePageProps) {
               <p className="mt-5 max-w-2xl text-base leading-7 text-soft/70 sm:mt-7 sm:text-xl sm:leading-8">{service.description}</p>
             </div>
 
-            <div className="premium-border rounded-[32px] bg-white/75 p-4 shadow-panel backdrop-blur-2xl sm:p-6">
+            <div className="premium-border rounded-[32px] bg-graphite/80 p-4 shadow-panel backdrop-blur-2xl sm:p-6">
               <Image
                 src={assetPath(service.visual)}
                 alt={`Visual premium de ${service.title}`}
                 width={720}
                 height={520}
-                className="mb-6 aspect-[1.55] w-full rounded-[24px] border border-black/10 object-cover"
+                className="mb-6 aspect-[1.55] w-full rounded-[24px] border border-white/10 object-cover"
                 priority
               />
               <p className="text-sm uppercase tracking-[0.26em] text-titanium">Indicado para</p>
               <p className="mt-4 text-2xl font-semibold leading-9">{service.idealFor}</p>
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
                 {service.outcomes.slice(0, 4).map((outcome) => (
-                  <div key={outcome} className="rounded-2xl border border-black/10 bg-white/70 p-4 shadow-sm">
+                  <div key={outcome} className="rounded-2xl border border-white/10 bg-graphite/70 p-4 shadow-sm">
                     <CheckCircle2 className="mb-4 h-5 w-5 text-gold" />
                     <p className="text-sm leading-6 text-soft/72">{outcome}</p>
                   </div>
@@ -142,7 +142,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <p className="mb-6 font-display text-2xl font-semibold">Como conduzimos</p>
             <div className="space-y-4">
               {service.process.map((item, index) => (
-                <div key={item} className="flex items-center gap-4 rounded-2xl border border-black/10 bg-white/70 p-4 shadow-sm">
+                <div key={item} className="flex items-center gap-4 rounded-2xl border border-white/10 bg-graphite/70 p-4 shadow-sm">
                   <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-gold/25 bg-gold/[0.08] text-sm text-gold">
                     {index + 1}
                   </span>
@@ -152,14 +152,14 @@ export default async function ServicePage({ params }: ServicePageProps) {
             </div>
           </article>
 
-          <article className="premium-border rounded-[28px] bg-white/75 p-6 shadow-panel backdrop-blur-xl sm:p-8">
+          <article className="premium-border rounded-[28px] bg-graphite/80 p-6 shadow-panel backdrop-blur-xl sm:p-8">
             <p className="mb-6 font-display text-2xl font-semibold">Valor para o negócio</p>
             <p className="text-base leading-8 text-soft/68">
               Uma solução mais profissional, clara e confiável para fortalecer sua imagem, melhorar a experiência do cliente e aumentar a chance de contato comercial.
             </p>
             <Link
               href={`mailto:contato@norteone.com.br?subject=Quero%20solicitar%20um%20orçamento%20-%20${encodeURIComponent(service.title)}`}
-              className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-soft px-6 text-sm font-semibold text-obsidian shadow-gold transition hover:bg-white"
+              className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-soft px-6 text-sm font-semibold text-obsidian shadow-gold transition hover:bg-gold"
             >
               Solicitar orçamento
               <ArrowRight className="h-4 w-4" />
@@ -169,7 +169,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
       </section>
 
       <section className="relative z-10 px-4 py-10 sm:px-8 sm:py-16">
-        <div className="mx-auto max-w-7xl border-t border-black/10 pt-10">
+        <div className="mx-auto max-w-7xl border-t border-white/10 pt-10">
           <p className="mb-6 text-sm uppercase tracking-[0.28em] text-titanium">Outras soluções</p>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {services
@@ -179,7 +179,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 <Link
                   key={item.slug}
                   href={`/servicos/${item.slug}`}
-                  className="rounded-2xl border border-black/10 bg-white/70 p-4 text-sm font-semibold shadow-sm transition hover:border-gold/40 hover:bg-white hover:text-gold"
+                  className="rounded-2xl border border-white/10 bg-graphite/70 p-4 text-sm font-semibold shadow-sm transition hover:border-gold/40 hover:bg-graphite hover:text-gold"
                 >
                   {item.title}
                 </Link>

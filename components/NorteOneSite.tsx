@@ -118,8 +118,8 @@ function MagneticButton({
       whileTap={{ scale: 0.98 }}
       className={
         variant === "primary"
-          ? "group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-soft px-6 text-sm font-semibold text-obsidian shadow-gold transition hover:bg-white"
-          : "group inline-flex h-12 items-center justify-center gap-2 rounded-full border border-black/10 bg-white/70 px-6 text-sm font-semibold text-soft shadow-sm backdrop-blur-xl transition hover:border-gold/50 hover:bg-white"
+          ? "group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-soft px-6 text-sm font-semibold text-obsidian shadow-gold transition hover:bg-gold"
+          : "group inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-graphite/70 px-6 text-sm font-semibold text-soft shadow-sm backdrop-blur-xl transition hover:border-gold/50 hover:bg-graphite"
       }
     >
       {children}
@@ -144,11 +144,11 @@ function FloatingDashboard() {
       initial={{ opacity: 0, y: 34, rotateX: 12 }}
       animate={{ opacity: 1, y: 0, rotateX: 0 }}
       transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-      className="premium-border relative mx-auto w-full max-w-[560px] rounded-[28px] bg-white/70 p-3 shadow-panel backdrop-blur-2xl"
+      className="premium-border relative mx-auto w-full max-w-[560px] rounded-[28px] bg-graphite/70 p-3 shadow-panel backdrop-blur-2xl"
     >
       <div className="absolute -inset-16 -z-10 bg-[radial-gradient(circle,rgba(200,169,107,0.18),transparent_58%)] blur-3xl" />
       <div className="glass-panel overflow-hidden rounded-[22px]">
-        <div className="flex items-center justify-between border-b border-black/10 px-5 py-4">
+        <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
           <div className="flex items-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-[#ff6b6b]" />
             <span className="h-2.5 w-2.5 rounded-full bg-[#ffd166]" />
@@ -158,7 +158,7 @@ function FloatingDashboard() {
         </div>
 
         <div className="grid gap-3 p-4 sm:grid-cols-[1.1fr_0.9fr]">
-          <div className="rounded-2xl border border-black/10 bg-graphite/70 p-4">
+          <div className="rounded-2xl border border-white/10 bg-graphite/70 p-4">
             <div className="mb-7 flex items-center justify-between">
               <div>
                 <p className="text-xs text-titanium">Oportunidades</p>
@@ -190,7 +190,7 @@ function FloatingDashboard() {
               <motion.div
                 key={label}
                 whileHover={{ x: 4 }}
-                className="rounded-2xl border border-black/10 bg-white/70 p-4"
+                className="rounded-2xl border border-white/10 bg-graphite/70 p-4"
               >
                 <div className="flex items-center justify-between gap-3">
                   <div>
@@ -204,7 +204,7 @@ function FloatingDashboard() {
           </div>
         </div>
 
-        <div className="border-t border-black/10 p-4">
+        <div className="border-t border-white/10 p-4">
           <div className="rounded-2xl border border-gold/20 bg-gold/[0.08] p-4">
             <div className="flex items-start gap-3">
               <div className="rounded-full bg-gold/15 p-2 text-gold">
@@ -264,7 +264,7 @@ export function NorteOneSite() {
       </div>
       <div className="tech-grid pointer-events-none absolute inset-x-0 top-0 z-[1] h-[980px] opacity-55" />
 
-      <header className="fixed left-0 right-0 top-0 z-40 border-b border-black/[0.07] bg-obsidian/78 backdrop-blur-2xl">
+      <header className="fixed left-0 right-0 top-0 z-40 border-b border-white/10 bg-obsidian/78 backdrop-blur-2xl">
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-8">
           <a href="#inicio" className="flex items-center gap-3" aria-label="Norte One">
             <Image
@@ -290,7 +290,7 @@ export function NorteOneSite() {
 
           <a
             href="#contato"
-            className="hidden rounded-full border border-black/10 bg-soft px-5 py-2.5 text-sm font-semibold text-obsidian shadow-sm transition hover:-translate-y-0.5 hover:bg-gold sm:inline-flex"
+            className="hidden rounded-full border border-white/10 bg-soft px-5 py-2.5 text-sm font-semibold text-obsidian shadow-sm transition hover:-translate-y-0.5 hover:bg-gold sm:inline-flex"
           >
             Solicitar orçamento
           </a>
@@ -305,7 +305,7 @@ export function NorteOneSite() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="mb-5 inline-flex items-center gap-3 rounded-full border border-black/10 bg-white/70 px-4 py-2 text-sm text-soft/68 shadow-sm backdrop-blur-xl sm:mb-8"
+              className="mb-5 inline-flex items-center gap-3 rounded-full border border-white/10 bg-graphite/70 px-4 py-2 text-sm text-soft/68 shadow-sm backdrop-blur-xl sm:mb-8"
             >
               <span className="h-2 w-2 rounded-full bg-gold shadow-[0_0_18px_rgba(200,169,107,0.9)]" />
               Sites, IA e automações para empresas
@@ -347,7 +347,7 @@ export function NorteOneSite() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1.1, delay: 0.55 }}
-              className="mt-8 hidden max-w-2xl grid-cols-3 gap-3 border-t border-black/10 pt-5 sm:mt-14 sm:grid sm:pt-6"
+              className="mt-8 hidden max-w-2xl grid-cols-3 gap-3 border-t border-white/10 pt-5 sm:mt-14 sm:grid sm:pt-6"
             >
               {["Imagem profissional", "Atendimento com IA", "Mais oportunidades"].map((item) => (
                 <div key={item}>
@@ -380,7 +380,7 @@ export function NorteOneSite() {
                 ["Eficiência", "atendimento e processos mais inteligentes"],
                 ["Conversão", "jornadas pensadas para gerar contato"]
               ].map(([title, text]) => (
-                <div key={title} className="rounded-2xl border border-black/10 bg-white/65 p-4 shadow-sm">
+                <div key={title} className="rounded-2xl border border-white/10 bg-graphite/70 p-4 shadow-sm">
                   <p className="font-display text-lg text-gold">{title}</p>
                   <p className="mt-2 text-sm leading-6 text-soft/62">{text}</p>
                 </div>
@@ -406,9 +406,9 @@ export function NorteOneSite() {
                   key={service.title}
                   whileHover={{ y: -8 }}
                   transition={{ type: "spring", stiffness: 260, damping: 24 }}
-                  className="group premium-border rounded-[24px] bg-white/70 p-6 shadow-panel backdrop-blur-xl"
+                  className="group premium-border rounded-[24px] bg-graphite/70 p-6 shadow-panel backdrop-blur-xl"
                 >
-                  <div className="mb-6 overflow-hidden rounded-2xl border border-black/10 bg-white/70">
+                  <div className="mb-6 overflow-hidden rounded-2xl border border-white/10 bg-graphite/70">
                     <Image
                       src={assetPath(service.visual)}
                       alt={`Visual estratégico de ${service.title}`}
@@ -460,10 +460,10 @@ export function NorteOneSite() {
             {[...portfolioCases, ...portfolioCases].map((item, index) => (
               <article
                 key={`${item.name}-${index}`}
-                className="group w-[82vw] max-w-[760px] shrink-0 overflow-hidden rounded-[28px] border border-black/10 bg-white/78 p-3 shadow-panel backdrop-blur-2xl sm:w-[640px] sm:p-4 lg:w-[720px]"
+                className="group w-[82vw] max-w-[760px] shrink-0 overflow-hidden rounded-[28px] border border-white/10 bg-graphite/80 p-3 shadow-panel backdrop-blur-2xl sm:w-[640px] sm:p-4 lg:w-[720px]"
                 aria-hidden={index >= portfolioCases.length}
               >
-                <div className="overflow-hidden rounded-[22px] border border-black/10 bg-white">
+                <div className="overflow-hidden rounded-[22px] border border-white/10 bg-graphite">
                   <Image
                     src={assetPath(item.image)}
                     alt={`Mockup premium do projeto ${item.name}`}
@@ -476,7 +476,7 @@ export function NorteOneSite() {
                   <div>
                     <div className="flex flex-wrap items-center gap-2">
                       <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">{item.segment}</p>
-                      <span className="rounded-full border border-black/10 bg-white/80 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-titanium">
+                      <span className="rounded-full border border-white/10 bg-graphite/85 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-titanium">
                         Conceito premium
                       </span>
                     </div>
@@ -492,7 +492,7 @@ export function NorteOneSite() {
                       ))}
                     </div>
                     {item.details.map((detail) => (
-                      <div key={detail} className="flex items-center gap-3 rounded-2xl border border-black/10 bg-white/70 px-4 py-3 text-sm text-soft/70">
+                      <div key={detail} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-graphite/70 px-4 py-3 text-sm text-soft/70">
                         <span className="h-1.5 w-1.5 rounded-full bg-gold shadow-[0_0_12px_rgba(200,169,107,0.75)]" />
                         {detail}
                       </div>
@@ -513,7 +513,7 @@ export function NorteOneSite() {
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
             {differentiators.map((item) => (
-              <div data-reveal key={item} className="flex gap-4 rounded-2xl border border-black/10 bg-white/70 p-5 shadow-sm">
+              <div data-reveal key={item} className="flex gap-4 rounded-2xl border border-white/10 bg-graphite/70 p-5 shadow-sm">
                 <ShieldCheck className="mt-0.5 h-5 w-5 flex-none text-gold" />
                 <p className="text-sm leading-7 text-soft/72">{item}</p>
               </div>
@@ -532,7 +532,7 @@ export function NorteOneSite() {
           <div className="relative grid gap-4 lg:grid-cols-5">
             <div className="absolute left-0 right-0 top-12 hidden h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent lg:block" />
             {process.map((step, index) => (
-              <div data-reveal key={step.title} className="relative rounded-[24px] border border-black/10 bg-white/70 p-6 shadow-sm backdrop-blur-xl">
+              <div data-reveal key={step.title} className="relative rounded-[24px] border border-white/10 bg-graphite/70 p-6 shadow-sm backdrop-blur-xl">
                 <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-full border border-gold/30 bg-obsidian text-gold">
                   {index + 1}
                 </div>
@@ -547,7 +547,7 @@ export function NorteOneSite() {
       </section>
 
       <section id="contato" className="px-4 py-14 sm:px-8 sm:py-20 lg:py-24">
-        <div data-reveal className="premium-border relative mx-auto max-w-7xl overflow-hidden rounded-[28px] bg-white/80 px-5 py-14 text-center shadow-panel backdrop-blur-2xl sm:rounded-[36px] sm:px-12 sm:py-20">
+        <div data-reveal className="premium-border relative mx-auto max-w-7xl overflow-hidden rounded-[28px] bg-graphite/85 px-5 py-14 text-center shadow-panel backdrop-blur-2xl sm:rounded-[36px] sm:px-12 sm:py-20">
           <div className="absolute inset-0 bg-radial-gold opacity-80" />
           <div className="relative mx-auto max-w-4xl">
             <p className="mb-5 text-sm uppercase tracking-[0.32em] text-gold">Próximo passo</p>
@@ -564,7 +564,7 @@ export function NorteOneSite() {
         </div>
       </section>
 
-      <footer className="border-t border-black/10 px-4 py-8 sm:px-8 sm:py-10">
+      <footer className="border-t border-white/10 px-4 py-8 sm:px-8 sm:py-10">
         <div className="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Image

@@ -5,10 +5,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        obsidian: "#F6F5F2",
-        graphite: "#EFECE6",
+        obsidian: "#0B0B0D",
+        graphite: "#1A1A1F",
         gold: "#C8A96B",
-        soft: "#111114",
+        soft: "#F6F5F2",
         titanium: "#7A7A80"
       },
       fontFamily: {
@@ -17,11 +17,11 @@ const config: Config = {
       },
       boxShadow: {
         gold: "0 18px 42px rgba(200, 169, 107, 0.18)",
-        panel: "0 24px 80px rgba(17, 17, 20, 0.10)"
+        panel: "0 24px 80px rgba(0, 0, 0, 0.28)"
       },
       backgroundImage: {
-        "radial-gold": "radial-gradient(circle at 50% 0%, rgba(200,169,107,0.16), transparent 45%)",
-        "panel-glow": "linear-gradient(135deg, rgba(255,255,255,0.88), rgba(239,236,230,0.68))"
+        "radial-gold": "radial-gradient(circle at 50% 0%, rgba(200,169,107,0.18), transparent 45%)",
+        "panel-glow": "linear-gradient(135deg, rgba(26,26,31,0.92), rgba(11,11,13,0.78))"
       }
     }
   },
