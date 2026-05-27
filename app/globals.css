@@ -55,7 +55,7 @@ body {
     linear-gradient(90deg, rgba(17, 17, 20, 0.045) 1px, transparent 1px);
   background-size: 72px 72px;
   mask-image: radial-gradient(circle at 50% 30%, black 0%, transparent 68%);
-  animation: grid-drift 24s linear infinite;
+  animation: grid-drift 46s linear infinite;
 }
 
 .animated-dark-bg {
@@ -78,8 +78,8 @@ body {
   min-width: 520px;
   min-height: 520px;
   border-radius: 999px;
-  filter: blur(42px);
-  opacity: 0.62;
+  filter: blur(20px);
+  opacity: 0.38;
   will-change: transform;
 }
 
@@ -89,7 +89,7 @@ body {
   background:
     radial-gradient(circle at 35% 35%, rgba(200, 169, 107, 0.22), transparent 34%),
     radial-gradient(circle at 62% 58%, rgba(255, 255, 255, 0.58), transparent 42%);
-  animation: cinematic-orbit-one 18s ease-in-out infinite alternate;
+  animation: cinematic-orbit-one 34s ease-in-out infinite alternate;
 }
 
 .animated-dark-bg::after {
@@ -98,7 +98,7 @@ body {
   background:
     radial-gradient(circle at 48% 42%, rgba(200, 169, 107, 0.12), transparent 36%),
     radial-gradient(circle at 22% 70%, rgba(122, 122, 128, 0.16), transparent 42%);
-  animation: cinematic-orbit-two 22s ease-in-out infinite alternate;
+  animation: cinematic-orbit-two 40s ease-in-out infinite alternate;
 }
 
 .animated-dark-bg__grid,
@@ -115,7 +115,7 @@ body {
   background-size: 84px 84px;
   mask-image: radial-gradient(circle at 50% 24%, black 0%, transparent 72%);
   opacity: 0.5;
-  animation: grid-drift 28s linear infinite;
+  animation: grid-drift 58s linear infinite;
 }
 
 .animated-dark-bg__particles {
@@ -130,20 +130,20 @@ body {
     212px 212px;
   mask-image: linear-gradient(to bottom, transparent, black 18%, black 72%, transparent);
   opacity: 0.2;
-  animation: particle-float 36s linear infinite;
+  animation: particle-float 70s linear infinite;
 }
 
 .animated-dark-bg__scan {
   background: linear-gradient(105deg, transparent 0%, rgba(255, 255, 255, 0.62) 48%, transparent 58%);
   transform: translateX(-120%);
-  animation: premium-scan 11s ease-in-out infinite;
+  animation: none;
 }
 
 .glass-panel {
   border: 1px solid rgba(17, 17, 20, 0.08);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(239, 236, 230, 0.62));
   box-shadow: 0 24px 80px rgba(17, 17, 20, 0.10);
-  backdrop-filter: blur(28px);
+  backdrop-filter: blur(14px);
 }
 
 .gold-text {
@@ -151,18 +151,6 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-}
-
-.cursor-glow {
-  pointer-events: none;
-  position: fixed;
-  z-index: 60;
-  width: 420px;
-  height: 420px;
-  transform: translate3d(-50%, -50%, 0);
-  border-radius: 999px;
-  background: radial-gradient(circle, rgba(200, 169, 107, 0.16), transparent 64%);
-  mix-blend-mode: multiply;
 }
 
 .premium-border {
@@ -215,7 +203,7 @@ body {
   width: max-content;
   gap: 1rem;
   padding-inline: 1rem;
-  animation: portfolio-drift 42s linear infinite;
+  animation: portfolio-drift 64s linear infinite;
   will-change: transform;
 }
 
@@ -240,10 +228,6 @@ body {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
-  }
-
-  .cursor-glow {
-    display: none;
   }
 
   .animated-dark-bg::before,

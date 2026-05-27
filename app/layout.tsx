@@ -4,9 +4,9 @@ import { brandLogo } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://norteone.com.br"),
-  title: "Norte One | Tecnologia inteligente para empresas que querem crescer",
+  title: "Norte One | Sites, IA e automações para empresas",
   description:
-    "Sites premium, IA, automações, chatbots inteligentes, cartões NFC, branding digital e soluções tecnológicas para empresas.",
+    "Presença digital premium para empresas que precisam transmitir autoridade, melhorar o atendimento e gerar mais oportunidades comerciais.",
   keywords: [
     "Norte One",
     "sites premium",
@@ -18,9 +18,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Norte One" }],
   openGraph: {
-    title: "Norte One | Tecnologia, IA, Design e Resultados",
+    title: "Norte One | Presença digital premium para empresas",
     description:
-      "Soluções inteligentes para empresas que querem autoridade, presença digital e crescimento.",
+      "Sites profissionais, IA, chatbots, automações e soluções digitais para empresas que querem parecer mais fortes e vender com mais confiança.",
     url: "https://norteone.com.br",
     siteName: "Norte One",
     locale: "pt_BR",

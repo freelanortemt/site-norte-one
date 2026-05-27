@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 import { getServiceBySlug, services } from "@/lib/services";
-import { assetPath, brandLogo } from "@/lib/site";
+import { assetPath, brandLogo, brandLogoSmall } from "@/lib/site";
 
 type ServicePageProps = {
   params: Promise<{ slug: string }>;
@@ -63,7 +63,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-8">
           <Link href="/#inicio" className="flex items-center gap-3" aria-label="Norte One">
             <Image
-              src={brandLogo}
+              src={brandLogoSmall}
               width={46}
               height={46}
               alt="Logo Norte One"
@@ -81,7 +81,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-3 py-2 text-xs font-semibold text-soft shadow-sm backdrop-blur-xl transition hover:border-gold/50 hover:bg-white hover:text-gold sm:px-5 sm:py-2.5 sm:text-sm"
           >
             <ArrowLeft className="h-4 w-4" />
-            Voltar aos serviços
+            Ver soluções
           </Link>
         </nav>
       </header>
@@ -109,7 +109,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 className="mb-6 aspect-[1.55] w-full rounded-[24px] border border-black/10 object-cover"
                 priority
               />
-              <p className="text-sm uppercase tracking-[0.26em] text-titanium">Ideal para</p>
+              <p className="text-sm uppercase tracking-[0.26em] text-titanium">Indicado para</p>
               <p className="mt-4 text-2xl font-semibold leading-9">{service.idealFor}</p>
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
                 {service.outcomes.slice(0, 4).map((outcome) => (
@@ -127,7 +127,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
       <section className="relative z-10 px-4 py-10 sm:px-8 sm:py-16">
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-3">
           <article className="glass-panel rounded-[28px] p-6 sm:p-8">
-            <p className="mb-6 font-display text-2xl font-semibold">O que entregamos</p>
+            <p className="mb-6 font-display text-2xl font-semibold">O que sua empresa recebe</p>
             <div className="space-y-4">
               {service.deliverables.map((item) => (
                 <div key={item} className="flex gap-3 text-sm leading-6 text-soft/70">
@@ -139,7 +139,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </article>
 
           <article className="glass-panel rounded-[28px] p-6 sm:p-8">
-            <p className="mb-6 font-display text-2xl font-semibold">Processo</p>
+            <p className="mb-6 font-display text-2xl font-semibold">Como conduzimos</p>
             <div className="space-y-4">
               {service.process.map((item, index) => (
                 <div key={item} className="flex items-center gap-4 rounded-2xl border border-black/10 bg-white/70 p-4 shadow-sm">
@@ -153,15 +153,15 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </article>
 
           <article className="premium-border rounded-[28px] bg-white/75 p-6 shadow-panel backdrop-blur-xl sm:p-8">
-            <p className="mb-6 font-display text-2xl font-semibold">Resultado esperado</p>
+            <p className="mb-6 font-display text-2xl font-semibold">Valor para o negócio</p>
             <p className="text-base leading-8 text-soft/68">
-              Um projeto com aparência premium, estrutura clara e execução técnica para aumentar confiança, gerar desejo e facilitar a decisão do cliente.
+              Uma solução mais profissional, clara e confiável para fortalecer sua imagem, melhorar a experiência do cliente e aumentar a chance de contato comercial.
             </p>
             <Link
-              href="mailto:contato@norteone.com.br?subject=Quero%20falar%20sobre%20um%20serviço%20da%20Norte%20One"
+              href={`mailto:contato@norteone.com.br?subject=Quero%20solicitar%20um%20orçamento%20-%20${encodeURIComponent(service.title)}`}
               className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-soft px-6 text-sm font-semibold text-obsidian shadow-gold transition hover:bg-white"
             >
-              Solicitar proposta
+              Solicitar orçamento
               <ArrowRight className="h-4 w-4" />
             </Link>
           </article>

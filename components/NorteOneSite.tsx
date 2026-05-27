@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   ArrowRight,
   Bot,
@@ -22,7 +22,7 @@ import {
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { services } from "@/lib/services";
-import { assetPath, brandLogo } from "@/lib/site";
+import { assetPath, brandLogoSmall } from "@/lib/site";
 
 const serviceIcons = {
   "sites-premium": PanelsTopLeft,
@@ -36,48 +36,69 @@ const serviceIcons = {
 };
 
 const differentiators = [
-  "Design premium com percepção imediata de valor",
-  "Inteligência artificial aplicada a vendas e atendimento",
-  "Automações modernas para reduzir trabalho manual",
-  "Suporte estratégico do conceito ao lançamento",
-  "Experiência visual refinada em todos os dispositivos",
-  "Foco real em autoridade, conversão e resultado"
+  "Estratégia antes do design: cada projeto nasce para resolver um problema comercial real.",
+  "Acabamento visual premium para sua empresa ser percebida com mais autoridade.",
+  "Tecnologia moderna, rápida e preparada para crescer junto com o negócio.",
+  "IA e automações aplicadas ao atendimento, vendas e operação, sem complexidade para o cliente.",
+  "Experiência mobile refinada para transformar visitantes em conversas qualificadas.",
+  "Acompanhamento próximo, comunicação clara e entrega organizada do início ao lançamento."
 ];
 
-const process = ["Estratégia", "Design", "Desenvolvimento", "Automação", "Lançamento"];
+const process = [
+  {
+    title: "Diagnóstico",
+    text: "Entendemos seu negócio, público, oferta e pontos que hoje limitam sua presença digital."
+  },
+  {
+    title: "Estratégia",
+    text: "Definimos a mensagem, a jornada do cliente e a estrutura ideal para gerar confiança e contato."
+  },
+  {
+    title: "Design",
+    text: "Criamos uma experiência visual premium, clara e alinhada ao valor que sua empresa entrega."
+  },
+  {
+    title: "Execução",
+    text: "Desenvolvemos o site, automação ou solução digital com performance, responsividade e cuidado técnico."
+  },
+  {
+    title: "Lançamento",
+    text: "Publicamos, testamos e deixamos tudo pronto para sua empresa começar a captar oportunidades."
+  }
+];
 
 const portfolioCases = [
   {
     name: "Aurora Prime Imóveis",
     segment: "Imobiliária de alto padrão",
-    image: "/portfolio/aurora-prime-imoveis.png",
-    scope: "Website institucional, catálogo premium, filtros por perfil e captação via WhatsApp.",
-    details: ["Venda de imóveis de luxo", "Mapa de oportunidades", "Leads qualificados"],
-    metrics: ["Meta: +42% consultas", "Ticket: alto padrão", "Praça: Cuiabá MT"]
+    image: "/portfolio/optimized/aurora-prime-imoveis.jpg",
+    scope: "Experiência digital para apresentar imóveis de alto padrão com mais desejo, confiança e contato rápido.",
+    details: ["Catálogo premium", "Busca por perfil", "Captação via WhatsApp"],
+    metrics: ["Foco: consultas qualificadas", "Oferta: alto padrão", "Praça: Cuiabá MT"]
   },
   {
     name: "Mendes & Valença Advocacia",
     segment: "Escritório jurídico empresarial",
-    image: "/portfolio/mendes-valenca-advocacia.png",
-    scope: "Presença digital sóbria com áreas de atuação, perfil da banca e jornada de consulta.",
-    details: ["Autoridade jurídica", "Página de consulta", "Comunicação institucional"],
-    metrics: ["Meta: +31% reuniões", "Perfil: empresarial", "Praça: Centro Sul"]
+    image: "/portfolio/optimized/mendes-valenca-advocacia.jpg",
+    scope: "Site institucional para uma banca que precisa transmitir seriedade, autoridade e segurança na primeira visita.",
+    details: ["Áreas de atuação", "Perfil da banca", "Jornada de consulta"],
+    metrics: ["Foco: confiança", "Perfil: empresarial", "Tom: institucional"]
   },
   {
     name: "OdontoVitta Clinic",
     segment: "Clínica odontológica premium",
-    image: "/portfolio/odontovitta-clinic.png",
-    scope: "Site de conversão com tratamentos, agendamento online e experiência mobile refinada.",
-    details: ["Agenda digital", "Tratamentos destacados", "Confiança visual"],
-    metrics: ["Meta: +47% agendamentos", "Foco: estética dental", "Mobile: prioridade"]
+    image: "/portfolio/optimized/odontovitta-clinic.jpg",
+    scope: "Site para destacar tratamentos, facilitar agendamentos e posicionar a clínica com percepção premium.",
+    details: ["Agendamento online", "Tratamentos claros", "Prova visual"],
+    metrics: ["Foco: novos pacientes", "Área: estética dental", "Mobile: prioridade"]
   },
   {
     name: "Santé Prime Clinic",
     segment: "Clínica médica particular",
-    image: "/portfolio/sante-prime-clinic.png",
-    scope: "Interface para especialidades, corpo clínico, agendamento e portal do paciente.",
-    details: ["Especialidades médicas", "Portal do paciente", "UX para saúde"],
-    metrics: ["Meta: +36% pré-consultas", "Foco: particular", "Jornada: paciente"]
+    image: "/portfolio/optimized/sante-prime-clinic.jpg",
+    scope: "Presença digital para clínica particular com navegação simples, agendamento direto e imagem confiável.",
+    details: ["Especialidades médicas", "Corpo clínico", "Portal do paciente"],
+    metrics: ["Foco: pré-consultas", "Modelo: particular", "Jornada: paciente"]
   }
 ];
 
@@ -133,15 +154,15 @@ function FloatingDashboard() {
             <span className="h-2.5 w-2.5 rounded-full bg-[#ffd166]" />
             <span className="h-2.5 w-2.5 rounded-full bg-[#69db7c]" />
           </div>
-          <div className="rounded-full border border-gold/20 bg-gold/10 px-3 py-1 text-[11px] text-gold">AI Operating Layer</div>
+          <div className="rounded-full border border-gold/20 bg-gold/10 px-3 py-1 text-[11px] text-gold">Proposta digital</div>
         </div>
 
         <div className="grid gap-3 p-4 sm:grid-cols-[1.1fr_0.9fr]">
           <div className="rounded-2xl border border-black/10 bg-graphite/70 p-4">
             <div className="mb-7 flex items-center justify-between">
               <div>
-                <p className="text-xs text-titanium">Pipeline digital</p>
-                <p className="mt-1 font-display text-2xl font-semibold">+284%</p>
+                <p className="text-xs text-titanium">Oportunidades</p>
+                <p className="mt-1 font-display text-2xl font-semibold">+ clareza</p>
               </div>
               <div className="rounded-full bg-gold/15 p-2 text-gold">
                 <Zap className="h-5 w-5" />
@@ -162,9 +183,9 @@ function FloatingDashboard() {
 
           <div className="space-y-3">
             {[
-              ["Chatbot", "Lead qualificado", "98%"],
-              ["Website", "Velocidade", "0.8s"],
-              ["NFC", "Interações", "1.2k"]
+              ["Site premium", "Autoridade digital", "24/7"],
+              ["Chatbot", "Atendimento imediato", "IA"],
+              ["Automação", "Menos trabalho manual", "Fluxos"]
             ].map(([label, status, metric]) => (
               <motion.div
                 key={label}
@@ -190,9 +211,9 @@ function FloatingDashboard() {
                 <MessageSquareText className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-sm font-medium">IA Norte One</p>
+                <p className="text-sm font-medium">Diagnóstico Norte One</p>
                 <p className="mt-1 text-sm leading-6 text-soft/70">
-                  Analisei o perfil do visitante e recomendo uma proposta premium com site, chatbot e automação comercial.
+                  Sua empresa pode ter uma presença digital mais forte, mais clara e preparada para gerar conversas comerciais todos os dias.
                 </p>
               </div>
             </div>
@@ -204,22 +225,9 @@ function FloatingDashboard() {
 }
 
 export function NorteOneSite() {
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
-  const springX = useSpring(cursorX, { stiffness: 90, damping: 24 });
-  const springY = useSpring(cursorY, { stiffness: 90, damping: 24 });
   const heroRef = useRef<HTMLElement>(null);
-  const y = useTransform(springY, [0, 900], [0, 46]);
-
-  useEffect(() => {
-    const onMove = (event: MouseEvent) => {
-      cursorX.set(event.clientX);
-      cursorY.set(event.clientY);
-    };
-
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
-  }, [cursorX, cursorY]);
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 900], [0, 46]);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -248,7 +256,6 @@ export function NorteOneSite() {
 
   return (
     <main ref={heroRef} className="relative overflow-hidden bg-obsidian text-soft [&>footer]:relative [&>footer]:z-10 [&>section]:relative [&>section]:z-10">
-      <motion.div className="cursor-glow hidden lg:block" style={{ left: springX, top: springY }} />
       <div className="noise pointer-events-none fixed inset-0 z-50 opacity-[0.018]" />
       <div className="animated-dark-bg pointer-events-none" aria-hidden="true">
         <div className="animated-dark-bg__grid" />
@@ -261,7 +268,7 @@ export function NorteOneSite() {
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-8">
           <a href="#inicio" className="flex items-center gap-3" aria-label="Norte One">
             <Image
-              src={brandLogo}
+              src={brandLogoSmall}
               width={48}
               height={48}
               alt="Logo Norte One"
@@ -285,7 +292,7 @@ export function NorteOneSite() {
             href="#contato"
             className="hidden rounded-full border border-black/10 bg-soft px-5 py-2.5 text-sm font-semibold text-obsidian shadow-sm transition hover:-translate-y-0.5 hover:bg-gold sm:inline-flex"
           >
-            Falar agora
+            Solicitar orçamento
           </a>
         </nav>
       </header>
@@ -301,7 +308,7 @@ export function NorteOneSite() {
               className="mb-5 inline-flex items-center gap-3 rounded-full border border-black/10 bg-white/70 px-4 py-2 text-sm text-soft/68 shadow-sm backdrop-blur-xl sm:mb-8"
             >
               <span className="h-2 w-2 rounded-full bg-gold shadow-[0_0_18px_rgba(200,169,107,0.9)]" />
-              Tecnologia, IA, Design e Resultados
+              Sites, IA e automações para empresas
             </motion.div>
 
             <motion.h1
@@ -310,7 +317,7 @@ export function NorteOneSite() {
               transition={{ duration: 0.95, delay: 0.08 }}
               className="max-w-4xl font-display text-[clamp(2.45rem,5.25vw,5.55rem)] font-semibold leading-[0.96] tracking-normal"
             >
-              Tecnologia inteligente para empresas que querem <span className="gold-text">crescer.</span>
+              Sua empresa com presença digital de alto padrão.
             </motion.h1>
 
             <motion.p
@@ -319,7 +326,7 @@ export function NorteOneSite() {
               transition={{ duration: 0.95, delay: 0.16 }}
               className="mt-5 max-w-2xl text-base leading-7 text-soft/68 sm:mt-8 sm:text-xl sm:leading-8"
             >
-              Sites premium, IA, automações e soluções digitais modernas para negócios que querem autoridade e resultados.
+              Criamos sites profissionais, chatbots e automações que fortalecem sua marca, melhoram o atendimento e abrem caminho para mais oportunidades.
             </motion.p>
 
             <motion.div
@@ -329,10 +336,10 @@ export function NorteOneSite() {
               className="mt-7 flex flex-col gap-3 sm:mt-10 sm:flex-row"
             >
               <MagneticButton href="#contato">
-                Solicitar demonstração
+                Solicitar orçamento
               </MagneticButton>
               <MagneticButton href="#servicos" variant="secondary">
-                Conhecer serviços
+                Ver soluções
               </MagneticButton>
             </motion.div>
 
@@ -342,10 +349,10 @@ export function NorteOneSite() {
               transition={{ duration: 1.1, delay: 0.55 }}
               className="mt-8 hidden max-w-2xl grid-cols-3 gap-3 border-t border-black/10 pt-5 sm:mt-14 sm:grid sm:pt-6"
             >
-              {["IA aplicada", "UX premium", "Automação"].map((item) => (
+              {["Imagem profissional", "Atendimento com IA", "Mais oportunidades"].map((item) => (
                 <div key={item}>
                   <p className="text-xs uppercase tracking-[0.22em] text-titanium">{item}</p>
-                  <p className="mt-2 font-display text-2xl font-semibold text-soft">01</p>
+                  <p className="mt-2 font-display text-2xl font-semibold text-soft">N1</p>
                 </div>
               ))}
             </motion.div>
@@ -358,20 +365,20 @@ export function NorteOneSite() {
       <section id="sobre" className="relative px-4 py-14 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.82fr_1.18fr]">
           <div data-reveal>
-            <SectionLabel>Sobre</SectionLabel>
+            <SectionLabel>Para empresas exigentes</SectionLabel>
             <h2 className="font-display text-4xl font-semibold leading-tight sm:text-5xl">
-              A Norte One transforma presença digital em percepção de valor.
+              Transformamos presença digital em confiança, desejo e contato comercial.
             </h2>
           </div>
           <div data-reveal className="glass-panel rounded-[28px] p-7 sm:p-10">
             <p className="text-xl leading-9 text-soft/78">
-              Unimos design premium, inteligência artificial, automações e estratégia para criar experiências digitais que elevam marcas, simplificam operações e aceleram oportunidades comerciais.
+              A NORTE ONE desenvolve experiências digitais para empresas que precisam parecer tão profissionais online quanto são na prática. Cada projeto une estratégia, design e tecnologia para tornar sua marca mais clara, confiável e pronta para vender melhor.
             </p>
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
               {[
-                ["Design", "interfaces memoráveis"],
-                ["Inteligência", "IA conectada ao negócio"],
-                ["Resultados", "presença que converte"]
+                ["Autoridade", "uma imagem digital à altura do seu negócio"],
+                ["Eficiência", "atendimento e processos mais inteligentes"],
+                ["Conversão", "jornadas pensadas para gerar contato"]
               ].map(([title, text]) => (
                 <div key={title} className="rounded-2xl border border-black/10 bg-white/65 p-4 shadow-sm">
                   <p className="font-display text-lg text-gold">{title}</p>
@@ -386,8 +393,8 @@ export function NorteOneSite() {
       <section id="servicos" className="px-4 py-14 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <div data-reveal className="mb-12 max-w-3xl">
-            <SectionLabel>Serviços</SectionLabel>
-            <h2 className="font-display text-4xl font-semibold sm:text-6xl">Soluções digitais com acabamento de empresa global.</h2>
+            <SectionLabel>Soluções</SectionLabel>
+            <h2 className="font-display text-4xl font-semibold sm:text-6xl">O que sua empresa precisa para vender confiança no digital.</h2>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -423,7 +430,7 @@ export function NorteOneSite() {
                     className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-gold transition hover:text-soft"
                     aria-label={`Saiba mais sobre ${service.title}`}
                   >
-                    Saiba mais
+                    Entender solução
                     <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
                   </Link>
                 </motion.article>
@@ -437,13 +444,13 @@ export function NorteOneSite() {
         <div className="mx-auto max-w-7xl">
           <div data-reveal className="mb-10 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
             <div className="max-w-3xl">
-              <SectionLabel>Portfólio visual</SectionLabel>
+              <SectionLabel>Projetos conceito</SectionLabel>
               <h2 className="font-display text-4xl font-semibold sm:text-6xl">
-                Mockups realistas para segmentos que precisam vender confiança.
+                Como um projeto premium pode posicionar negócios de diferentes mercados.
               </h2>
             </div>
             <p className="max-w-md text-base leading-7 text-soft/62">
-              Vitrines digitais com nome, contexto e acabamento de projeto pronto para apresentar autoridade antes do primeiro contato.
+              Exemplos visuais de sites pensados para gerar percepção de valor, facilitar a decisão do cliente e transformar visitas em conversas.
             </p>
           </div>
         </div>
@@ -470,7 +477,7 @@ export function NorteOneSite() {
                     <div className="flex flex-wrap items-center gap-2">
                       <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">{item.segment}</p>
                       <span className="rounded-full border border-black/10 bg-white/80 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-titanium">
-                        Projeto conceito
+                        Conceito premium
                       </span>
                     </div>
                     <h3 className="mt-2 font-display text-2xl font-semibold sm:text-3xl">{item.name}</h3>
@@ -502,7 +509,7 @@ export function NorteOneSite() {
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.85fr_1.15fr]">
           <div data-reveal>
             <SectionLabel>Diferenciais</SectionLabel>
-            <h2 className="font-display text-4xl font-semibold sm:text-6xl">O nível de detalhe que muda a percepção da marca.</h2>
+            <h2 className="font-display text-4xl font-semibold sm:text-6xl">Por que empresas escolhem a NORTE ONE para construir presença digital.</h2>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
             {differentiators.map((item) => (
@@ -519,19 +526,19 @@ export function NorteOneSite() {
         <div className="mx-auto max-w-7xl">
           <div data-reveal className="mb-14 max-w-3xl">
             <SectionLabel>Processo</SectionLabel>
-            <h2 className="font-display text-4xl font-semibold sm:text-6xl">Da estratégia ao lançamento com precisão.</h2>
+            <h2 className="font-display text-4xl font-semibold sm:text-6xl">Uma entrega organizada, clara e segura do início ao lançamento.</h2>
           </div>
 
           <div className="relative grid gap-4 lg:grid-cols-5">
             <div className="absolute left-0 right-0 top-12 hidden h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent lg:block" />
             {process.map((step, index) => (
-              <div data-reveal key={step} className="relative rounded-[24px] border border-black/10 bg-white/70 p-6 shadow-sm backdrop-blur-xl">
+              <div data-reveal key={step.title} className="relative rounded-[24px] border border-black/10 bg-white/70 p-6 shadow-sm backdrop-blur-xl">
                 <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-full border border-gold/30 bg-obsidian text-gold">
                   {index + 1}
                 </div>
-                <h3 className="font-display text-xl font-semibold">{step}</h3>
+                <h3 className="font-display text-xl font-semibold">{step.title}</h3>
                 <p className="mt-4 text-sm leading-7 text-soft/58">
-                  Etapa conduzida com clareza, refinamento visual e foco no impacto final para o cliente.
+                  {step.text}
                 </p>
               </div>
             ))}
@@ -543,14 +550,14 @@ export function NorteOneSite() {
         <div data-reveal className="premium-border relative mx-auto max-w-7xl overflow-hidden rounded-[28px] bg-white/80 px-5 py-14 text-center shadow-panel backdrop-blur-2xl sm:rounded-[36px] sm:px-12 sm:py-20">
           <div className="absolute inset-0 bg-radial-gold opacity-80" />
           <div className="relative mx-auto max-w-4xl">
-            <p className="mb-5 text-sm uppercase tracking-[0.32em] text-gold">Próximo nível</p>
-            <h2 className="font-display text-5xl font-semibold leading-tight sm:text-7xl">Transforme sua presença digital.</h2>
+            <p className="mb-5 text-sm uppercase tracking-[0.32em] text-gold">Próximo passo</p>
+            <h2 className="font-display text-5xl font-semibold leading-tight sm:text-7xl">Sua empresa pode estar perdendo oportunidades por não transmitir a imagem certa.</h2>
             <p className="mx-auto mt-7 max-w-2xl text-lg leading-8 text-soft/66">
-              Uma marca premium precisa de uma experiência digital que pareça tão forte quanto a solução que ela entrega.
+              Vamos construir uma presença digital mais profissional, persuasiva e preparada para transformar interesse em contato.
             </p>
             <div className="mt-10">
-              <MagneticButton href="mailto:contato@norteone.com.br?subject=Quero%20falar%20com%20a%20Norte%20One">
-                Falar com a Norte One
+              <MagneticButton href="mailto:contato@norteone.com.br?subject=Quero%20solicitar%20um%20orçamento%20com%20a%20Norte%20One">
+                Quero meu projeto profissional
               </MagneticButton>
             </div>
           </div>
@@ -561,7 +568,7 @@ export function NorteOneSite() {
         <div className="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Image
-              src={brandLogo}
+              src={brandLogoSmall}
               alt="Logo Norte One"
               width={58}
               height={58}
@@ -569,7 +576,7 @@ export function NorteOneSite() {
             />
             <div>
               <p className="font-display text-sm font-semibold uppercase tracking-[0.28em]">Norte One</p>
-              <p className="mt-1 text-sm text-soft/58">Soluções inteligentes. Resultados reais.</p>
+              <p className="mt-1 text-sm text-soft/58">Presença digital premium para empresas que querem crescer.</p>
             </div>
           </div>
           <div className="flex flex-wrap gap-5 text-sm text-soft/58">
