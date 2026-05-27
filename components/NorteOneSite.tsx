@@ -9,17 +9,14 @@ import {
   Bot,
   BrainCircuit,
   Cpu,
-  Fingerprint,
   Globe2,
   MessageSquareText,
-  Orbit,
   Palette,
   PanelsTopLeft,
   RadioTower,
   Rocket,
   ShieldCheck,
   Sparkles,
-  WandSparkles,
   Zap
 } from "lucide-react";
 import { gsap } from "gsap";
@@ -280,7 +277,6 @@ export function NorteOneSite() {
           <div className="hidden items-center gap-8 text-sm text-soft/62 lg:flex">
             <a className="transition hover:text-soft" href="#sobre">Sobre</a>
             <a className="transition hover:text-soft" href="#servicos">Serviços</a>
-            <a className="transition hover:text-soft" href="#demonstracao">Demo</a>
             <a className="transition hover:text-soft" href="#portfolio">Portfólio</a>
             <a className="transition hover:text-soft" href="#processo">Processo</a>
           </div>
@@ -433,71 +429,6 @@ export function NorteOneSite() {
                 </motion.article>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      <section id="demonstracao" className="px-4 py-14 sm:px-8 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl">
-          <div data-reveal className="mb-12 flex flex-col justify-between gap-7 lg:flex-row lg:items-end">
-            <div className="max-w-3xl">
-              <SectionLabel>Demonstração visual</SectionLabel>
-              <h2 className="font-display text-4xl font-semibold sm:text-6xl">Interfaces que parecem produto, não promessa.</h2>
-            </div>
-            <p className="max-w-md text-base leading-7 text-soft/62">
-              Mockups premium para website, dashboard IA, chatbot, painel administrativo e cartão NFC, todos pensados para vender valor em segundos.
-            </p>
-          </div>
-
-          <div className="grid gap-4 lg:grid-cols-[1.25fr_0.75fr]">
-            <div data-reveal className="glass-panel min-h-[440px] rounded-[28px] p-5 sm:p-8">
-              <div className="mb-8 flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-titanium">Norte One Suite</p>
-                  <p className="mt-1 font-display text-2xl font-semibold">Digital command center</p>
-                </div>
-                <Orbit className="h-7 w-7 text-gold" />
-              </div>
-              <div className="grid gap-4 md:grid-cols-3">
-                <div className="rounded-3xl border border-black/10 bg-white/70 p-5 shadow-sm md:col-span-2">
-                  <div className="h-44 rounded-2xl bg-[radial-gradient(circle_at_30%_20%,rgba(200,169,107,0.22),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.86),rgba(239,236,230,0.7))]" />
-                  <div className="mt-5 h-3 w-2/3 rounded-full bg-black/10" />
-                  <div className="mt-3 h-3 w-1/2 rounded-full bg-black/5" />
-                </div>
-                <div className="rounded-3xl border border-black/10 bg-white/70 p-5 shadow-sm">
-                  <Fingerprint className="mb-10 h-9 w-9 text-gold" />
-                  <p className="font-display text-2xl font-semibold">NFC</p>
-                  <p className="mt-3 text-sm leading-6 text-soft/62">Contato inteligente em um toque.</p>
-                </div>
-              </div>
-              <div className="mt-4 grid gap-4 md:grid-cols-3">
-                {["Website premium", "Chatbot ativo", "Painel admin"].map((item) => (
-                  <div key={item} className="rounded-2xl border border-black/10 bg-white/70 p-4 shadow-sm">
-                    <p className="text-sm font-medium">{item}</p>
-                    <div className="mt-4 h-2 rounded-full bg-black/10">
-                      <div className="h-2 w-4/5 rounded-full bg-gold" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div data-reveal className="space-y-4">
-              <div className="glass-panel rounded-[28px] p-6">
-                <Image
-                  src={brandLogo}
-                  alt="Logo Norte One"
-                  width={220}
-                  height={220}
-                  className="mx-auto w-40 rounded-full border border-gold/30 object-cover shadow-gold sm:w-48"
-                />
-                <p className="mt-6 text-center font-display text-2xl font-semibold">Brand signal premium</p>
-              </div>
-              <div className="rounded-[28px] border border-gold/20 bg-gold/[0.06] p-6">
-                <WandSparkles className="h-7 w-7 text-gold" />
-                <p className="mt-5 text-lg font-semibold">Motion discreto, brilho preciso e hierarquia clara.</p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
