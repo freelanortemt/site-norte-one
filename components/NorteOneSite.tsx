@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
+  ArrowLeft,
   ArrowRight,
   Bot,
   BrainCircuit,
@@ -226,8 +227,26 @@ function FloatingDashboard() {
 
 export function NorteOneSite() {
   const heroRef = useRef<HTMLElement>(null);
+  const portfolioRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 900], [0, 46]);
+
+  const scrollPortfolio = (direction: "previous" | "next") => {
+    const track = portfolioRef.current;
+
+    if (!track) {
+      return;
+    }
+
+    const card = track.querySelector<HTMLElement>("[data-portfolio-card]");
+    const cardWidth = card?.offsetWidth ?? track.clientWidth * 0.82;
+    const gap = 16;
+
+    track.scrollBy({
+      left: direction === "next" ? cardWidth + gap : -(cardWidth + gap),
+      behavior: "smooth"
+    });
+  };
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -453,15 +472,38 @@ export function NorteOneSite() {
               Exemplos visuais de sites pensados para gerar percepção de valor, facilitar a decisão do cliente e transformar visitas em conversas.
             </p>
           </div>
+          <div data-reveal className="mb-6 flex items-center justify-between gap-4">
+            <p className="text-sm leading-6 text-soft/58">
+              Navegue pelos projetos e veja como cada segmento pode ganhar uma presença digital mais forte.
+            </p>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => scrollPortfolio("previous")}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-graphite/80 text-soft transition hover:border-gold/50 hover:text-gold"
+                aria-label="Ver projeto anterior"
+              >
+                <ArrowLeft className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollPortfolio("next")}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-soft text-obsidian shadow-gold transition hover:bg-gold"
+                aria-label="Ver próximo projeto"
+              >
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div data-reveal className="portfolio-marquee -mx-4 sm:-mx-8">
-          <div className="portfolio-marquee__track">
-            {[...portfolioCases, ...portfolioCases].map((item, index) => (
+        <div data-reveal className="portfolio-carousel -mx-4 sm:-mx-8">
+          <div ref={portfolioRef} className="portfolio-carousel__track" aria-label="Projetos conceito da Norte One">
+            {portfolioCases.map((item) => (
               <article
-                key={`${item.name}-${index}`}
+                key={item.name}
+                data-portfolio-card
                 className="group w-[82vw] max-w-[760px] shrink-0 overflow-hidden rounded-[28px] border border-white/10 bg-graphite/80 p-3 shadow-panel backdrop-blur-2xl sm:w-[640px] sm:p-4 lg:w-[720px]"
-                aria-hidden={index >= portfolioCases.length}
               >
                 <div className="overflow-hidden rounded-[22px] border border-white/10 bg-graphite">
                   <Image

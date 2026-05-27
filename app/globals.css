@@ -171,14 +171,14 @@ body {
   pointer-events: none;
 }
 
-.portfolio-marquee {
+.portfolio-carousel {
   position: relative;
   overflow: hidden;
   padding: 0.25rem 0 1.5rem;
 }
 
-.portfolio-marquee::before,
-.portfolio-marquee::after {
+.portfolio-carousel::before,
+.portfolio-carousel::after {
   content: "";
   position: absolute;
   top: 0;
@@ -188,36 +188,34 @@ body {
   pointer-events: none;
 }
 
-.portfolio-marquee::before {
+.portfolio-carousel::before {
   left: 0;
   background: linear-gradient(90deg, rgba(11, 11, 13, 0.98), transparent);
 }
 
-.portfolio-marquee::after {
+.portfolio-carousel::after {
   right: 0;
   background: linear-gradient(270deg, rgba(11, 11, 13, 0.98), transparent);
 }
 
-.portfolio-marquee__track {
+.portfolio-carousel__track {
   display: flex;
-  width: max-content;
   gap: 1rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
   padding-inline: 1rem;
-  animation: portfolio-drift 64s linear infinite;
-  will-change: transform;
+  scroll-behavior: smooth;
+  scroll-padding-inline: 1rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
 }
 
-.portfolio-marquee:hover .portfolio-marquee__track {
-  animation-play-state: paused;
+.portfolio-carousel__track::-webkit-scrollbar {
+  display: none;
 }
 
-@keyframes portfolio-drift {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
+.portfolio-carousel__track > * {
+  scroll-snap-align: center;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -235,7 +233,6 @@ body {
   .animated-dark-bg__grid,
   .animated-dark-bg__particles,
   .animated-dark-bg__scan,
-  .portfolio-marquee__track,
   .tech-grid {
     animation: none !important;
   }
