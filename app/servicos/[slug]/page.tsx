@@ -54,11 +54,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
     <main className="relative min-h-screen overflow-hidden bg-obsidian text-soft">
       <div className="animated-dark-bg pointer-events-none" aria-hidden="true">
         <div className="animated-dark-bg__grid" />
-        <div className="animated-dark-bg__particles" />
       </div>
-      <div className="noise pointer-events-none fixed inset-0 z-50 opacity-[0.018]" />
 
-      <header className="topbar fixed left-0 right-0 top-0 z-40 border-b border-white/10 bg-obsidian/78 backdrop-blur-2xl">
+      <header className="topbar fixed left-0 right-0 top-0 z-40 border-b border-white/10 bg-obsidian/95">
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-8">
           <Link href="/#inicio" className="flex items-center gap-3" aria-label="Norte One">
             <Image
@@ -77,7 +75,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
           <Link
             href="/#servicos"
-            className="interactive-lift inline-flex items-center gap-2 rounded-full border border-white/10 bg-graphite/70 px-3 py-2 text-xs font-semibold text-soft shadow-sm backdrop-blur-xl transition hover:border-gold/50 hover:bg-graphite hover:text-gold sm:px-5 sm:py-2.5 sm:text-sm"
+            className="interactive-lift inline-flex items-center gap-2 rounded-full border border-white/10 bg-graphite/90 px-3 py-2 text-xs font-semibold text-soft shadow-sm transition hover:border-gold/50 hover:bg-graphite hover:text-gold sm:px-5 sm:py-2.5 sm:text-sm"
           >
             <ArrowLeft className="h-4 w-4" />
             Ver soluções
@@ -86,7 +84,6 @@ export default async function ServicePage({ params }: ServicePageProps) {
       </header>
 
       <section className="relative z-10 px-4 pb-12 pt-24 sm:px-8 sm:pb-20 lg:pt-36">
-        <div className="hero-circuit pointer-events-none absolute inset-0" aria-hidden="true" />
         <div className="mx-auto max-w-7xl">
           <div className="relative grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
             <div>
@@ -100,7 +97,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
               <p className="mt-5 max-w-2xl text-base leading-7 text-soft/70 sm:mt-7 sm:text-xl sm:leading-8">{service.description}</p>
             </div>
 
-            <div className="premium-border premium-surface rounded-[32px] bg-graphite/80 p-4 shadow-panel backdrop-blur-2xl sm:p-6">
+            <div className="premium-border premium-surface rounded-[32px] bg-graphite/95 p-4 shadow-panel sm:p-6">
               <Image
                 src={assetPath(service.visual)}
                 alt={`Visual premium de ${service.title}`}
@@ -153,7 +150,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             </div>
           </article>
 
-          <article className="premium-border premium-surface rounded-[28px] bg-graphite/80 p-6 shadow-panel backdrop-blur-xl sm:p-8">
+          <article className="premium-border premium-surface rounded-[28px] bg-graphite/95 p-6 shadow-panel sm:p-8">
             <p className="mb-6 font-display text-2xl font-semibold">Valor para o negócio</p>
             <p className="text-base leading-8 text-soft/68">
               Uma solução mais profissional, clara e confiável para fortalecer sua imagem, melhorar a experiência do cliente e aumentar a chance de contato comercial.

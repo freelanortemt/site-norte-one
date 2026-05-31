@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -23,8 +22,6 @@ import {
   Sparkles,
   Zap
 } from "lucide-react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { services } from "@/lib/services";
 import { assetPath, brandLogoSmall } from "@/lib/site";
 
@@ -122,19 +119,17 @@ function MagneticButton({
   variant?: "primary" | "secondary";
 }) {
   return (
-    <motion.a
+    <a
       href={href}
-      whileHover={{ y: -3, scale: 1.015 }}
-      whileTap={{ scale: 0.98 }}
       className={
         variant === "primary"
           ? "premium-cta group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-soft px-6 text-sm font-semibold text-obsidian shadow-gold transition hover:bg-gold"
-          : "interactive-lift group inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-graphite/70 px-6 text-sm font-semibold text-soft shadow-sm backdrop-blur-xl transition hover:border-gold/50 hover:bg-graphite"
+          : "interactive-lift group inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-graphite/90 px-6 text-sm font-semibold text-soft shadow-sm transition hover:border-gold/50 hover:bg-graphite"
       }
     >
       {children}
       <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-    </motion.a>
+    </a>
   );
 }
 
@@ -149,15 +144,9 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 function FloatingDashboard() {
   return (
-    <motion.div
-      style={{ transformStyle: "preserve-3d" }}
-      initial={{ opacity: 0, y: 34, rotateX: 12 }}
-      animate={{ opacity: 1, y: 0, rotateX: 0 }}
-      transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-      className="interface-shell premium-border relative mx-auto w-full max-w-[560px] rounded-[28px] bg-graphite/70 p-3 shadow-panel backdrop-blur-2xl"
+    <div
+      className="interface-shell premium-border relative mx-auto w-full max-w-[560px] rounded-[28px] bg-graphite/90 p-3 shadow-panel"
     >
-      <div className="absolute -inset-16 -z-10 bg-[radial-gradient(circle,rgba(200,169,107,0.18),transparent_58%)] blur-3xl" />
-      <div className="interface-shell__scan" />
       <div className="glass-panel overflow-hidden rounded-[22px]">
         <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
           <div className="flex items-center gap-2">
@@ -183,12 +172,10 @@ function FloatingDashboard() {
               </div>
             </div>
             <div className="flex h-32 items-end gap-2">
-              {[42, 58, 47, 72, 64, 86, 76, 94].map((height, index) => (
-                <motion.span
+              {[42, 58, 47, 72, 64, 86, 76, 94].map((height) => (
+                <span
                   key={height}
-                  initial={{ height: 12 }}
-                  animate={{ height }}
-                  transition={{ duration: 1, delay: 0.6 + index * 0.08 }}
+                  style={{ height }}
                   className="flex-1 rounded-t-md bg-gradient-to-t from-gold/35 to-gold"
                 />
               ))}
@@ -201,9 +188,8 @@ function FloatingDashboard() {
               ["Chatbot", "Atendimento imediato", "IA"],
               ["Automação", "Menos trabalho manual", "Fluxos"]
             ].map(([label, status, metric]) => (
-              <motion.div
+              <div
                 key={label}
-                whileHover={{ x: 4 }}
                 className="rounded-2xl border border-white/10 bg-graphite/70 p-4"
               >
                 <div className="flex items-center justify-between gap-3">
@@ -213,7 +199,7 @@ function FloatingDashboard() {
                   </div>
                   <p className="font-display text-xl text-gold">{metric}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -234,20 +220,17 @@ function FloatingDashboard() {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-4 left-4 hidden items-center gap-2 rounded-full border border-white/10 bg-obsidian/90 px-4 py-2 text-xs text-soft/72 shadow-panel backdrop-blur-xl sm:flex">
+      <div className="absolute bottom-4 left-4 hidden items-center gap-2 rounded-full border border-white/10 bg-obsidian/95 px-4 py-2 text-xs text-soft/72 shadow-panel sm:flex">
         <BadgeCheck className="h-4 w-4 text-gold" />
         Experiência digital sob medida
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 export function NorteOneSite() {
-  const heroRef = useRef<HTMLElement>(null);
   const portfolioRef = useRef<HTMLDivElement>(null);
   const [activePortfolio, setActivePortfolio] = useState(0);
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 900], [0, 46]);
 
   const scrollPortfolio = (direction: "previous" | "next") => {
     const track = portfolioRef.current;
@@ -297,41 +280,13 @@ export function NorteOneSite() {
     setActivePortfolio(nearest);
   };
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((item) => {
-        gsap.fromTo(
-          item,
-          { autoAlpha: 0, y: 42 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.95,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: item,
-              start: "top 84%"
-            }
-          }
-        );
-      });
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <main ref={heroRef} className="relative overflow-hidden bg-obsidian text-soft [&>footer]:relative [&>footer]:z-10 [&>section]:relative [&>section]:z-10">
-      <div className="noise pointer-events-none fixed inset-0 z-50 opacity-[0.018]" />
+    <main className="relative overflow-hidden bg-obsidian text-soft [&>footer]:relative [&>footer]:z-10 [&>section]:relative [&>section]:z-10">
       <div className="animated-dark-bg pointer-events-none" aria-hidden="true">
         <div className="animated-dark-bg__grid" />
-        <div className="animated-dark-bg__particles" />
       </div>
-      <div className="tech-grid pointer-events-none absolute inset-x-0 top-0 z-[1] h-[980px] opacity-55" />
 
-      <header className="topbar fixed left-0 right-0 top-0 z-40 border-b border-white/10 bg-obsidian/78 backdrop-blur-2xl">
+      <header className="topbar fixed left-0 right-0 top-0 z-40 border-b border-white/10 bg-obsidian/95">
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-8">
           <a href="#inicio" className="flex items-center gap-3" aria-label="Norte One">
             <Image
@@ -365,43 +320,28 @@ export function NorteOneSite() {
       </header>
 
       <section id="inicio" className="relative px-4 pb-14 pt-24 sm:px-8 sm:pb-20 sm:pt-32 lg:min-h-screen lg:pt-36">
-        <div className="hero-circuit pointer-events-none absolute inset-0" aria-hidden="true" />
-        <div className="hero-beam pointer-events-none absolute left-[42%] top-20 hidden h-[620px] w-px lg:block" aria-hidden="true" />
-        <motion.div style={{ y }} className="absolute right-[-180px] top-20 h-[480px] w-[480px] rounded-full border border-gold/20 opacity-40 blur-[1px]" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-9 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
           <div>
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="mb-5 inline-flex items-center gap-3 rounded-full border border-white/10 bg-graphite/70 px-4 py-2 text-sm text-soft/68 shadow-sm backdrop-blur-xl sm:mb-8"
+            <div
+              className="mb-5 inline-flex items-center gap-3 rounded-full border border-white/10 bg-graphite/90 px-4 py-2 text-sm text-soft/68 shadow-sm sm:mb-8"
             >
               <span className="h-2 w-2 rounded-full bg-gold shadow-[0_0_18px_rgba(200,169,107,0.9)]" />
               Sites, IA e automações para empresas
-            </motion.div>
+            </div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.95, delay: 0.08 }}
+            <h1
               className="max-w-4xl font-display text-[clamp(2.45rem,5.25vw,5.55rem)] font-semibold leading-[0.96] tracking-normal"
             >
               Sua empresa com presença digital de <span className="gold-text">alto padrão.</span>
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.95, delay: 0.16 }}
+            <p
               className="mt-5 max-w-2xl text-base leading-7 text-soft/68 sm:mt-8 sm:text-xl sm:leading-8"
             >
               Criamos sites profissionais, chatbots e automações que fortalecem sua marca, melhoram o atendimento e abrem caminho para mais oportunidades.
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.95, delay: 0.24 }}
+            <div
               className="mt-7 flex flex-col gap-3 sm:mt-10 sm:flex-row"
             >
               <MagneticButton href="#contato">
@@ -410,12 +350,9 @@ export function NorteOneSite() {
               <MagneticButton href="#servicos" variant="secondary">
                 Ver soluções
               </MagneticButton>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1.1, delay: 0.55 }}
+            <div
               className="mt-8 hidden max-w-2xl grid-cols-3 gap-3 border-t border-white/10 pt-5 sm:mt-14 sm:grid sm:pt-6"
             >
               {heroSignals.map(([title, text]) => (
@@ -424,7 +361,7 @@ export function NorteOneSite() {
                   <p className="mt-2 text-xs uppercase tracking-[0.16em] text-titanium">{text}</p>
                 </div>
               ))}
-            </motion.div>
+            </div>
           </div>
 
           <FloatingDashboard />
@@ -481,12 +418,10 @@ export function NorteOneSite() {
               const featured = index < 2;
 
               return (
-                <motion.article
+                <article
                   data-reveal
                   key={service.title}
-                  whileHover={{ y: -8 }}
-                  transition={{ type: "spring", stiffness: 260, damping: 24 }}
-                  className={`service-card group premium-border rounded-[24px] bg-graphite/70 p-6 shadow-panel backdrop-blur-xl ${
+                  className={`service-card group premium-border rounded-[24px] bg-graphite/90 p-6 shadow-panel ${
                     featured ? "xl:col-span-6" : "xl:col-span-4"
                   }`}
                 >
@@ -518,7 +453,7 @@ export function NorteOneSite() {
                     Entender solução
                     <ArrowUpRight className="h-4 w-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </Link>
-                </motion.article>
+                </article>
               );
             })}
           </div>
@@ -576,7 +511,7 @@ export function NorteOneSite() {
               <article
                 key={item.name}
                 data-portfolio-card
-                className="group w-[82vw] max-w-[760px] shrink-0 overflow-hidden rounded-[28px] border border-white/10 bg-graphite/80 p-3 shadow-panel backdrop-blur-2xl sm:w-[640px] sm:p-4 lg:w-[720px]"
+                className="group w-[82vw] max-w-[760px] shrink-0 overflow-hidden rounded-[28px] border border-white/10 bg-graphite/95 p-3 shadow-panel sm:w-[640px] sm:p-4 lg:w-[720px]"
               >
                 <div className="overflow-hidden rounded-[22px] border border-white/10 bg-graphite">
                   <Image
@@ -675,7 +610,7 @@ export function NorteOneSite() {
           <div className="relative grid gap-4 md:grid-cols-2 lg:grid-cols-5">
             <div className="absolute left-0 right-0 top-12 hidden h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent lg:block" />
             {process.map((step, index) => (
-              <div data-reveal key={step.title} className="process-step interactive-lift relative rounded-[24px] border border-white/10 bg-graphite/70 p-6 shadow-sm backdrop-blur-xl">
+              <div data-reveal key={step.title} className="process-step interactive-lift relative rounded-[24px] border border-white/10 bg-graphite/90 p-6 shadow-sm">
                 <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-full border border-gold/30 bg-obsidian text-gold">
                   {index + 1}
                 </div>
@@ -690,7 +625,7 @@ export function NorteOneSite() {
       </section>
 
       <section id="contato" className="px-4 py-14 sm:px-8 sm:py-20 lg:py-24">
-        <div data-reveal className="cta-panel premium-border relative mx-auto max-w-7xl overflow-hidden rounded-[28px] bg-graphite/85 px-5 py-14 text-center shadow-panel backdrop-blur-2xl sm:rounded-[36px] sm:px-12 sm:py-20">
+        <div data-reveal className="cta-panel premium-border relative mx-auto max-w-7xl overflow-hidden rounded-[28px] bg-graphite/95 px-5 py-14 text-center shadow-panel sm:rounded-[36px] sm:px-12 sm:py-20">
           <div className="absolute inset-0 bg-radial-gold opacity-80" />
           <div className="cta-panel__grid absolute inset-0" />
           <ScanLine className="absolute left-8 top-8 h-6 w-6 text-gold/60" />
