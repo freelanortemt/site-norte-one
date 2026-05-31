@@ -433,6 +433,7 @@ export function NorteOneSite() {
       <div className="animated-dark-bg pointer-events-none" aria-hidden="true">
         <div className="animated-dark-bg__grid" />
       </div>
+      <AdaptiveHeroScene />
 
       <header className="topbar fixed left-0 right-0 top-0 z-40 border-b border-white/10 bg-obsidian/95">
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-8">
@@ -469,7 +470,6 @@ export function NorteOneSite() {
       </header>
 
       <section id="inicio" className="hero-stage relative isolate px-4 pb-14 pt-24 sm:px-8 sm:pb-20 sm:pt-32 lg:min-h-screen lg:pt-36">
-        <AdaptiveHeroScene />
         <div className="hero-stage__atmosphere pointer-events-none absolute inset-0" aria-hidden="true" />
         <LazyMotion features={domAnimation}>
           <MotionConfig reducedMotion="user">

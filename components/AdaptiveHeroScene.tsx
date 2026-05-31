@@ -12,7 +12,7 @@ import {
   Vector2
 } from "three";
 
-type SceneQuality = "fallback" | "mobile" | "balanced" | "high";
+type SceneQuality = "fallback" | "balanced" | "high";
 
 type SceneProfile = {
   dpr: number;
@@ -22,7 +22,6 @@ type SceneProfile = {
 };
 
 const profiles: Record<Exclude<SceneQuality, "fallback">, SceneProfile> = {
-  mobile: { dpr: 1, fps: 28, particles: 180, detail: 0 },
   balanced: { dpr: 1.2, fps: 42, particles: 420, detail: 1 },
   high: { dpr: 1.5, fps: 54, particles: 720, detail: 2 }
 };
@@ -71,7 +70,6 @@ function supportsWebGL2() {
 
 function selectQuality(): SceneQuality {
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const compactViewport = window.matchMedia("(max-width: 767px)").matches;
   const navigatorWithHints = navigator as Navigator & {
     connection?: { saveData?: boolean };
     deviceMemory?: number;
@@ -81,10 +79,6 @@ function selectQuality(): SceneQuality {
 
   if (reducedMotion || navigatorWithHints.connection?.saveData || !supportsWebGL2()) {
     return "fallback";
-  }
-
-  if (compactViewport) {
-    return "mobile";
   }
 
   return cores >= 8 && memory >= 8 ? "high" : "balanced";
@@ -275,37 +269,20 @@ function Scene({
 }
 
 export default function AdaptiveHeroScene() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const pointerTarget = useRef(new Vector2());
   const [active, setActive] = useState(true);
   const [quality] = useState<SceneQuality>(() => (typeof window === "undefined" ? "fallback" : selectQuality()));
 
   useEffect(() => {
-    const container = containerRef.current;
-
-    if (!container) {
-      return;
-    }
-
-    let visible = true;
-    const syncActivity = () => setActive(visible && document.visibilityState === "visible");
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        visible = entry.isIntersecting;
-        syncActivity();
-      },
-      { threshold: 0.02 }
-    );
+    const syncActivity = () => setActive(document.visibilityState === "visible");
     const trackPointer = (event: PointerEvent) => {
       pointerTarget.current.set((event.clientX / window.innerWidth) * 2 - 1, -(event.clientY / window.innerHeight) * 2 + 1);
     };
 
-    observer.observe(container);
     document.addEventListener("visibilitychange", syncActivity);
     window.addEventListener("pointermove", trackPointer, { passive: true });
 
     return () => {
-      observer.disconnect();
       document.removeEventListener("visibilitychange", syncActivity);
       window.removeEventListener("pointermove", trackPointer);
     };
@@ -314,7 +291,7 @@ export default function AdaptiveHeroScene() {
   const profile = quality === "fallback" ? null : profiles[quality];
 
   return (
-    <div ref={containerRef} className="hero-webgl" data-quality={quality} data-active={active} aria-hidden="true">
+    <div className="hero-webgl" data-quality={quality} data-active={active} aria-hidden="true">
       <div className="hero-webgl__fallback" />
       {profile ? (
         <Canvas
