@@ -28,8 +28,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: brandLogo,
-        width: 1254,
-        height: 1254,
+        width: 220,
+        height: 220,
         alt: "Logo Norte One"
       }
     ]
