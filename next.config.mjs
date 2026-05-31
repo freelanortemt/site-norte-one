@@ -4,6 +4,7 @@ const repositoryName = "site-norte-one";
 
 const nextConfig = {
   output: "export",
+  trailingSlash: true,
   basePath: isGitHubPages ? `/${repositoryName}` : "",
   assetPrefix: isGitHubPages ? `/${repositoryName}/` : "",
   env: {
