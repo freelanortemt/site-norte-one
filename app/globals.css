@@ -1,3 +1,5 @@
+@import "lenis/dist/lenis.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -79,6 +81,50 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+.hero-stage {
+  min-height: min(940px, 100svh);
+}
+
+.hero-webgl {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-webgl__canvas {
+  position: absolute !important;
+  inset: 0;
+  opacity: 0.96;
+}
+
+.hero-webgl__fallback,
+.hero-webgl__vignette,
+.hero-stage__atmosphere {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-webgl__fallback {
+  background:
+    radial-gradient(circle at 72% 42%, rgba(200, 169, 107, 0.18), transparent 22%),
+    radial-gradient(circle at 78% 46%, rgba(122, 122, 128, 0.14), transparent 34%);
+}
+
+.hero-webgl__vignette {
+  background:
+    linear-gradient(90deg, rgba(11, 11, 13, 0.96) 0%, rgba(11, 11, 13, 0.78) 36%, rgba(11, 11, 13, 0.22) 66%, rgba(11, 11, 13, 0.72) 100%),
+    linear-gradient(180deg, rgba(11, 11, 13, 0.26), transparent 62%, #0b0b0d 100%);
+}
+
+.hero-stage__atmosphere {
+  z-index: 1;
+  background:
+    radial-gradient(circle at 84% 32%, rgba(200, 169, 107, 0.1), transparent 24%),
+    linear-gradient(180deg, transparent 70%, rgba(11, 11, 13, 0.94) 100%);
 }
 
 .topbar {
@@ -169,6 +215,100 @@ body {
   border: 1px solid rgba(200, 169, 107, 0.24);
 }
 
+.intelligence-stage {
+  display: grid;
+  overflow: hidden;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 66% 18%, rgba(200, 169, 107, 0.1), transparent 27%),
+    linear-gradient(135deg, rgba(26, 26, 31, 0.98), rgba(11, 11, 13, 0.98));
+  box-shadow: 0 22px 62px rgba(0, 0, 0, 0.26);
+}
+
+.intelligence-stage__modes,
+.intelligence-stage__flow,
+.intelligence-stage__chat {
+  padding: 1.25rem;
+}
+
+.intelligence-stage__flow,
+.intelligence-stage__chat {
+  border-top: 1px solid rgba(245, 245, 243, 0.1);
+}
+
+.intelligence-stage__flow {
+  position: relative;
+  overflow: hidden;
+}
+
+.intelligence-stage__flow-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.28;
+  background-image:
+    linear-gradient(rgba(245, 245, 243, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 169, 107, 0.06) 1px, transparent 1px);
+  background-size: 38px 38px;
+}
+
+.intelligence-mode,
+.intelligence-node {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid rgba(245, 245, 243, 0.1);
+  border-radius: 14px;
+  background: rgba(17, 17, 20, 0.68);
+  transition:
+    border-color 220ms ease,
+    background-color 220ms ease,
+    color 220ms ease,
+    transform 220ms ease;
+}
+
+.intelligence-mode {
+  width: 100%;
+  padding: 0.8rem 0.9rem;
+  color: rgba(245, 245, 243, 0.6);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.intelligence-mode:hover,
+.intelligence-mode--active {
+  border-color: rgba(200, 169, 107, 0.46);
+  background: rgba(200, 169, 107, 0.1);
+  color: #f6f5f2;
+  transform: translateX(3px);
+}
+
+.intelligence-node {
+  padding: 0.82rem 0.9rem;
+}
+
+.chat-message {
+  max-width: 92%;
+  border: 1px solid rgba(245, 245, 243, 0.1);
+  border-radius: 16px;
+  padding: 0.82rem 0.92rem;
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+
+.chat-message--visitor {
+  margin-left: auto;
+  border-color: rgba(245, 245, 243, 0.14);
+  background: rgba(43, 43, 49, 0.78);
+  color: rgba(245, 245, 243, 0.76);
+}
+
+.chat-message--assistant {
+  border-color: rgba(200, 169, 107, 0.24);
+  background: rgba(200, 169, 107, 0.08);
+  color: rgba(245, 245, 243, 0.84);
+}
+
 .portfolio-carousel {
   position: relative;
   overflow: hidden;
@@ -214,6 +354,40 @@ body {
 
 .portfolio-carousel__track > * {
   scroll-snap-align: center;
+}
+
+@media (min-width: 900px) {
+  .intelligence-stage {
+    grid-template-columns: minmax(190px, 0.72fr) minmax(260px, 1fr) minmax(320px, 1.3fr);
+  }
+
+  .intelligence-stage__modes,
+  .intelligence-stage__flow,
+  .intelligence-stage__chat {
+    padding: 1.65rem;
+  }
+
+  .intelligence-stage__flow,
+  .intelligence-stage__chat {
+    border-top: 0;
+    border-left: 1px solid rgba(245, 245, 243, 0.1);
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-stage {
+    min-height: auto;
+  }
+
+  .hero-webgl__canvas {
+    opacity: 0.58;
+  }
+
+  .hero-webgl__vignette {
+    background:
+      linear-gradient(90deg, rgba(11, 11, 13, 0.94), rgba(11, 11, 13, 0.7)),
+      linear-gradient(180deg, rgba(11, 11, 13, 0.2), rgba(11, 11, 13, 0.7) 72%, #0b0b0d);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

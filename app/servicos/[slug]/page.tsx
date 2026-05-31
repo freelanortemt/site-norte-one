@@ -65,6 +65,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
               height={46}
               alt="Logo Norte One"
               className="h-11 w-11 rounded-full border border-gold/30 object-cover shadow-sm sm:h-12 sm:w-12"
+              loading="eager"
               priority
             />
             <div>

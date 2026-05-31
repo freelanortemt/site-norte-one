@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useRef, useState } from "react";
+import { domAnimation, LazyMotion, m, MotionConfig } from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
@@ -10,7 +12,9 @@ import {
   BadgeCheck,
   Bot,
   BrainCircuit,
+  CalendarCheck2,
   Check,
+  CircleCheck,
   Cpu,
   Globe2,
   MessageSquareText,
@@ -20,10 +24,18 @@ import {
   Rocket,
   ScanLine,
   Sparkles,
+  UserRoundCheck,
+  Workflow,
   Zap
 } from "lucide-react";
+import { CinematicMotionEngine } from "@/components/CinematicMotionEngine";
 import { services } from "@/lib/services";
 import { assetPath, brandLogoSmall } from "@/lib/site";
+
+const AdaptiveHeroScene = dynamic(() => import("@/components/AdaptiveHeroScene"), {
+  loading: () => <div className="hero-webgl hero-webgl--loading" aria-hidden="true" />,
+  ssr: false
+});
 
 const serviceIcons = {
   "sites-premium": PanelsTopLeft,
@@ -49,6 +61,36 @@ const heroSignals = [
   ["Estratégia", "orientada ao negócio"],
   ["Design", "alto valor percebido"],
   ["Tecnologia", "pronta para escalar"]
+];
+
+const intelligenceFlows = [
+  {
+    id: "atendimento",
+    title: "Atendimento",
+    icon: MessageSquareText,
+    status: "Resposta imediata",
+    prompt: "Olá, quero entender qual solução faz sentido para minha empresa.",
+    response: "Perfeito. Posso identificar sua necessidade e encaminhar você para uma conversa mais objetiva com nosso time.",
+    steps: ["Contato recebido", "Contexto identificado", "Atendimento direcionado"]
+  },
+  {
+    id: "qualificacao",
+    title: "Qualificação",
+    icon: UserRoundCheck,
+    status: "Oportunidade organizada",
+    prompt: "Preciso de um site profissional e também quero automatizar meu atendimento.",
+    response: "Entendi. Sua empresa pode se beneficiar de uma presença premium conectada a um fluxo inteligente de atendimento.",
+    steps: ["Necessidade mapeada", "Perfil qualificado", "Prioridade definida"]
+  },
+  {
+    id: "agendamento",
+    title: "Agendamento",
+    icon: CalendarCheck2,
+    status: "Próximo passo claro",
+    prompt: "Quero conversar com um especialista sobre o projeto.",
+    response: "Ótimo. Vou deixar seu contato preparado para avançarmos com um diagnóstico estratégico da sua empresa.",
+    steps: ["Interesse confirmado", "Briefing preparado", "Conversa agendada"]
+  }
 ];
 
 const process = [
@@ -228,6 +270,111 @@ function FloatingDashboard() {
   );
 }
 
+function IntelligenceExperience() {
+  const [activeFlowId, setActiveFlowId] = useState(intelligenceFlows[0].id);
+  const activeFlow = intelligenceFlows.find((flow) => flow.id === activeFlowId) ?? intelligenceFlows[0];
+
+  return (
+    <section id="inteligencia" className="relative px-4 py-14 sm:px-8 sm:py-20 lg:py-24">
+      <div className="mx-auto max-w-7xl">
+        <div data-cinematic className="mb-10 grid gap-6 lg:grid-cols-[0.88fr_1.12fr] lg:items-end">
+          <div>
+            <SectionLabel>IA em operação</SectionLabel>
+            <h2 className="font-display text-4xl font-semibold sm:text-6xl">
+              Atendimento inteligente que transforma interesse em próximo passo.
+            </h2>
+          </div>
+          <p className="max-w-xl text-base leading-8 text-soft/62">
+            Uma experiência conectada para responder com velocidade, entender o cliente e organizar oportunidades com mais consistência.
+          </p>
+        </div>
+
+        <div className="intelligence-stage premium-border">
+          <div className="intelligence-stage__modes">
+            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-titanium">Simular jornada</p>
+            <div className="grid gap-2">
+              {intelligenceFlows.map((flow) => {
+                const Icon = flow.icon;
+                const active = flow.id === activeFlow.id;
+
+                return (
+                  <button
+                    key={flow.id}
+                    type="button"
+                    onClick={() => setActiveFlowId(flow.id)}
+                    className={`intelligence-mode ${active ? "intelligence-mode--active" : ""}`}
+                    aria-pressed={active}
+                  >
+                    <Icon className="h-4 w-4" />
+                    <span>{flow.title}</span>
+                  </button>
+                );
+              })}
+            </div>
+            <div className="mt-7 border-t border-white/10 pt-5">
+              <div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-gold">
+                <span className="signal-dot" />
+                Fluxo monitorado
+              </div>
+              <p className="mt-3 text-sm leading-6 text-soft/54">
+                A interface responde ao cenário escolhido sem interromper sua navegação.
+              </p>
+            </div>
+          </div>
+
+          <div className="intelligence-stage__flow">
+            <div className="intelligence-stage__flow-grid" aria-hidden="true" />
+            <div className="relative">
+              <div className="mb-8 flex items-center gap-3 text-sm font-semibold text-soft">
+                <Workflow className="h-5 w-5 text-gold" />
+                Jornada automatizada
+              </div>
+              <div className="grid gap-3">
+                {activeFlow.steps.map((step, index) => (
+                  <div key={step} className="intelligence-node">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full border border-gold/30 bg-gold/[0.08] text-xs text-gold">
+                      0{index + 1}
+                    </span>
+                    <p className="text-sm font-semibold text-soft/76">{step}</p>
+                    <CircleCheck className="ml-auto h-4 w-4 text-gold" />
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 flex items-center gap-3 border-t border-white/10 pt-5 text-xs uppercase tracking-[0.18em] text-titanium">
+                <Zap className="h-4 w-4 text-gold" />
+                {activeFlow.status}
+              </div>
+            </div>
+          </div>
+
+          <div className="intelligence-stage__chat">
+            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full border border-gold/25 bg-gold/[0.1] text-gold">
+                  <Bot className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold">Assistente Norte One</p>
+                  <p className="mt-1 text-xs text-titanium">Atendimento inteligente</p>
+                </div>
+              </div>
+              <span className="signal-dot" />
+            </div>
+            <div className="mt-5 space-y-3">
+              <p className="chat-message chat-message--visitor">{activeFlow.prompt}</p>
+              <p className="chat-message chat-message--assistant">{activeFlow.response}</p>
+            </div>
+            <div className="mt-5 flex items-center gap-2 border-t border-white/10 pt-4 text-xs text-soft/48">
+              <Sparkles className="h-3.5 w-3.5 text-gold" />
+              Conversa contextual, objetiva e preparada para avançar.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function NorteOneSite() {
   const portfolioRef = useRef<HTMLDivElement>(null);
   const [activePortfolio, setActivePortfolio] = useState(0);
@@ -282,6 +429,7 @@ export function NorteOneSite() {
 
   return (
     <main className="relative overflow-hidden bg-obsidian text-soft [&>footer]:relative [&>footer]:z-10 [&>section]:relative [&>section]:z-10">
+      <CinematicMotionEngine />
       <div className="animated-dark-bg pointer-events-none" aria-hidden="true">
         <div className="animated-dark-bg__grid" />
       </div>
@@ -295,6 +443,7 @@ export function NorteOneSite() {
               height={48}
               alt="Logo Norte One"
               className="h-11 w-11 rounded-full border border-gold/30 object-cover shadow-sm sm:h-12 sm:w-12"
+              loading="eager"
               priority
             />
             <div>
@@ -319,59 +468,86 @@ export function NorteOneSite() {
         </nav>
       </header>
 
-      <section id="inicio" className="relative px-4 pb-14 pt-24 sm:px-8 sm:pb-20 sm:pt-32 lg:min-h-screen lg:pt-36">
-        <div className="relative mx-auto grid max-w-7xl items-center gap-9 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
-          <div>
-            <div
+      <section id="inicio" className="hero-stage relative isolate px-4 pb-14 pt-24 sm:px-8 sm:pb-20 sm:pt-32 lg:min-h-screen lg:pt-36">
+        <AdaptiveHeroScene />
+        <div className="hero-stage__atmosphere pointer-events-none absolute inset-0" aria-hidden="true" />
+        <LazyMotion features={domAnimation}>
+          <MotionConfig reducedMotion="user">
+            <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-9 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+              <div>
+                <m.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.72, ease: [0.16, 1, 0.3, 1] }}
               className="mb-5 inline-flex items-center gap-3 rounded-full border border-white/10 bg-graphite/90 px-4 py-2 text-sm text-soft/68 shadow-sm sm:mb-8"
-            >
-              <span className="h-2 w-2 rounded-full bg-gold shadow-[0_0_18px_rgba(200,169,107,0.9)]" />
-              Sites, IA e automações para empresas
+                >
+                  <span className="h-2 w-2 rounded-full bg-gold shadow-[0_0_18px_rgba(200,169,107,0.9)]" />
+                  Sites, IA e automações para empresas
+                </m.div>
+
+                <m.h1
+                  initial={{ opacity: 0, y: 22 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.08, duration: 0.86, ease: [0.16, 1, 0.3, 1] }}
+                  className="max-w-4xl font-display text-[clamp(2.45rem,5.25vw,5.55rem)] font-semibold leading-[0.96] tracking-normal"
+                >
+                  Sua empresa com presença digital de <span className="gold-text">alto padrão.</span>
+                </m.h1>
+
+                <m.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.16, duration: 0.86, ease: [0.16, 1, 0.3, 1] }}
+                  className="mt-5 max-w-2xl text-base leading-7 text-soft/68 sm:mt-8 sm:text-xl sm:leading-8"
+                >
+                  Criamos sites profissionais, chatbots e automações que fortalecem sua marca, melhoram o atendimento e abrem caminho para mais oportunidades.
+                </m.p>
+
+                <m.div
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.24, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="mt-7 flex flex-col gap-3 sm:mt-10 sm:flex-row"
+                >
+                  <MagneticButton href="#contato">
+                    Solicitar orçamento
+                  </MagneticButton>
+                  <MagneticButton href="#servicos" variant="secondary">
+                    Ver soluções
+                  </MagneticButton>
+                </m.div>
+
+                <m.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.42, duration: 0.9 }}
+                  className="mt-8 hidden max-w-2xl grid-cols-3 gap-3 border-t border-white/10 pt-5 sm:mt-14 sm:grid sm:pt-6"
+                >
+                  {heroSignals.map(([title, text]) => (
+                    <div key={title}>
+                      <p className="font-display text-lg font-semibold text-soft">{title}</p>
+                      <p className="mt-2 text-xs uppercase tracking-[0.16em] text-titanium">{text}</p>
+                    </div>
+                  ))}
+                </m.div>
+              </div>
+
+              <m.div
+                initial={{ opacity: 0, scale: 0.98, y: 18 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ delay: 0.22, duration: 0.92, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <FloatingDashboard />
+              </m.div>
             </div>
-
-            <h1
-              className="max-w-4xl font-display text-[clamp(2.45rem,5.25vw,5.55rem)] font-semibold leading-[0.96] tracking-normal"
-            >
-              Sua empresa com presença digital de <span className="gold-text">alto padrão.</span>
-            </h1>
-
-            <p
-              className="mt-5 max-w-2xl text-base leading-7 text-soft/68 sm:mt-8 sm:text-xl sm:leading-8"
-            >
-              Criamos sites profissionais, chatbots e automações que fortalecem sua marca, melhoram o atendimento e abrem caminho para mais oportunidades.
-            </p>
-
-            <div
-              className="mt-7 flex flex-col gap-3 sm:mt-10 sm:flex-row"
-            >
-              <MagneticButton href="#contato">
-                Solicitar orçamento
-              </MagneticButton>
-              <MagneticButton href="#servicos" variant="secondary">
-                Ver soluções
-              </MagneticButton>
-            </div>
-
-            <div
-              className="mt-8 hidden max-w-2xl grid-cols-3 gap-3 border-t border-white/10 pt-5 sm:mt-14 sm:grid sm:pt-6"
-            >
-              {heroSignals.map(([title, text]) => (
-                <div key={title}>
-                  <p className="font-display text-lg font-semibold text-soft">{title}</p>
-                  <p className="mt-2 text-xs uppercase tracking-[0.16em] text-titanium">{text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <FloatingDashboard />
-        </div>
+          </MotionConfig>
+        </LazyMotion>
       </section>
 
       <section id="sobre" className="relative px-4 py-14 sm:px-8 sm:py-20 lg:py-24">
         <div className="section-rule mx-auto mb-12 max-w-7xl" />
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.82fr_1.18fr]">
-          <div data-reveal>
+          <div data-cinematic>
             <SectionLabel>Para empresas exigentes</SectionLabel>
             <h2 className="font-display text-4xl font-semibold leading-tight sm:text-5xl">
               Transformamos presença digital em confiança, desejo e contato comercial.
@@ -380,7 +556,7 @@ export function NorteOneSite() {
               Uma presença digital forte não é decoração. É uma parte estratégica da decisão de compra.
             </p>
           </div>
-          <div data-reveal className="glass-panel premium-surface rounded-[28px] p-7 sm:p-10">
+          <div data-cinematic className="glass-panel premium-surface rounded-[28px] p-7 sm:p-10">
             <p className="text-xl leading-9 text-soft/78">
               A NORTE ONE desenvolve experiências digitais para empresas que precisam parecer tão profissionais online quanto são na prática. Cada projeto une estratégia, design e tecnologia para tornar sua marca mais clara, confiável e pronta para vender melhor.
             </p>
@@ -402,7 +578,7 @@ export function NorteOneSite() {
 
       <section id="servicos" className="px-4 py-14 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl">
-          <div data-reveal className="mb-12 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <div data-cinematic className="mb-12 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
             <div className="max-w-3xl">
               <SectionLabel>Soluções</SectionLabel>
               <h2 className="font-display text-4xl font-semibold sm:text-6xl">O que sua empresa precisa para vender confiança no digital.</h2>
@@ -419,7 +595,6 @@ export function NorteOneSite() {
 
               return (
                 <article
-                  data-reveal
                   key={service.title}
                   className={`service-card group premium-border rounded-[24px] bg-graphite/90 p-6 shadow-panel ${
                     featured ? "xl:col-span-6" : "xl:col-span-4"
@@ -460,9 +635,11 @@ export function NorteOneSite() {
         </div>
       </section>
 
+      <IntelligenceExperience />
+
       <section id="portfolio" className="overflow-hidden px-4 py-14 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl">
-          <div data-reveal className="mb-10 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <div data-cinematic className="mb-10 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
             <div className="max-w-3xl">
               <SectionLabel>Projetos conceito</SectionLabel>
               <h2 className="font-display text-4xl font-semibold sm:text-6xl">
@@ -473,7 +650,7 @@ export function NorteOneSite() {
               Exemplos visuais de sites pensados para gerar percepção de valor, facilitar a decisão do cliente e transformar visitas em conversas.
             </p>
           </div>
-          <div data-reveal className="mb-6 flex items-center justify-between gap-4">
+          <div className="mb-6 flex items-center justify-between gap-4">
             <div>
               <p className="text-sm leading-6 text-soft/58">
                 Navegue pelos projetos e veja como cada segmento pode ganhar uma presença digital mais forte.
@@ -505,7 +682,7 @@ export function NorteOneSite() {
           </div>
         </div>
 
-        <div data-reveal className="portfolio-carousel -mx-4 sm:-mx-8">
+        <div className="portfolio-carousel -mx-4 sm:-mx-8">
           <div ref={portfolioRef} onScroll={syncPortfolioPosition} className="portfolio-carousel__track" aria-label="Projetos conceito da Norte One">
             {portfolioCases.map((item) => (
               <article
@@ -581,7 +758,7 @@ export function NorteOneSite() {
 
       <section className="px-4 py-14 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.85fr_1.15fr]">
-          <div data-reveal>
+          <div data-cinematic>
             <SectionLabel>Diferenciais</SectionLabel>
             <h2 className="font-display text-4xl font-semibold sm:text-6xl">Por que empresas escolhem a NORTE ONE para construir presença digital.</h2>
             <div className="mt-8 flex items-center gap-3 text-sm text-soft/58">
@@ -591,7 +768,7 @@ export function NorteOneSite() {
           </div>
           <div className="premium-surface overflow-hidden rounded-[28px] border border-white/10 bg-graphite/55 px-5 sm:px-7">
             {differentiators.map((item, index) => (
-              <div data-reveal key={item} className="group flex gap-5 border-b border-white/[0.08] py-5 last:border-b-0 sm:py-6">
+              <div key={item} className="group flex gap-5 border-b border-white/[0.08] py-5 last:border-b-0 sm:py-6">
                 <span className="font-display text-sm text-gold">{String(index + 1).padStart(2, "0")}</span>
                 <p className="text-sm leading-7 text-soft/72 transition group-hover:text-soft">{item}</p>
               </div>
@@ -602,7 +779,7 @@ export function NorteOneSite() {
 
       <section id="processo" className="px-4 py-14 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl">
-          <div data-reveal className="mb-14 max-w-3xl">
+          <div data-cinematic className="mb-14 max-w-3xl">
             <SectionLabel>Processo</SectionLabel>
             <h2 className="font-display text-4xl font-semibold sm:text-6xl">Uma entrega organizada, clara e segura do início ao lançamento.</h2>
           </div>
@@ -610,7 +787,7 @@ export function NorteOneSite() {
           <div className="relative grid gap-4 md:grid-cols-2 lg:grid-cols-5">
             <div className="absolute left-0 right-0 top-12 hidden h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent lg:block" />
             {process.map((step, index) => (
-              <div data-reveal key={step.title} className="process-step interactive-lift relative rounded-[24px] border border-white/10 bg-graphite/90 p-6 shadow-sm">
+              <div key={step.title} className="process-step interactive-lift relative rounded-[24px] border border-white/10 bg-graphite/90 p-6 shadow-sm">
                 <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-full border border-gold/30 bg-obsidian text-gold">
                   {index + 1}
                 </div>
@@ -625,7 +802,7 @@ export function NorteOneSite() {
       </section>
 
       <section id="contato" className="px-4 py-14 sm:px-8 sm:py-20 lg:py-24">
-        <div data-reveal className="cta-panel premium-border relative mx-auto max-w-7xl overflow-hidden rounded-[28px] bg-graphite/95 px-5 py-14 text-center shadow-panel sm:rounded-[36px] sm:px-12 sm:py-20">
+        <div data-cinematic className="cta-panel premium-border relative mx-auto max-w-7xl overflow-hidden rounded-[28px] bg-graphite/95 px-5 py-14 text-center shadow-panel sm:rounded-[36px] sm:px-12 sm:py-20">
           <div className="absolute inset-0 bg-radial-gold opacity-80" />
           <div className="cta-panel__grid absolute inset-0" />
           <ScanLine className="absolute left-8 top-8 h-6 w-6 text-gold/60" />
