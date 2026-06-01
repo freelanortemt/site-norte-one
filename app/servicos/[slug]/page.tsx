@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
+import { whatsappUrl } from "@/lib/contact";
 import { getServiceBySlug, services } from "@/lib/services";
 import { assetPath, brandLogo, brandLogoSmall } from "@/lib/site";
 
@@ -156,13 +157,15 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <p className="text-base leading-8 text-soft/68">
               Uma solução mais profissional, clara e confiável para fortalecer sua imagem, melhorar a experiência do cliente e aumentar a chance de contato comercial.
             </p>
-            <Link
-              href={`mailto:contato@norteone.com.br?subject=Quero%20solicitar%20um%20orçamento%20-%20${encodeURIComponent(service.title)}`}
+            <a
+              href={whatsappUrl(`Olá! Gostaria de solicitar um orçamento para ${service.title}.`)}
+              target="_blank"
+              rel="noreferrer"
               className="premium-cta mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-soft px-6 text-sm font-semibold text-obsidian shadow-gold transition hover:bg-gold"
             >
               Solicitar orçamento
               <ArrowRight className="h-4 w-4" />
-            </Link>
+            </a>
           </article>
         </div>
       </section>

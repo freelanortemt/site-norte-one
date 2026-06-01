@@ -29,6 +29,7 @@ import {
   Zap
 } from "lucide-react";
 import { CinematicMotionEngine } from "@/components/CinematicMotionEngine";
+import { whatsappDisplay, whatsappUrl } from "@/lib/contact";
 import { services } from "@/lib/services";
 import { assetPath, brandLogoSmall } from "@/lib/site";
 
@@ -160,9 +161,13 @@ function MagneticButton({
   href: string;
   variant?: "primary" | "secondary";
 }) {
+  const opensInNewTab = href.startsWith("http");
+
   return (
     <a
       href={href}
+      target={opensInNewTab ? "_blank" : undefined}
+      rel={opensInNewTab ? "noreferrer" : undefined}
       className={
         variant === "primary"
           ? "premium-cta group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-soft px-6 text-sm font-semibold text-obsidian shadow-gold transition hover:bg-gold"
@@ -461,7 +466,9 @@ export function NorteOneSite() {
           </div>
 
           <a
-            href="#contato"
+            href={whatsappUrl()}
+            target="_blank"
+            rel="noreferrer"
             className="hidden rounded-full border border-white/10 bg-soft px-5 py-2.5 text-sm font-semibold text-obsidian shadow-sm transition hover:-translate-y-0.5 hover:bg-gold sm:inline-flex"
           >
             Solicitar orçamento
@@ -509,7 +516,7 @@ export function NorteOneSite() {
                   transition={{ delay: 0.24, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                   className="mt-7 flex flex-col gap-3 sm:mt-10 sm:flex-row"
                 >
-                  <MagneticButton href="#contato">
+                  <MagneticButton href={whatsappUrl()}>
                     Solicitar orçamento
                   </MagneticButton>
                   <MagneticButton href="#servicos" variant="secondary">
@@ -813,7 +820,7 @@ export function NorteOneSite() {
               Vamos construir uma presença digital mais profissional, persuasiva e preparada para transformar interesse em contato.
             </p>
             <div className="mt-10">
-              <MagneticButton href="mailto:contato@norteone.com.br?subject=Quero%20solicitar%20um%20orçamento%20com%20a%20Norte%20One">
+              <MagneticButton href={whatsappUrl("Olá! Quero conversar sobre um projeto profissional para minha empresa.")}>
                 Quero meu projeto profissional
               </MagneticButton>
             </div>
@@ -847,6 +854,7 @@ export function NorteOneSite() {
           <div className="flex flex-wrap gap-5 text-sm text-soft/58">
             <a href="https://instagram.com" className="hover:text-gold">Instagram</a>
             <a href="https://linkedin.com" className="hover:text-gold">LinkedIn</a>
+            <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="hover:text-gold">WhatsApp: {whatsappDisplay}</a>
             <a href="mailto:contato@norteone.com.br" className="hover:text-gold">contato@norteone.com.br</a>
           </div>
         </div>
