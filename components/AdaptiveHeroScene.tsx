@@ -12,7 +12,7 @@ import {
   Vector2
 } from "three";
 
-type SceneQuality = "fallback" | "balanced" | "high";
+type SceneQuality = "fallback" | "mobile" | "balanced" | "high";
 
 type SceneProfile = {
   dpr: number;
@@ -22,8 +22,9 @@ type SceneProfile = {
 };
 
 const profiles: Record<Exclude<SceneQuality, "fallback">, SceneProfile> = {
-  balanced: { dpr: 1.2, fps: 42, particles: 420, detail: 1 },
-  high: { dpr: 1.5, fps: 54, particles: 720, detail: 2 }
+  mobile: { dpr: 1, fps: 30, particles: 240, detail: 0 },
+  balanced: { dpr: 1.2, fps: 42, particles: 460, detail: 1 },
+  high: { dpr: 1.5, fps: 54, particles: 760, detail: 2 }
 };
 
 const vertexShader = `
@@ -70,6 +71,7 @@ function supportsWebGL2() {
 
 function selectQuality(): SceneQuality {
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const compactViewport = window.matchMedia("(max-width: 767px)").matches;
   const navigatorWithHints = navigator as Navigator & {
     connection?: { saveData?: boolean };
     deviceMemory?: number;
@@ -79,6 +81,10 @@ function selectQuality(): SceneQuality {
 
   if (reducedMotion || navigatorWithHints.connection?.saveData || !supportsWebGL2()) {
     return "fallback";
+  }
+
+  if (compactViewport) {
+    return "mobile";
   }
 
   return cores >= 8 && memory >= 8 ? "high" : "balanced";
@@ -148,10 +154,10 @@ function ParticleField({
   }, [count]);
   const uniforms = useMemo(
     () => ({
-      uColor: { value: new Color("#f6f5f2") },
+      uColor: { value: new Color("#d8e1e8") },
       uPointer: { value: new Vector2() },
       uTime: { value: 0 },
-      uWarm: { value: new Color("#c8a96b") }
+      uWarm: { value: new Color("#b87945") }
     }),
     []
   );
@@ -212,19 +218,19 @@ function EnergyCore({
     <group ref={groupRef} position={[2.6, 0.4, -1.4]}>
       <mesh ref={coreRef}>
         <icosahedronGeometry args={[1.85, detail]} />
-        <meshStandardMaterial color="#17171b" metalness={0.92} roughness={0.32} transparent opacity={0.74} />
+        <meshStandardMaterial color="#0b1f33" metalness={0.84} roughness={0.36} transparent opacity={0.72} />
       </mesh>
       <mesh scale={1.08}>
         <icosahedronGeometry args={[1.85, Math.max(1, detail)]} />
-        <meshBasicMaterial color="#c8a96b" wireframe transparent opacity={0.2} />
+        <meshBasicMaterial color="#b87945" wireframe transparent opacity={0.2} />
       </mesh>
       <mesh rotation={[Math.PI / 2.4, 0.2, 0.4]}>
         <torusGeometry args={[2.55, 0.018, 8, 76]} />
-        <meshBasicMaterial color="#c8a96b" transparent opacity={0.56} />
+        <meshBasicMaterial color="#b87945" transparent opacity={0.52} />
       </mesh>
       <mesh rotation={[1.2, 0.75, 0.1]}>
         <torusGeometry args={[2.15, 0.012, 8, 68]} />
-        <meshBasicMaterial color="#f6f5f2" transparent opacity={0.2} />
+        <meshBasicMaterial color="#d8e1e8" transparent opacity={0.18} />
       </mesh>
     </group>
   );
@@ -241,7 +247,7 @@ function DepthGrid() {
 
   return (
     <group ref={gridRef} position={[0, -2.55, -3.5]}>
-      <gridHelper args={[28, 34, "#8f7849", "#2b2b31"]} />
+      <gridHelper args={[28, 34, "#b87945", "#20242a"]} />
     </group>
   );
 }
@@ -257,9 +263,9 @@ function Scene({
 }) {
   return (
     <>
-      <fog attach="fog" args={["#0b0b0d", 7.5, 18]} />
+      <fog attach="fog" args={["#0b1f33", 7.5, 18]} />
       <ambientLight intensity={0.72} />
-      <pointLight position={[4, 3, 4]} intensity={15} color="#c8a96b" distance={12} />
+      <pointLight position={[4, 3, 4]} intensity={15} color="#b87945" distance={12} />
       <ParticleField count={profile.particles} pointerTarget={pointerTarget} />
       <EnergyCore detail={profile.detail} pointerTarget={pointerTarget} />
       <DepthGrid />
@@ -307,7 +313,7 @@ export default function AdaptiveHeroScene() {
             preserveDrawingBuffer: false,
             stencil: false
           }}
-          onCreated={({ gl }) => gl.setClearColor("#0b0b0d", 0)}
+          onCreated={({ gl }) => gl.setClearColor("#0b1f33", 0)}
         >
           <Scene active={active} pointerTarget={pointerTarget} profile={profile} />
         </Canvas>

@@ -85,6 +85,30 @@ export const services: ServiceDetail[] = [
     idealFor: "Empresas que querem crescer sem aumentar a complexidade operacional."
   },
   {
+    slug: "aplicativos",
+    title: "Aplicativos",
+    eyebrow: "Experiências mobile",
+    visual: "/visuals/optimized/sistemas-personalizados.jpg",
+    summary: "Aplicativos e interfaces digitais para aproximar clientes, equipes e processos importantes do negócio.",
+    description:
+      "Quando a experiência precisa ir além do site, criamos interfaces mobile e aplicações digitais pensadas para simplificar acesso, organizar jornadas e fortalecer o relacionamento com clientes ou equipes.",
+    outcomes: [
+      "Experiência mobile mais profissional",
+      "Acesso rápido a serviços, informações ou fluxos",
+      "Mais conveniência para clientes e equipes",
+      "Interface alinhada ao posicionamento da marca"
+    ],
+    deliverables: [
+      "Diagnóstico da jornada mobile",
+      "Arquitetura da experiência",
+      "Design de interface",
+      "Desenvolvimento da aplicação",
+      "Publicação, testes e evolução"
+    ],
+    process: ["Descoberta", "Protótipo", "Interface", "Desenvolvimento", "Lançamento"],
+    idealFor: "Empresas que precisam oferecer uma experiência digital mais próxima, prática e recorrente."
+  },
+  {
     slug: "cartoes-nfc",
     title: "Cartões NFC",
     eyebrow: "Primeira impressão moderna",
