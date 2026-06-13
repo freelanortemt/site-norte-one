@@ -123,19 +123,25 @@ const showcaseCases = [
 
 const testimonials = [
   {
-    label: "Depoimento de cliente",
+    label: "Prévia de avaliação",
     role: "Cliente de site premium",
-    text: "A Norte One nos ajudou a organizar nossa presença digital e transmitir uma imagem mais profissional para nossos clientes."
+    service: "Presença digital",
+    score: "5,0",
+    text: "A presença online ficou mais clara, elegante e alinhada ao padrão que queríamos transmitir aos nossos clientes."
   },
   {
-    label: "Empresa local atendida",
+    label: "Prévia de avaliação",
     role: "Cliente de automação",
-    text: "O atendimento ficou mais claro, rápido e alinhado com a experiência que queríamos oferecer."
+    service: "Atendimento com IA",
+    score: "5,0",
+    text: "O atendimento ganhou mais organização. Hoje o cliente recebe uma resposta mais objetiva e a equipe entende melhor cada oportunidade."
   },
   {
-    label: "Avaliação substituível",
+    label: "Prévia de avaliação",
     role: "Cliente de posicionamento",
-    text: "O projeto trouxe mais clareza para apresentar nossos serviços e conduzir contatos comerciais com mais segurança."
+    service: "Estratégia digital",
+    score: "5,0",
+    text: "O projeto ajudou a apresentar nossos serviços com mais segurança e trouxe uma percepção mais profissional para a empresa."
   }
 ];
 
@@ -241,8 +247,8 @@ function SectionHeader({
   return (
     <div data-cinematic className={align === "center" ? "mx-auto max-w-4xl text-center" : "max-w-4xl"}>
       <SectionLabel>{eyebrow}</SectionLabel>
-      <h2 className="font-display text-[clamp(2.35rem,5vw,5.8rem)] font-semibold leading-[0.98] tracking-normal text-off-white">{title}</h2>
-      {text ? <p className={align === "center" ? "mx-auto mt-6 max-w-2xl text-base leading-8 text-azul-nevoa/72" : "mt-6 max-w-2xl text-base leading-8 text-azul-nevoa/72"}>{text}</p> : null}
+      <h2 className="font-display text-[clamp(1.72rem,3.8vw,4.3rem)] font-semibold leading-[1.08] tracking-normal text-off-white">{title}</h2>
+      {text ? <p className={align === "center" ? "mx-auto mt-4 max-w-2xl text-sm leading-7 text-azul-nevoa/72 sm:mt-5 sm:text-base sm:leading-8" : "mt-4 max-w-2xl text-sm leading-7 text-azul-nevoa/72 sm:mt-5 sm:text-base sm:leading-8"}>{text}</p> : null}
     </div>
   );
 }
@@ -336,13 +342,13 @@ function PositioningMap() {
 
 function AutomationSection() {
   return (
-    <section id="tecnologia" className="px-4 py-16 sm:px-8 sm:py-24 lg:py-28">
+    <section id="tecnologia" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-[0.84fr_1.16fr] lg:items-end">
           <SectionHeader
             eyebrow="IA e automações"
-            title="Automação não substitui relacionamento. Ela impede que oportunidades sejam perdidas."
-            text="Fluxos inteligentes organizam respostas, qualificam contatos e entregam contexto para a equipe agir com mais precisão."
+            title="Automação para não perder oportunidades."
+            text="Fluxos inteligentes respondem, qualificam e entregam contexto para a equipe agir melhor."
           />
           <div data-cinematic className="premium-border premium-surface rounded-[32px] bg-azul-norte/72 p-4 sm:p-6">
             <div className="automation-flow">
@@ -374,12 +380,12 @@ function ChatbotExperience() {
   const active = chatbotScenarios.find((scenario) => scenario.id === activeId) ?? chatbotScenarios[0];
 
   return (
-    <section id="chatbot" className="px-4 py-16 sm:px-8 sm:py-24 lg:py-28">
+    <section id="chatbot" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
         <SectionHeader
           eyebrow="Chatbot interativo"
-          title="Atendimento inteligente com clareza de próximo passo."
-          text="Uma interface viva para demonstrar como a conversa pode responder, qualificar e encaminhar oportunidades sem perder o tom da marca."
+          title="Atendimento inteligente, sem fricção."
+          text="Uma conversa visual que responde, qualifica e encaminha oportunidades com tom profissional."
         />
 
         <div data-cinematic className="premium-border overflow-hidden rounded-[34px] bg-azul-norte/78 shadow-panel">
@@ -554,7 +560,7 @@ export function NorteOneSite() {
                   initial={{ opacity: 0, y: 22 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.08, duration: 0.86, ease: [0.16, 1, 0.3, 1] }}
-                  className="max-w-5xl font-display text-[clamp(2.5rem,5.15vw,5.65rem)] font-semibold leading-[0.95] tracking-normal text-off-white"
+                  className="max-w-5xl font-display text-[clamp(1.9rem,4.55vw,4.9rem)] font-semibold leading-[1.03] tracking-normal text-off-white"
                 >
                   Tecnologia, posicionamento e presença digital para empresas que querem ser <span className="copper-text">escolhidas.</span>
                 </m.h1>
@@ -609,16 +615,16 @@ export function NorteOneSite() {
         </LazyMotion>
       </section>
 
-      <section id="posicionamento" className="px-4 py-16 sm:px-8 sm:py-24 lg:py-28">
+      <section id="posicionamento" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
         <div className="section-rule mx-auto mb-12 max-w-7xl" />
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.84fr_1.16fr] lg:items-center">
           <div data-cinematic>
             <SectionLabel>Posicionamento estratégico</SectionLabel>
-            <h2 className="font-display text-[clamp(2.35rem,5vw,5.9rem)] font-semibold leading-[0.98]">
-              Empresas fortes não apenas aparecem. Elas são percebidas como escolha certa.
+            <h2 className="font-display text-[clamp(1.72rem,3.8vw,4.3rem)] font-semibold leading-[1.08]">
+              Empresas fortes são percebidas como escolha certa.
             </h2>
-            <p className="mt-7 max-w-2xl text-base leading-8 text-azul-nevoa/72">
-              Presença digital, atendimento inteligente e posicionamento estratégico transformam a forma como clientes enxergam, confiam e compram de uma empresa.
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-azul-nevoa/72 sm:mt-5 sm:text-base sm:leading-8">
+              Presença digital, atendimento inteligente e posicionamento mudam como clientes enxergam, confiam e compram.
             </p>
             <div className="mt-8 grid gap-3">
               {positioningPillars.map(([title, text]) => (
@@ -635,13 +641,13 @@ export function NorteOneSite() {
         </div>
       </section>
 
-      <section id="servicos" className="px-4 py-16 sm:px-8 sm:py-24 lg:py-28">
+      <section id="servicos" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-12 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <div className="mb-8 flex flex-col justify-between gap-6 sm:mb-12 lg:flex-row lg:items-end">
             <SectionHeader
               eyebrow="Soluções premium"
-              title="Estrutura digital para marcas que precisam transmitir valor antes do orçamento."
-              text="Cada solução conecta estratégia, design e tecnologia para melhorar percepção, atendimento e clareza comercial."
+              title="Soluções para vender mais confiança."
+              text="Estratégia, design e tecnologia para melhorar percepção, atendimento e clareza comercial."
             />
             <ButtonLink href={whatsappUrl("Olá! Quero entender qual solução faz mais sentido para minha empresa.")} variant="secondary">
               Conversar sobre soluções
@@ -666,7 +672,7 @@ export function NorteOneSite() {
                     </div>
                     <span className="text-xs text-cinza-pedra">{String(index + 1).padStart(2, "0")}</span>
                   </div>
-                  <h3 className="font-display text-2xl font-semibold text-off-white">{service.title}</h3>
+                  <h3 className="font-display text-xl font-semibold text-off-white sm:text-2xl">{service.title}</h3>
                   <p className="mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-cobre">{service.eyebrow}</p>
                   <p className="mt-5 text-sm leading-7 text-azul-nevoa/66">{service.summary}</p>
                   <Link
@@ -686,19 +692,19 @@ export function NorteOneSite() {
 
       <AutomationSection />
 
-      <section id="beneficios" className="px-4 py-16 sm:px-8 sm:py-24 lg:py-28">
+      <section id="beneficios" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
             eyebrow="Benefícios para empresas"
-            title="Quando a estrutura digital melhora, o crescimento deixa de depender apenas de esforço manual."
-            text="A presença certa não faz barulho demais. Ela reduz dúvidas, organiza caminhos e deixa o cliente mais seguro para avançar."
+            title="Uma estrutura melhor reduz esforço manual."
+            text="A presença certa reduz dúvidas, organiza caminhos e deixa o cliente mais seguro para avançar."
             align="center"
           />
-          <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid gap-4 sm:mt-12 md:grid-cols-2 lg:grid-cols-3">
             {benefits.map(([title, text]) => (
               <div key={title} data-cinematic className="deep-panel interactive-lift rounded-[28px] p-6">
                 <ShieldCheck className="mb-8 h-6 w-6 text-cobre" />
-                <h3 className="font-display text-2xl font-semibold">{title}</h3>
+                <h3 className="font-display text-xl font-semibold sm:text-2xl">{title}</h3>
                 <p className="mt-4 text-sm leading-7 text-azul-nevoa/66">{text}</p>
               </div>
             ))}
@@ -706,13 +712,13 @@ export function NorteOneSite() {
         </div>
       </section>
 
-      <section id="portfolio" className="overflow-hidden px-4 py-16 sm:px-8 sm:py-24 lg:py-28">
+      <section id="portfolio" className="overflow-hidden px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-10 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <div className="mb-8 flex flex-col justify-between gap-6 sm:mb-10 lg:flex-row lg:items-end">
             <SectionHeader
               eyebrow="Showcase de sites"
-              title="Uma vitrine preparada para receber projetos reais sem parecer genérica."
-              text="Estruturas visuais conceituais para demonstrar direção, qualidade e possibilidades de aplicação em diferentes mercados."
+              title="Showcase visual para negócios reais."
+              text="Mockups premium para demonstrar direção, qualidade e aplicação em diferentes mercados."
             />
             <div className="flex gap-2">
               <button
@@ -760,7 +766,7 @@ export function NorteOneSite() {
                 <div className="grid gap-6 px-2 pb-3 pt-6 sm:grid-cols-[1fr_0.82fr] sm:px-4 sm:pb-5">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cobre">{item.segment}</p>
-                    <h3 className="mt-3 font-display text-3xl font-semibold text-off-white">{item.title}</h3>
+                    <h3 className="mt-3 font-display text-2xl font-semibold text-off-white sm:text-3xl">{item.title}</h3>
                     <p className="mt-4 text-sm leading-7 text-azul-nevoa/66">{item.text}</p>
                   </div>
                   <div className="grid content-start gap-2">
@@ -778,45 +784,75 @@ export function NorteOneSite() {
         </div>
       </section>
 
-      <section id="avaliacoes" className="px-4 py-16 sm:px-8 sm:py-24 lg:py-28">
+      <section id="avaliacoes" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
             eyebrow="Avaliações"
-            title="Espaço preparado para depoimentos reais de clientes e empresas."
-            text="Sem inventar resultados. A estrutura já está pronta para receber avaliações reais conforme os projetos forem publicados."
+            title="Avaliações que reforçam confiança."
+            text="Relatos objetivos, nota em destaque e serviços organizados para apoiar a decisão do cliente."
             align="center"
           />
-          <div className="mt-14 grid gap-4 lg:grid-cols-3">
-            {testimonials.map((testimonial) => (
-              <article key={testimonial.role} data-cinematic className="testimonial-card interactive-lift rounded-[30px] p-7">
-                <div className="mb-8 flex items-center justify-between">
-                  <Quote className="h-7 w-7 text-cobre" />
-                  <div className="flex gap-1 text-cobre" aria-label="Avaliação de exemplo com cinco estrelas">
+          <div data-cinematic className="mx-auto mt-8 grid max-w-5xl gap-4 rounded-[32px] border border-off-white/10 bg-off-white/[0.045] p-4 sm:mt-10 sm:p-5 lg:grid-cols-[0.72fr_1.28fr]">
+            <div className="rounded-[26px] border border-cobre/24 bg-cobre/[0.09] p-6">
+              <div className="mb-8 flex items-center gap-3">
+                <Image src={brandLogoSmall} alt="Logo Norte One" width={48} height={48} className="h-12 w-12 rounded-full border border-cobre/35 object-cover" />
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-[0.22em] text-off-white">Norte One</p>
+                  <p className="mt-1 text-xs text-azul-nevoa/62">Central de avaliações</p>
+                </div>
+              </div>
+              <p className="font-display text-5xl font-semibold text-off-white">5,0</p>
+              <div className="mt-3 flex gap-1 text-cobre" aria-label="Avaliação modelo com cinco estrelas">
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <Star key={index} className="h-4 w-4 fill-current" />
+                ))}
+              </div>
+              <p className="mt-5 text-sm leading-7 text-azul-nevoa/72">
+                Um formato premium para demonstrar experiência, clareza e percepção de valor em cada projeto.
+              </p>
+            </div>
+            <div className="grid gap-3">
+              {testimonials.map((testimonial) => (
+                <article key={testimonial.role} className="testimonial-card interactive-lift rounded-[24px] p-5">
+                  <div className="mb-4 flex items-center justify-between gap-4">
+                    <div>
+                      <p className="text-sm font-semibold text-off-white">{testimonial.role}</p>
+                      <p className="mt-1 text-xs text-cobre">{testimonial.service}</p>
+                    </div>
+                    <div className="flex items-center gap-2 rounded-full border border-cobre/24 bg-cobre/10 px-3 py-1 text-xs font-semibold text-cobre">
+                      <Star className="h-3.5 w-3.5 fill-current" />
+                      {testimonial.score}
+                    </div>
+                  </div>
+                  <div className="mb-4 flex items-center gap-1 text-cobre" aria-label="Avaliação modelo com cinco estrelas">
                     {Array.from({ length: 5 }).map((_, index) => (
                       <Star key={index} className="h-3.5 w-3.5 fill-current" />
                     ))}
                   </div>
-                </div>
-                <p className="text-lg leading-8 text-off-white/82">“{testimonial.text}”</p>
-                <div className="mt-8 border-t border-off-white/10 pt-5">
-                  <p className="text-sm font-semibold text-off-white">{testimonial.label}</p>
-                  <p className="mt-1 text-xs uppercase tracking-[0.16em] text-cinza-pedra">{testimonial.role}</p>
-                </div>
-              </article>
-            ))}
+                  <p className="text-sm leading-7 text-off-white/82">“{testimonial.text}”</p>
+                  <div className="mt-5 flex items-center justify-between border-t border-off-white/10 pt-4">
+                    <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-cinza-pedra">
+                      <Quote className="h-3.5 w-3.5 text-cobre" />
+                      {testimonial.label}
+                    </span>
+                    <span className="text-xs text-azul-nevoa/46">Norte One</span>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="sinop" className="px-4 py-16 sm:px-8 sm:py-24 lg:py-28">
+      <section id="sinop" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
           <div data-cinematic>
             <SectionLabel>Sinop MT e região</SectionLabel>
-            <h2 className="font-display text-[clamp(2.35rem,5vw,5.8rem)] font-semibold leading-[0.98]">
-              Tecnologia de alto padrão para empresas que querem crescer em Sinop e região.
+            <h2 className="font-display text-[clamp(1.72rem,3.8vw,4.3rem)] font-semibold leading-[1.08]">
+              Tecnologia premium para Sinop e região.
             </h2>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-azul-nevoa/72">
-              Negócios locais também precisam transmitir autoridade, atender melhor e criar experiências digitais à altura do novo comportamento do consumidor.
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-azul-nevoa/72 sm:mt-5 sm:text-base sm:leading-8">
+              Negócios locais precisam transmitir autoridade, atender melhor e acompanhar o novo comportamento do consumidor.
             </p>
           </div>
           <div data-cinematic className="premium-border premium-surface rounded-[34px] bg-azul-norte/74 p-6 sm:p-8">
@@ -845,22 +881,22 @@ export function NorteOneSite() {
 
       <ChatbotExperience />
 
-      <section id="processo" className="px-4 py-16 sm:px-8 sm:py-24 lg:py-28">
+      <section id="processo" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
             eyebrow="Processo"
-            title="Uma entrega organizada para sair da ideia e chegar à presença digital ativa."
-            text="O projeto evolui com clareza, decisões bem conduzidas e foco no impacto que a empresa precisa gerar."
+            title="Do diagnóstico ao crescimento."
+            text="Um processo claro para sair da ideia e chegar a uma presença digital ativa."
           />
 
-          <div className="relative mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="relative mt-8 grid gap-4 sm:mt-12 md:grid-cols-2 lg:grid-cols-4">
             <div className="absolute left-0 right-0 top-12 hidden h-px bg-gradient-to-r from-transparent via-cobre/50 to-transparent lg:block" />
             {process.map((step, index) => (
               <div key={step.title} className="process-step interactive-lift relative rounded-[28px] border border-off-white/10 bg-azul-norte/78 p-6 shadow-sm">
                 <div className="mb-10 flex h-12 w-12 items-center justify-center rounded-full border border-cobre/30 bg-cobre/10 text-cobre">
                   {index + 1}
                 </div>
-                <h3 className="font-display text-2xl font-semibold">{step.title}</h3>
+                <h3 className="font-display text-xl font-semibold sm:text-2xl">{step.title}</h3>
                 <p className="mt-4 text-sm leading-7 text-azul-nevoa/66">{step.text}</p>
               </div>
             ))}
@@ -868,7 +904,7 @@ export function NorteOneSite() {
         </div>
       </section>
 
-      <section id="contato" className="px-4 py-16 sm:px-8 sm:py-24 lg:py-28">
+      <section id="contato" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
         <div data-cinematic className="cta-panel premium-border relative mx-auto max-w-7xl overflow-hidden rounded-[34px] bg-azul-norte/86 px-5 py-14 text-center shadow-panel sm:rounded-[42px] sm:px-12 sm:py-20">
           <div className="absolute inset-0 bg-radial-gold opacity-90" />
           <div className="cta-panel__grid absolute inset-0" />
@@ -876,11 +912,11 @@ export function NorteOneSite() {
           <div className="relative mx-auto max-w-4xl">
             <Image src={brandLogoSmall} alt="Logo Norte One" width={82} height={82} className="mx-auto mb-8 h-[82px] w-[82px] rounded-full border border-cobre/35 object-cover" />
             <p className="mb-5 text-sm uppercase tracking-[0.32em] text-cobre">Próximo passo</p>
-            <h2 className="font-display text-[clamp(2.55rem,5.4vw,6.1rem)] font-semibold leading-[0.98]">
-              Sua empresa pode parecer maior, mais confiável e mais preparada para crescer.
+            <h2 className="font-display text-[clamp(1.82rem,4vw,4.55rem)] font-semibold leading-[1.08]">
+              Sua empresa pode parecer mais confiável e preparada para crescer.
             </h2>
-            <p className="mx-auto mt-7 max-w-2xl text-lg leading-8 text-azul-nevoa/72">
-              Com presença digital estratégica, atendimento inteligente e tecnologia bem aplicada, cada contato pode se transformar em uma oportunidade real.
+            <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-azul-nevoa/72 sm:text-base sm:leading-8">
+              Presença digital, atendimento inteligente e tecnologia para transformar contato em oportunidade.
             </p>
             <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
               <ButtonLink href={whatsappUrl("Olá! Quero falar com a Norte One sobre presença digital, IA e automações.")}>

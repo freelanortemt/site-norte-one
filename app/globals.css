@@ -79,6 +79,33 @@ body {
   animation: tech-grid-flow 18s linear infinite;
 }
 
+.animated-dark-bg::before,
+.animated-dark-bg::after {
+  content: "";
+  position: absolute;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  pointer-events: none;
+  opacity: 0.42;
+  will-change: transform;
+}
+
+.animated-dark-bg::before {
+  left: -18vw;
+  top: 18vh;
+  width: min(68vw, 760px);
+  background: radial-gradient(circle, rgba(184, 121, 69, 0.2), transparent 62%);
+  animation: ambient-drift 24s ease-in-out infinite alternate;
+}
+
+.animated-dark-bg::after {
+  right: -22vw;
+  bottom: 8vh;
+  width: min(72vw, 820px);
+  background: radial-gradient(circle, rgba(216, 225, 232, 0.13), transparent 64%);
+  animation: ambient-drift-alt 28s ease-in-out infinite alternate;
+}
+
 .glass-panel {
   border: 1px solid rgba(216, 225, 232, 0.12);
   background:
@@ -402,6 +429,17 @@ body {
     min-height: auto;
   }
 
+  .animated-dark-bg::before,
+  .animated-dark-bg::after {
+    width: 92vw;
+    opacity: 0.3;
+  }
+
+  .animated-dark-bg__grid {
+    animation-duration: 24s;
+    opacity: 0.24;
+  }
+
   .hero-webgl__canvas {
     opacity: 0.54;
   }
@@ -429,8 +467,28 @@ body {
   }
 
   .animated-dark-bg__grid,
+  .animated-dark-bg::before,
+  .animated-dark-bg::after,
   .signal-dot {
     animation: none !important;
+  }
+}
+
+@keyframes ambient-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(9vw, -4vh, 0) scale(1.14);
+  }
+}
+
+@keyframes ambient-drift-alt {
+  from {
+    transform: translate3d(0, 0, 0) scale(0.95);
+  }
+  to {
+    transform: translate3d(-8vw, 5vh, 0) scale(1.08);
   }
 }
 

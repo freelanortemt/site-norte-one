@@ -22,7 +22,7 @@ type SceneProfile = {
 };
 
 const profiles: Record<Exclude<SceneQuality, "fallback">, SceneProfile> = {
-  mobile: { dpr: 1, fps: 30, particles: 240, detail: 0 },
+  mobile: { dpr: 1, fps: 26, particles: 190, detail: 0 },
   balanced: { dpr: 1.2, fps: 42, particles: 460, detail: 1 },
   high: { dpr: 1.5, fps: 54, particles: 760, detail: 2 }
 };
