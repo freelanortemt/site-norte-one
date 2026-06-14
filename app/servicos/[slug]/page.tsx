@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
+import { AmbientTechBackground } from "@/components/AmbientTechBackground";
+import { CinematicMotionEngine } from "@/components/CinematicMotionEngine";
 import { whatsappUrl } from "@/lib/contact";
 import { getServiceBySlug, services } from "@/lib/services";
 import { assetPath, brandLogo, brandLogoSmall } from "@/lib/site";
@@ -53,9 +55,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-obsidian text-soft">
-      <div className="animated-dark-bg pointer-events-none" aria-hidden="true">
-        <div className="animated-dark-bg__grid" />
-      </div>
+      <CinematicMotionEngine />
+      <AmbientTechBackground />
 
       <header className="topbar fixed left-0 right-0 top-0 z-40 border-b border-white/10 bg-obsidian/95">
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-8">
@@ -69,7 +70,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
               loading="eager"
               priority
             />
-            <div>
+            <div data-cinematic>
               <p className="font-display text-xs font-semibold uppercase tracking-[0.22em] sm:text-sm sm:tracking-[0.28em]">Norte One</p>
               <p className="text-[10px] uppercase tracking-[0.18em] text-titanium sm:text-[11px] sm:tracking-[0.24em]">Tech Studio</p>
             </div>
@@ -99,7 +100,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
               <p className="mt-5 max-w-2xl text-base leading-7 text-soft/70 sm:mt-7 sm:text-xl sm:leading-8">{service.description}</p>
             </div>
 
-            <div className="premium-border premium-surface rounded-[32px] bg-graphite/95 p-4 shadow-panel sm:p-6">
+            <div data-cinematic className="premium-border premium-surface rounded-[32px] bg-graphite/95 p-4 shadow-panel sm:p-6">
               <Image
                 src={assetPath(service.visual)}
                 alt={`Visual premium de ${service.title}`}
@@ -126,7 +127,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
       <section className="relative z-10 px-4 py-10 sm:px-8 sm:py-16">
         <div className="section-rule mx-auto mb-10 max-w-7xl" />
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-3">
-          <article className="glass-panel premium-surface rounded-[28px] p-6 sm:p-8">
+          <article data-cinematic className="glass-panel premium-surface rounded-[28px] p-6 sm:p-8">
             <p className="mb-6 font-display text-2xl font-semibold">O que sua empresa recebe</p>
             <div className="space-y-4">
               {service.deliverables.map((item) => (
@@ -138,7 +139,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             </div>
           </article>
 
-          <article className="glass-panel premium-surface rounded-[28px] p-6 sm:p-8">
+          <article data-cinematic className="glass-panel premium-surface rounded-[28px] p-6 sm:p-8">
             <p className="mb-6 font-display text-2xl font-semibold">Como conduzimos</p>
             <div className="space-y-4">
               {service.process.map((item, index) => (
@@ -152,7 +153,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             </div>
           </article>
 
-          <article className="premium-border premium-surface rounded-[28px] bg-graphite/95 p-6 shadow-panel sm:p-8">
+          <article data-cinematic className="premium-border premium-surface rounded-[28px] bg-graphite/95 p-6 shadow-panel sm:p-8">
             <p className="mb-6 font-display text-2xl font-semibold">Valor para o negócio</p>
             <p className="text-base leading-8 text-soft/68">
               Uma solução mais profissional, clara e confiável para fortalecer sua imagem, melhorar a experiência do cliente e aumentar a chance de contato comercial.
@@ -173,7 +174,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
       <section className="relative z-10 px-4 py-10 sm:px-8 sm:py-16">
         <div className="mx-auto max-w-7xl border-t border-white/10 pt-10">
           <p className="mb-6 text-sm uppercase tracking-[0.28em] text-titanium">Outras soluções</p>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div data-cinematic className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {services
               .filter((item) => item.slug !== service.slug)
               .slice(0, 4)

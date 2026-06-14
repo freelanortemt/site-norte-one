@@ -55,55 +55,39 @@ body {
   border-radius: 999px;
 }
 
-.animated-dark-bg {
-  position: fixed;
-  inset: 0;
+.ambient-tech-bg {
   z-index: 0;
   overflow: hidden;
   background:
-    radial-gradient(circle at 14% 16%, rgba(216, 225, 232, 0.12), transparent 25%),
-    radial-gradient(circle at 80% 18%, rgba(184, 121, 69, 0.2), transparent 28%),
-    linear-gradient(135deg, #071624 0%, #0b1f33 46%, #20242a 100%);
+    radial-gradient(circle at 50% 0%, rgba(184, 121, 69, 0.18), transparent 28rem),
+    radial-gradient(circle at 14% 14%, rgba(216, 225, 232, 0.08), transparent 18rem),
+    linear-gradient(180deg, #071624 0%, #0b1f33 44%, #071624 100%);
 }
 
-.animated-dark-bg__grid {
+.ambient-tech-bg__canvas,
+.ambient-tech-bg__noise,
+.ambient-tech-bg__shade {
   position: absolute;
-  inset: -96px;
-  background-image:
-    linear-gradient(rgba(216, 225, 232, 0.065) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(184, 121, 69, 0.058) 1px, transparent 1px);
-  background-size: 76px 76px;
-  opacity: 0.34;
-  transform: translate3d(0, 0, 0);
-  will-change: transform;
-  animation: tech-grid-flow 18s linear infinite;
+  inset: 0;
 }
 
-.animated-dark-bg::before,
-.animated-dark-bg::after {
-  content: "";
-  position: absolute;
-  aspect-ratio: 1;
-  border-radius: 999px;
-  pointer-events: none;
-  opacity: 0.42;
-  will-change: transform;
+.ambient-tech-bg__canvas {
+  height: 100%;
+  opacity: 0.82;
+  width: 100%;
 }
 
-.animated-dark-bg::before {
-  left: -18vw;
-  top: 18vh;
-  width: min(68vw, 760px);
-  background: radial-gradient(circle, rgba(184, 121, 69, 0.2), transparent 62%);
-  animation: ambient-drift 24s ease-in-out infinite alternate;
+.ambient-tech-bg__noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+  opacity: 0.046;
 }
 
-.animated-dark-bg::after {
-  right: -22vw;
-  bottom: 8vh;
-  width: min(72vw, 820px);
-  background: radial-gradient(circle, rgba(216, 225, 232, 0.13), transparent 64%);
-  animation: ambient-drift-alt 28s ease-in-out infinite alternate;
+.ambient-tech-bg__shade {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(184, 121, 69, 0.18), transparent 28rem),
+    radial-gradient(circle at 72% 18%, rgba(216, 225, 232, 0.1), transparent 22rem),
+    linear-gradient(180deg, rgba(11, 31, 51, 0.18), rgba(11, 31, 51, 0.9) 72%, rgba(7, 22, 36, 0.96));
 }
 
 .glass-panel {
@@ -126,37 +110,9 @@ body {
   min-height: min(980px, 100svh);
 }
 
-.hero-webgl {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.hero-webgl__canvas {
-  position: absolute !important;
-  inset: 0;
-  opacity: 0.9;
-}
-
-.hero-webgl__fallback,
-.hero-webgl__vignette,
 .hero-stage__atmosphere {
   position: absolute;
   inset: 0;
-}
-
-.hero-webgl__fallback {
-  background:
-    radial-gradient(circle at 68% 35%, rgba(184, 121, 69, 0.22), transparent 24%),
-    radial-gradient(circle at 76% 48%, rgba(216, 225, 232, 0.12), transparent 34%);
-}
-
-.hero-webgl__vignette {
-  background:
-    linear-gradient(90deg, rgba(7, 22, 36, 0.96) 0%, rgba(11, 31, 51, 0.8) 38%, rgba(11, 31, 51, 0.24) 68%, rgba(7, 22, 36, 0.78) 100%),
-    linear-gradient(180deg, rgba(7, 22, 36, 0.12), transparent 48%, rgba(7, 22, 36, 0.92) 100%);
 }
 
 .hero-stage__atmosphere {
@@ -205,6 +161,25 @@ body {
 .service-card:hover,
 .process-step:hover {
   transform: translateY(-3px);
+}
+
+.cinematic-motion-ready [data-cinematic] {
+  filter: blur(8px);
+  opacity: 0;
+  transform: translate3d(0, 32px, 0) perspective(900px) rotateX(5deg);
+  transform-origin: center top;
+  transition:
+    opacity 760ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 760ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 760ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform, filter;
+}
+
+.cinematic-motion-ready [data-cinematic].is-visible {
+  filter: blur(0);
+  opacity: 1;
+  transform: translate3d(0, 0, 0) perspective(900px) rotateX(0deg);
 }
 
 .premium-surface {
@@ -429,25 +404,20 @@ body {
     min-height: auto;
   }
 
-  .animated-dark-bg::before,
-  .animated-dark-bg::after {
-    width: 92vw;
-    opacity: 0.3;
+  .ambient-tech-bg__canvas {
+    opacity: 0.86;
   }
 
-  .animated-dark-bg__grid {
-    animation-duration: 24s;
-    opacity: 0.24;
-  }
-
-  .hero-webgl__canvas {
-    opacity: 0.54;
-  }
-
-  .hero-webgl__vignette {
+  .ambient-tech-bg__shade {
     background:
-      linear-gradient(90deg, rgba(7, 22, 36, 0.96), rgba(11, 31, 51, 0.78)),
-      linear-gradient(180deg, rgba(7, 22, 36, 0.28), rgba(7, 22, 36, 0.78) 70%, #071624);
+      radial-gradient(circle at 50% 0%, rgba(184, 121, 69, 0.2), transparent 24rem),
+      linear-gradient(180deg, rgba(11, 31, 51, 0.1), rgba(11, 31, 51, 0.86) 70%, rgba(7, 22, 36, 0.96));
+  }
+
+  .cinematic-motion-ready [data-cinematic] {
+    filter: blur(5px);
+    transform: translate3d(0, 22px, 0) perspective(760px) rotateX(3deg);
+    transition-duration: 680ms;
   }
 
   .portfolio-carousel::before,
@@ -466,38 +436,8 @@ body {
     transition-duration: 0.01ms !important;
   }
 
-  .animated-dark-bg__grid,
-  .animated-dark-bg::before,
-  .animated-dark-bg::after,
   .signal-dot {
     animation: none !important;
-  }
-}
-
-@keyframes ambient-drift {
-  from {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  to {
-    transform: translate3d(9vw, -4vh, 0) scale(1.14);
-  }
-}
-
-@keyframes ambient-drift-alt {
-  from {
-    transform: translate3d(0, 0, 0) scale(0.95);
-  }
-  to {
-    transform: translate3d(-8vw, 5vh, 0) scale(1.08);
-  }
-}
-
-@keyframes tech-grid-flow {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(76px, 76px, 0);
   }
 }
 

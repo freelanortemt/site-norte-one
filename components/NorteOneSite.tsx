@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { useRef, useState } from "react";
 import { domAnimation, LazyMotion, m, MotionConfig } from "framer-motion";
 import {
@@ -37,15 +36,11 @@ import {
   Workflow,
   Zap
 } from "lucide-react";
+import { AmbientTechBackground } from "@/components/AmbientTechBackground";
 import { CinematicMotionEngine } from "@/components/CinematicMotionEngine";
 import { whatsappDisplay, whatsappUrl } from "@/lib/contact";
 import { services } from "@/lib/services";
 import { assetPath, brandLogoSmall } from "@/lib/site";
-
-const AdaptiveHeroScene = dynamic(() => import("@/components/AdaptiveHeroScene"), {
-  loading: () => <div className="hero-webgl hero-webgl--loading" aria-hidden="true" />,
-  ssr: false
-});
 
 const serviceIcons = {
   "sites-premium": PanelsTopLeft,
@@ -498,10 +493,7 @@ export function NorteOneSite() {
   return (
     <main className="relative overflow-hidden bg-azul-norte text-off-white [&>footer]:relative [&>footer]:z-10 [&>section]:relative [&>section]:z-10">
       <CinematicMotionEngine />
-      <div className="animated-dark-bg pointer-events-none" aria-hidden="true">
-        <div className="animated-dark-bg__grid" />
-      </div>
-      <AdaptiveHeroScene />
+      <AmbientTechBackground />
 
       <header className="topbar fixed left-0 right-0 top-0 z-40 border-b border-off-white/10">
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-8">
@@ -662,6 +654,7 @@ export function NorteOneSite() {
               return (
                 <article
                   key={service.title}
+                  data-cinematic
                   className={`service-card premium-border group rounded-[30px] bg-azul-norte/72 p-6 shadow-panel ${
                     featured ? "xl:col-span-4" : "xl:col-span-3"
                   }`}
@@ -751,6 +744,7 @@ export function NorteOneSite() {
             {showcaseCases.map((item) => (
               <article
                 key={item.title}
+                data-cinematic
                 data-portfolio-card
                 className="group w-[84vw] max-w-[820px] shrink-0 overflow-hidden rounded-[32px] border border-off-white/10 bg-azul-norte/82 p-3 shadow-panel sm:w-[680px] sm:p-4 lg:w-[780px]"
               >
@@ -813,7 +807,7 @@ export function NorteOneSite() {
             </div>
             <div className="grid gap-3">
               {testimonials.map((testimonial) => (
-                <article key={testimonial.role} className="testimonial-card interactive-lift rounded-[24px] p-5">
+                <article key={testimonial.role} data-cinematic className="testimonial-card interactive-lift rounded-[24px] p-5">
                   <div className="mb-4 flex items-center justify-between gap-4">
                     <div>
                       <p className="text-sm font-semibold text-off-white">{testimonial.role}</p>
@@ -892,7 +886,7 @@ export function NorteOneSite() {
           <div className="relative mt-8 grid gap-4 sm:mt-12 md:grid-cols-2 lg:grid-cols-4">
             <div className="absolute left-0 right-0 top-12 hidden h-px bg-gradient-to-r from-transparent via-cobre/50 to-transparent lg:block" />
             {process.map((step, index) => (
-              <div key={step.title} className="process-step interactive-lift relative rounded-[28px] border border-off-white/10 bg-azul-norte/78 p-6 shadow-sm">
+              <div key={step.title} data-cinematic className="process-step interactive-lift relative rounded-[28px] border border-off-white/10 bg-azul-norte/78 p-6 shadow-sm">
                 <div className="mb-10 flex h-12 w-12 items-center justify-center rounded-full border border-cobre/30 bg-cobre/10 text-cobre">
                   {index + 1}
                 </div>

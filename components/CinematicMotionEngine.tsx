@@ -4,22 +4,47 @@ import { useEffect } from "react";
 
 export function CinematicMotionEngine() {
   useEffect(() => {
-    const desktopMotion = window.matchMedia("(min-width: 1024px) and (prefers-reduced-motion: no-preference)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    if (!desktopMotion.matches) {
+    if (reducedMotion.matches) {
       return;
     }
 
+    const desktopMotion = window.matchMedia("(min-width: 1024px)");
+    const revealItems = Array.from(document.querySelectorAll<HTMLElement>("[data-cinematic]"));
     let cancelled = false;
-    let cleanup = () => {};
+    let cleanupLenis = () => {};
 
-    void Promise.all([import("lenis"), import("gsap"), import("gsap/ScrollTrigger")]).then(
-      ([{ default: Lenis }, { gsap }, { ScrollTrigger }]) => {
+    document.documentElement.classList.add("cinematic-motion-ready");
+
+    revealItems.forEach((item, index) => {
+      item.style.setProperty("--reveal-delay", `${Math.min((index % 5) * 55, 220)}ms`);
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        rootMargin: "0px 0px -8% 0px",
+        threshold: 0.14
+      }
+    );
+
+    revealItems.forEach((item) => observer.observe(item));
+
+    if (desktopMotion.matches) {
+      void import("lenis").then(({ default: Lenis }) => {
         if (cancelled) {
           return;
         }
-
-        gsap.registerPlugin(ScrollTrigger);
 
         const lenis = new Lenis({
           anchors: true,
@@ -28,41 +53,26 @@ export function CinematicMotionEngine() {
           touchMultiplier: 1,
           wheelMultiplier: 0.86
         });
-        const ticker = (time: number) => lenis.raf(time * 1000);
-        const animations = gsap.utils.toArray<HTMLElement>("[data-cinematic]").map((item) =>
-          gsap.fromTo(
-            item,
-            { autoAlpha: 0.36, y: 30 },
-            {
-              autoAlpha: 1,
-              duration: 0.78,
-              ease: "power3.out",
-              scrollTrigger: {
-                once: true,
-                start: "top 88%",
-                trigger: item
-              },
-              y: 0
-            }
-          )
-        );
+        let animationFrame = 0;
+        const raf = (time: number) => {
+          lenis.raf(time);
+          animationFrame = window.requestAnimationFrame(raf);
+        };
 
-        lenis.on("scroll", ScrollTrigger.update);
-        gsap.ticker.add(ticker);
-        gsap.ticker.lagSmoothing(0);
+        animationFrame = window.requestAnimationFrame(raf);
 
-        cleanup = () => {
-          animations.forEach((animation) => animation.kill());
-          gsap.ticker.remove(ticker);
-          ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        cleanupLenis = () => {
+          window.cancelAnimationFrame(animationFrame);
           lenis.destroy();
         };
-      }
-    );
+      });
+    }
 
     return () => {
       cancelled = true;
-      cleanup();
+      observer.disconnect();
+      cleanupLenis();
+      document.documentElement.classList.remove("cinematic-motion-ready");
     };
   }, []);
 
