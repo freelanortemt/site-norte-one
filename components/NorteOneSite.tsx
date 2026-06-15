@@ -527,7 +527,7 @@ export function NorteOneSite() {
                   transition={{ delay: 0.08, duration: 0.86, ease: [0.16, 1, 0.3, 1] }}
                   className="max-w-5xl font-display text-[clamp(1.9rem,4.55vw,4.9rem)] font-semibold leading-[1.03] tracking-normal text-off-white"
                 >
-                  Aumente o faturamento e a performance da sua empresa através da <span className="copper-text">tecnologia e posicionamento certo.</span>
+                  Aumente o faturamento e a performance da sua empresa através da <span className="copper-text">tecnologia.</span>
                 </m.h1>
 
                 <m.p
@@ -536,7 +536,7 @@ export function NorteOneSite() {
                   transition={{ delay: 0.16, duration: 0.86, ease: [0.16, 1, 0.3, 1] }}
                   className="mt-5 max-w-2xl text-base leading-7 text-azul-nevoa/78 sm:mt-6 sm:text-lg sm:leading-8"
                 >
-                  Criamos sites premium, automações inteligentes e experiências digitais que fortalecem marcas, melhoram o atendimento e geram mais oportunidades de negócio.
+                  Entenda como sua empresa pode aumentar o faturamento em até 54% nos primeiros meses após a implementação de sistemas de performance, gestão e posicionamento com IA, de forma simples, fácil e sem precisar programar ou entender de tecnologia.
                 </m.p>
 
                 <m.div
