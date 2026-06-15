@@ -24,14 +24,12 @@ import {
   Network,
   Palette,
   PanelsTopLeft,
-  Quote,
   RadioTower,
   Rocket,
   ScanLine,
   ShieldCheck,
   Smartphone,
   Sparkles,
-  Star,
   UserRoundCheck,
   Workflow,
   Zap
@@ -113,30 +111,6 @@ const showcaseCases = [
     image: "/portfolio/optimized/sante-prime-clinic.jpg",
     text: "Interface conceitual para organizar contatos, acompanhar etapas e reduzir ruído na operação comercial.",
     tags: ["Fluxos", "Equipe", "IA"]
-  }
-];
-
-const testimonials = [
-  {
-    label: "Prévia de avaliação",
-    role: "Cliente de site premium",
-    service: "Presença digital",
-    score: "5,0",
-    text: "A presença online ficou mais clara, elegante e alinhada ao padrão que queríamos transmitir aos nossos clientes."
-  },
-  {
-    label: "Prévia de avaliação",
-    role: "Cliente de automação",
-    service: "Atendimento com IA",
-    score: "5,0",
-    text: "O atendimento ganhou mais organização. Hoje o cliente recebe uma resposta mais objetiva e a equipe entende melhor cada oportunidade."
-  },
-  {
-    label: "Prévia de avaliação",
-    role: "Cliente de posicionamento",
-    service: "Estratégia digital",
-    score: "5,0",
-    text: "O projeto ajudou a apresentar nossos serviços com mais segurança e trouxe uma percepção mais profissional para a empresa."
   }
 ];
 
@@ -517,7 +491,6 @@ export function NorteOneSite() {
             <a className="rounded-full px-4 py-2 transition hover:bg-off-white/[0.07] hover:text-off-white" href="#servicos">Soluções</a>
             <a className="rounded-full px-4 py-2 transition hover:bg-off-white/[0.07] hover:text-off-white" href="#tecnologia">Tecnologia</a>
             <a className="rounded-full px-4 py-2 transition hover:bg-off-white/[0.07] hover:text-off-white" href="#portfolio">Projetos</a>
-            <a className="rounded-full px-4 py-2 transition hover:bg-off-white/[0.07] hover:text-off-white" href="#avaliacoes">Avaliações</a>
             <a className="rounded-full px-4 py-2 transition hover:bg-off-white/[0.07] hover:text-off-white" href="#contato">Contato</a>
           </div>
 
@@ -554,7 +527,7 @@ export function NorteOneSite() {
                   transition={{ delay: 0.08, duration: 0.86, ease: [0.16, 1, 0.3, 1] }}
                   className="max-w-5xl font-display text-[clamp(1.9rem,4.55vw,4.9rem)] font-semibold leading-[1.03] tracking-normal text-off-white"
                 >
-                  Tecnologia, posicionamento e presença digital para empresas que querem ser <span className="copper-text">escolhidas.</span>
+                  Aumente o faturamento e a performance da sua empresa através da <span className="copper-text">tecnologia e posicionamento certo.</span>
                 </m.h1>
 
                 <m.p
@@ -774,66 +747,6 @@ export function NorteOneSite() {
                 </div>
               </article>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="avaliacoes" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeader
-            eyebrow="Avaliações"
-            title="Avaliações que reforçam confiança."
-            text="Relatos objetivos, nota em destaque e serviços organizados para apoiar a decisão do cliente."
-            align="center"
-          />
-          <div data-cinematic className="mx-auto mt-8 grid max-w-5xl gap-4 rounded-[32px] border border-off-white/10 bg-off-white/[0.045] p-4 sm:mt-10 sm:p-5 lg:grid-cols-[0.72fr_1.28fr]">
-            <div className="rounded-[26px] border border-cobre/24 bg-cobre/[0.09] p-6">
-              <div className="mb-8 flex items-center gap-3">
-                <Image src={brandLogoSmall} alt="Logo Norte One" width={48} height={48} className="h-12 w-12 rounded-full border border-cobre/35 object-cover" />
-                <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.22em] text-off-white">Norte One</p>
-                  <p className="mt-1 text-xs text-azul-nevoa/62">Central de avaliações</p>
-                </div>
-              </div>
-              <p className="font-display text-5xl font-semibold text-off-white">5,0</p>
-              <div className="mt-3 flex gap-1 text-cobre" aria-label="Avaliação modelo com cinco estrelas">
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <Star key={index} className="h-4 w-4 fill-current" />
-                ))}
-              </div>
-              <p className="mt-5 text-sm leading-7 text-azul-nevoa/72">
-                Um formato premium para demonstrar experiência, clareza e percepção de valor em cada projeto.
-              </p>
-            </div>
-            <div className="grid gap-3">
-              {testimonials.map((testimonial) => (
-                <article key={testimonial.role} data-cinematic className="testimonial-card interactive-lift rounded-[24px] p-5">
-                  <div className="mb-4 flex items-center justify-between gap-4">
-                    <div>
-                      <p className="text-sm font-semibold text-off-white">{testimonial.role}</p>
-                      <p className="mt-1 text-xs text-cobre">{testimonial.service}</p>
-                    </div>
-                    <div className="flex items-center gap-2 rounded-full border border-cobre/24 bg-cobre/10 px-3 py-1 text-xs font-semibold text-cobre">
-                      <Star className="h-3.5 w-3.5 fill-current" />
-                      {testimonial.score}
-                    </div>
-                  </div>
-                  <div className="mb-4 flex items-center gap-1 text-cobre" aria-label="Avaliação modelo com cinco estrelas">
-                    {Array.from({ length: 5 }).map((_, index) => (
-                      <Star key={index} className="h-3.5 w-3.5 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-sm leading-7 text-off-white/82">“{testimonial.text}”</p>
-                  <div className="mt-5 flex items-center justify-between border-t border-off-white/10 pt-4">
-                    <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-cinza-pedra">
-                      <Quote className="h-3.5 w-3.5 text-cobre" />
-                      {testimonial.label}
-                    </span>
-                    <span className="text-xs text-azul-nevoa/46">Norte One</span>
-                  </div>
-                </article>
-              ))}
-            </div>
           </div>
         </div>
       </section>

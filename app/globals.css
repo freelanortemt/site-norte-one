@@ -356,12 +356,6 @@ body {
   scroll-snap-align: center;
 }
 
-.testimonial-card {
-  min-height: 100%;
-  border: 1px solid rgba(216, 225, 232, 0.12);
-  background: rgba(7, 22, 36, 0.58);
-}
-
 .chat-message {
   max-width: 92%;
   border: 1px solid rgba(216, 225, 232, 0.12);
