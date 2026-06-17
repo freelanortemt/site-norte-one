@@ -181,6 +181,14 @@ const diagnosticBenefits = [
   "Indicar o caminho mais estratégico antes de qualquer proposta"
 ];
 
+const orbitNodes: Array<{ className: string; Icon: LucideIcon; label: string }> = [
+  { className: "orbit-item--presence", Icon: Globe2, label: "Presença" },
+  { className: "orbit-item--service", Icon: MessageSquareText, label: "Atendimento" },
+  { className: "orbit-item--process", Icon: Workflow, label: "Processos" },
+  { className: "orbit-item--opportunity", Icon: LineChart, label: "Oportunidades" },
+  { className: "orbit-item--positioning", Icon: SearchCheck, label: "Posicionamento" }
+];
+
 function ButtonLink({
   children,
   href,
@@ -283,25 +291,21 @@ function HeroCommandCenter() {
 function MechanismMap() {
   return (
     <div className="network-map premium-border">
-      <div className="network-node left-[8%] top-[18%]">
-        <Globe2 className="h-4 w-4 text-cobre" />
-        Presença
-      </div>
-      <div className="network-node right-[8%] top-[24%]">
-        <MessageSquareText className="h-4 w-4 text-cobre" />
-        Atendimento
-      </div>
-      <div className="network-node bottom-[20%] left-[14%]">
-        <Workflow className="h-4 w-4 text-cobre" />
-        Processos
-      </div>
-      <div className="network-node bottom-[14%] right-[12%]">
-        <LineChart className="h-4 w-4 text-cobre" />
-        Oportunidades
-      </div>
-      <div className="absolute left-1/2 top-1/2 z-[1] flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-cobre/35 bg-azul-norte/84 text-center shadow-gold">
-        <Image src={brandLogoSmall} alt="Logo Norte One" width={58} height={58} className="h-[58px] w-[58px] rounded-full object-cover" />
-        <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-cobre">Estrutura</p>
+      <div className="orbit-field" aria-hidden="true" />
+      {orbitNodes.map(({ className, Icon, label }) => (
+        <div key={label} className={`orbit-item ${className}`}>
+          <div className="orbit-card">
+            <Icon className="h-4 w-4 text-cobre" />
+            <span>{label}</span>
+          </div>
+        </div>
+      ))}
+
+      <div className="company-planet" aria-label="Sua empresa no centro da Estrutura Norte One">
+        <div className="company-planet__globe">
+          <span>Sua empresa</span>
+        </div>
+        <p>Estrutura</p>
       </div>
     </div>
   );

@@ -262,8 +262,8 @@ body {
 .network-map::before {
   content: "";
   position: absolute;
-  inset: 12%;
-  border: 1px solid rgba(216, 225, 232, 0.14);
+  inset: 13% 11%;
+  border: 1px solid rgba(216, 225, 232, 0.13);
   border-radius: 999px;
   transform: rotate(-12deg);
 }
@@ -272,24 +272,222 @@ body {
   content: "";
   position: absolute;
   inset: 22% 8%;
-  border: 1px solid rgba(184, 121, 69, 0.24);
+  border: 1px solid rgba(184, 121, 69, 0.2);
   border-radius: 999px;
   transform: rotate(18deg);
 }
 
-.network-node {
+.orbit-field {
   position: absolute;
-  display: flex;
-  min-width: 118px;
-  align-items: center;
-  gap: 0.55rem;
-  border: 1px solid rgba(216, 225, 232, 0.14);
+  inset: 17% 10%;
   border-radius: 999px;
-  background: rgba(11, 31, 51, 0.78);
-  padding: 0.75rem 0.9rem;
-  color: rgba(244, 241, 234, 0.78);
-  font-size: 0.78rem;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(184, 121, 69, 0.12), transparent 28%),
+    conic-gradient(from 180deg, transparent, rgba(216, 225, 232, 0.12), transparent, rgba(184, 121, 69, 0.18), transparent);
+  filter: blur(0.2px);
+  opacity: 0.62;
+}
+
+.orbit-item {
+  --orbit-delay: 0s;
+  --orbit-duration: 30s;
+  --orbit-radius-x: 118px;
+  --orbit-radius-x-mid: 83px;
+  --orbit-radius-y: 102px;
+  --orbit-radius-y-mid: 72px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  animation: orbit-ellipse var(--orbit-duration) linear infinite;
+  animation-delay: var(--orbit-delay);
+  will-change: transform;
+}
+
+.orbit-card {
+  display: flex;
+  min-width: 116px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border: 1px solid rgba(216, 225, 232, 0.16);
+  border-radius: 999px;
+  background: rgba(7, 22, 36, 0.84);
+  box-shadow: 0 16px 42px rgba(6, 18, 30, 0.28), inset 0 1px 0 rgba(244, 241, 234, 0.06);
+  color: rgba(244, 241, 234, 0.82);
+  font-size: 0.68rem;
   font-weight: 700;
+  padding: 0.62rem 0.72rem;
+  transform-origin: center;
+  white-space: nowrap;
+}
+
+.orbit-item--presence {
+  --orbit-delay: -24s;
+}
+
+.orbit-item--service {
+  --orbit-delay: -18s;
+}
+
+.orbit-item--process {
+  --orbit-delay: -12s;
+}
+
+.orbit-item--opportunity {
+  --orbit-delay: -6s;
+}
+
+.orbit-item--positioning {
+  --orbit-delay: 0s;
+}
+
+.company-planet {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 4;
+  display: flex;
+  height: 132px;
+  width: 132px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(184, 121, 69, 0.32);
+  background:
+    radial-gradient(circle at 50% 68%, rgba(184, 121, 69, 0.22), transparent 52%),
+    rgba(7, 22, 36, 0.88);
+  box-shadow: 0 0 70px rgba(184, 121, 69, 0.28), inset 0 1px 0 rgba(244, 241, 234, 0.08);
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.company-planet__globe {
+  position: relative;
+  display: grid;
+  height: 72px;
+  width: 72px;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 999px;
+  border: 1px solid rgba(216, 225, 232, 0.28);
+  background:
+    radial-gradient(circle at 34% 24%, rgba(244, 241, 234, 0.9), transparent 12%),
+    radial-gradient(circle at 72% 72%, rgba(184, 121, 69, 0.42), transparent 22%),
+    linear-gradient(145deg, #d8e1e8 0%, #7f9fb1 32%, #0b1f33 68%, #071624 100%);
+  box-shadow: inset -16px -18px 28px rgba(7, 22, 36, 0.5), inset 10px 9px 22px rgba(244, 241, 234, 0.22);
+}
+
+.company-planet__globe::before,
+.company-planet__globe::after {
+  content: "";
+  position: absolute;
+  border-radius: 45% 55% 48% 52%;
+  background: rgba(184, 121, 69, 0.48);
+  filter: blur(0.2px);
+}
+
+.company-planet__globe::before {
+  height: 30px;
+  left: 8px;
+  top: 19px;
+  width: 25px;
+  transform: rotate(-28deg);
+}
+
+.company-planet__globe::after {
+  bottom: 14px;
+  height: 24px;
+  right: 9px;
+  width: 30px;
+  transform: rotate(24deg);
+}
+
+.company-planet__globe span {
+  position: relative;
+  z-index: 1;
+  max-width: 54px;
+  color: #f4f1ea;
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  line-height: 1.05;
+  text-transform: uppercase;
+  text-shadow: 0 1px 8px rgba(7, 22, 36, 0.72);
+}
+
+.company-planet p {
+  margin-top: 0.65rem;
+  color: var(--cobre);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+@keyframes orbit-ellipse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translate(var(--orbit-radius-x), 0);
+  }
+
+  12.5% {
+    transform: translate(-50%, -50%) translate(var(--orbit-radius-x-mid), calc(var(--orbit-radius-y-mid) * -1));
+  }
+
+  25% {
+    transform: translate(-50%, -50%) translate(0, calc(var(--orbit-radius-y) * -1));
+  }
+
+  37.5% {
+    transform: translate(-50%, -50%) translate(calc(var(--orbit-radius-x-mid) * -1), calc(var(--orbit-radius-y-mid) * -1));
+  }
+
+  50% {
+    transform: translate(-50%, -50%) translate(calc(var(--orbit-radius-x) * -1), 0);
+  }
+
+  62.5% {
+    transform: translate(-50%, -50%) translate(calc(var(--orbit-radius-x-mid) * -1), var(--orbit-radius-y-mid));
+  }
+
+  75% {
+    transform: translate(-50%, -50%) translate(0, var(--orbit-radius-y));
+  }
+
+  87.5% {
+    transform: translate(-50%, -50%) translate(var(--orbit-radius-x-mid), var(--orbit-radius-y-mid));
+  }
+}
+
+@media (min-width: 640px) {
+  .network-map {
+    min-height: 430px;
+  }
+
+  .orbit-item {
+    --orbit-radius-x: clamp(150px, 22vw, 186px);
+    --orbit-radius-x-mid: clamp(106px, 15.5vw, 132px);
+    --orbit-radius-y: clamp(102px, 15vw, 126px);
+    --orbit-radius-y-mid: clamp(72px, 10.6vw, 89px);
+  }
+
+  .orbit-card {
+    min-width: 150px;
+    font-size: 0.82rem;
+    padding: 0.78rem 1rem;
+  }
+
+  .company-planet {
+    height: 142px;
+    width: 142px;
+  }
+
+  .company-planet__globe {
+    height: 78px;
+    width: 78px;
+  }
 }
 
 .automation-flow {
