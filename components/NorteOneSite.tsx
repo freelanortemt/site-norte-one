@@ -301,9 +301,15 @@ function MechanismMap() {
         </div>
       ))}
 
-      <div className="company-planet" aria-label="Sua empresa no centro da Estrutura Norte One">
+      <div className="company-planet" aria-label="Logo Norte One no centro da Estrutura">
         <div className="company-planet__globe">
-          <span>Sua empresa</span>
+          <Image
+            src={brandLogoSmall}
+            alt="Logo Norte One"
+            width={68}
+            height={68}
+            className="company-planet__logo"
+          />
         </div>
         <p>Estrutura</p>
       </div>
