@@ -5,5 +5,5 @@ export function assetPath(path: string) {
   return `${siteBasePath}${normalizedPath}`;
 }
 
-export const brandLogoSmall = assetPath("/brand/norte-one-logo-premium-small.jpg");
+export const brandLogoSmall = assetPath("/brand/norte-one-logo-copper.png");
 export const brandLogo = brandLogoSmall;

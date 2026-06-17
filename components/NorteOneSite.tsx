@@ -331,7 +331,7 @@ export function NorteOneSite() {
             />
             <div>
               <p className="font-display text-xs font-semibold uppercase tracking-[0.22em] text-off-white sm:text-sm sm:tracking-[0.28em]">Norte One</p>
-              <p className="text-[10px] uppercase tracking-[0.18em] text-cinza-pedra sm:text-[11px] sm:tracking-[0.24em]">Tech local</p>
+              <p className="text-[10px] uppercase tracking-[0.18em] text-cinza-pedra sm:text-[11px] sm:tracking-[0.24em]">Estratégia Digital</p>
             </div>
           </a>
 
