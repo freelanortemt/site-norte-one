@@ -1,168 +1,257 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { useRef, useState } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { domAnimation, LazyMotion, m, MotionConfig } from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
-  ArrowUpRight,
-  BadgeCheck,
   Bot,
   BrainCircuit,
   Building2,
-  CalendarCheck2,
   Check,
   CircleCheck,
+  ClipboardCheck,
   Cpu,
+  Gauge,
   Globe2,
   Layers3,
   LineChart,
   MapPin,
   MessageSquareText,
   Network,
-  Palette,
   PanelsTopLeft,
-  RadioTower,
-  Rocket,
-  ScanLine,
+  SearchCheck,
   ShieldCheck,
-  Smartphone,
   Sparkles,
-  UserRoundCheck,
+  Store,
   Workflow,
-  Zap
+  Zap,
+  type LucideIcon
 } from "lucide-react";
 import { AmbientTechBackground } from "@/components/AmbientTechBackground";
 import { CinematicMotionEngine } from "@/components/CinematicMotionEngine";
 import { whatsappDisplay, whatsappUrl } from "@/lib/contact";
-import { services } from "@/lib/services";
 import { assetPath, brandLogoSmall } from "@/lib/site";
 
-const serviceIcons = {
-  "sites-premium": PanelsTopLeft,
-  "chatbots-inteligentes": Bot,
-  "automacao-com-ia": BrainCircuit,
-  aplicativos: Smartphone,
-  "cartoes-nfc": RadioTower,
-  "branding-digital": Palette,
-  "presenca-digital": Globe2,
-  "sistemas-personalizados": Cpu,
-  "landing-pages": Rocket
-};
+const diagnosisUrl = "https://tally.so/r/Bz9gle";
 
-const heroSignals = [
-  ["Sites", "presença digital premium"],
-  ["IA", "atendimento inteligente"],
-  ["Automações", "menos oportunidades perdidas"],
-  ["Sistemas", "operações mais claras"]
+const heroSignals: Array<{ title: string; text: string; Icon: LucideIcon }> = [
+  { title: "Confiança", text: "Sua empresa precisa parecer forte antes do primeiro contato.", Icon: ShieldCheck },
+  { title: "Atendimento", text: "Interesse no WhatsApp precisa virar conversa organizada.", Icon: MessageSquareText },
+  { title: "Processos", text: "Menos improviso para conduzir oportunidades com clareza.", Icon: Workflow },
+  { title: "Oportunidades", text: "Contatos não podem esfriar por falta de resposta ou rotina.", Icon: LineChart },
+  { title: "WhatsApp", text: "O principal canal de venda precisa ter direção e contexto.", Icon: Bot },
+  { title: "Presença digital", text: "O cliente pesquisa, compara e decide antes de chamar.", Icon: Globe2 }
 ];
 
-const positioningPillars = [
-  ["Percepção", "Sua empresa precisa parecer confiável antes mesmo do primeiro contato."],
-  ["Estrutura", "Sites, automações e canais digitais organizados para facilitar a decisão do cliente."],
-  ["Crescimento", "Tecnologia aplicada para criar mais clareza, velocidade e recorrência comercial."]
-];
-
-const automationSteps = [
-  ["Cliente chama", MessageSquareText],
-  ["IA responde", Bot],
-  ["Lead qualifica", UserRoundCheck],
-  ["Equipe recebe", CalendarCheck2],
-  ["Venda acompanha", LineChart],
-  ["Cliente retorna", CircleCheck]
-];
-
-const benefits = [
-  ["Mais confiança no primeiro contato", "A percepção visual e a mensagem reduzem insegurança antes da conversa comercial."],
-  ["Mais agilidade no atendimento", "Fluxos inteligentes ajudam a responder melhor sem depender apenas de esforço manual."],
-  ["Mais organização de leads", "Oportunidades deixam de ficar espalhadas entre mensagens, anotações e planilhas."],
-  ["Mais percepção de valor", "Empresas bem posicionadas não precisam disputar apenas preço."],
-  ["Mais recorrência", "A experiência digital facilita retorno, relacionamento e continuidade."],
-  ["Menos oportunidades perdidas", "O cliente encontra o caminho certo para avançar no momento em que demonstra interesse."]
-];
-
-const showcaseCases = [
+const painCards = [
   {
-    title: "Projeto institucional premium",
-    segment: "Empresas de serviço",
-    image: "/portfolio/optimized/aurora-prime-imoveis.jpg",
-    text: "Estrutura preparada para apresentar autoridade, serviços e contato rápido sem depender de excesso de texto.",
-    tags: ["Institucional", "Posicionamento", "WhatsApp"]
+    title: "Sua empresa é boa, mas pode estar sendo percebida como comum.",
+    text: "O cliente compara sua empresa antes de falar com você. Quando a presença digital não transmite valor, a decisão já começa enfraquecida.",
+    Icon: Store
   },
   {
-    title: "Site para clínica",
-    segment: "Saúde e atendimento",
-    image: "/portfolio/optimized/odontovitta-clinic.jpg",
-    text: "Experiência clara para mostrar especialidades, facilitar agendamento e transmitir segurança ao paciente.",
-    tags: ["Mobile first", "Agendamento", "Confiança"]
+    title: "O WhatsApp recebe interesse, mas nem sempre vira oportunidade.",
+    text: "Mensagens acumulam, retornos são esquecidos e contatos esfriam quando não existe um processo claro de atendimento.",
+    Icon: MessageSquareText
   },
   {
-    title: "Site para imobiliária",
-    segment: "Negócios locais",
-    image: "/portfolio/optimized/mendes-valenca-advocacia.jpg",
-    text: "Vitrine digital para organizar ofertas, elevar percepção e conduzir interessados para uma conversa comercial.",
-    tags: ["Catálogo", "Captação", "Busca"]
+    title: "Ferramentas soltas não resolvem uma operação desorganizada.",
+    text: "Site, IA, automação e sistemas só geram valor quando fazem parte de uma estrutura conectada ao negócio.",
+    Icon: Layers3
   },
   {
-    title: "Sistema de atendimento",
-    segment: "Operação e vendas",
-    image: "/portfolio/optimized/sante-prime-clinic.jpg",
-    text: "Interface conceitual para organizar contatos, acompanhar etapas e reduzir ruído na operação comercial.",
-    tags: ["Fluxos", "Equipe", "IA"]
+    title: "O improviso cobra caro.",
+    text: "O maior custo muitas vezes não aparece em relatório: clientes que não chamaram, contatos que não voltaram e oportunidades que se perderam no caminho.",
+    Icon: Gauge
   }
 ];
 
-const sinopPoints = [
-  "Negócios locais precisam transmitir autoridade no mesmo nível das grandes marcas.",
-  "O consumidor compara, pesquisa e decide antes de chamar no WhatsApp.",
-  "Presença digital bem construída ajuda empresas de Sinop e região a serem percebidas como escolha certa."
-];
-
-const chatbotScenarios = [
+const structurePillars = [
   {
-    id: "servicos",
-    title: "Serviços",
-    prompt: "Olá, quero saber mais sobre os serviços.",
-    response:
-      "Claro. Posso te ajudar com site premium, atendimento automático, automações ou posicionamento digital. Qual dessas soluções faz mais sentido para sua empresa hoje?",
-    steps: ["Intenção identificada", "Solução sugerida", "Contato encaminhado"]
+    title: "Presença",
+    text: "Construímos uma presença digital que transmite confiança, clareza e valor antes do primeiro contato.",
+    Icon: Globe2
   },
   {
-    id: "atendimento",
     title: "Atendimento",
-    prompt: "Quero melhorar meu atendimento.",
-    response:
-      "Perfeito. Podemos estruturar um fluxo para responder clientes, qualificar contatos e encaminhar oportunidades para sua equipe.",
-    steps: ["Dúvida respondida", "Lead qualificado", "Equipe avisada"]
+    text: "Organizamos como sua empresa recebe, responde e conduz oportunidades, com IA e automações quando fizer sentido.",
+    Icon: Bot
   },
   {
-    id: "site",
-    title: "Site premium",
-    prompt: "Minha empresa precisa parecer mais profissional online.",
-    response:
-      "Esse é exatamente o papel de uma presença digital estratégica: organizar mensagem, design e tecnologia para aumentar confiança antes do orçamento.",
-    steps: ["Contexto entendido", "Prioridade definida", "Diagnóstico iniciado"]
+    title: "Processos",
+    text: "Estruturamos fluxos, dados, sistemas e etapas para reduzir improviso e tornar a operação mais organizada.",
+    Icon: Workflow
   }
+];
+
+const improvisedItems = [
+  "Instagram como única vitrine",
+  "WhatsApp sem processo",
+  "Site inexistente ou desatualizado",
+  "Atendimento dependente de memória",
+  "Planilhas soltas",
+  "Retornos esquecidos",
+  "Baixa percepção de valor",
+  "Cliente sem clareza para decidir"
+];
+
+const structuredItems = [
+  "Presença digital profissional",
+  "Site orientado à confiança",
+  "Atendimento mais claro e organizado",
+  "IA e automações aplicadas com estratégia",
+  "Processos conectados",
+  "Melhor condução de oportunidades",
+  "Mais percepção de valor",
+  "Caminho claro para o cliente agir"
+];
+
+const solutionGroups = [
+  {
+    title: "Confiança e presença digital",
+    text: "Para empresas que precisam ser percebidas com mais profissionalismo, clareza e valor antes do primeiro contato.",
+    includes: ["Sites profissionais", "Landing pages", "Posicionamento digital", "Páginas institucionais", "Vitrine de serviços", "Estrutura para Google e WhatsApp"],
+    Icon: PanelsTopLeft
+  },
+  {
+    title: "Atendimento e conversão de oportunidades",
+    text: "Para empresas que recebem interesse, mas precisam responder melhor, organizar contatos e reduzir oportunidades perdidas.",
+    includes: ["IA no WhatsApp", "Chatbots", "Fluxos de atendimento", "Qualificação de contatos", "Respostas automáticas", "Direcionamento para equipe"],
+    Icon: MessageSquareText
+  },
+  {
+    title: "Processos e automações",
+    text: "Para empresas que dependem muito de tarefas manuais e querem ganhar organização, velocidade e previsibilidade.",
+    includes: ["Automações", "Integrações", "Organização de dados", "Fluxos internos", "Acompanhamento de retornos", "Rotinas operacionais"],
+    Icon: Workflow
+  },
+  {
+    title: "Sistemas e soluções sob medida",
+    text: "Para empresas que precisam de uma solução própria para organizar operações, clientes, dados ou processos comerciais.",
+    includes: ["Sistemas personalizados", "Painéis internos", "Aplicações web", "Aplicativos", "Experiências digitais", "Plataformas específicas"],
+    Icon: Cpu
+  }
+];
+
+const ownerBenefits = [
+  ["Mais confiança antes do contato", "Sua empresa passa a causar uma primeira impressão mais forte e profissional."],
+  ["Mais clareza para o cliente agir", "O visitante entende o que você oferece, por que confiar e qual o próximo passo."],
+  ["Menos oportunidades perdidas", "O atendimento fica mais organizado e os contatos deixam de depender apenas de memória ou esforço manual."],
+  ["Mais percepção de valor", "Sua empresa deixa de competir apenas por preço e começa a ser percebida com mais autoridade."],
+  ["Mais organização comercial", "Atendimento, dados, retornos e processos passam a seguir uma lógica mais clara."],
+  ["Mais base para crescer", "A tecnologia deixa de ser ferramenta solta e passa a sustentar uma operação mais preparada."]
+];
+
+const audiences = [
+  "Clínicas e consultórios",
+  "Empresas de estética",
+  "Odontologia",
+  "Imobiliárias",
+  "Lojas de celular",
+  "Prestadores de serviço",
+  "Comércios locais",
+  "Empresas que vendem pelo WhatsApp",
+  "Negócios que dependem de confiança para fechar"
+];
+
+const sinopHighlights = [
+  "Atuação em Sinop-MT",
+  "Visão de mercado local",
+  "Atendimento próximo",
+  "Tecnologia aplicada à realidade regional",
+  "Estrutura profissional",
+  "Soluções sob medida"
 ];
 
 const process = [
   {
     title: "Diagnóstico",
-    text: "Entendemos o momento da empresa, seus pontos de contato e suas oportunidades digitais."
+    text: "Entendemos presença digital, atendimento, processos, gargalos e objetivos da empresa."
   },
   {
     title: "Estratégia",
-    text: "Definimos como a marca deve ser percebida e quais soluções geram mais impacto."
+    text: "Definimos quais pontos precisam ser estruturados primeiro para gerar mais valor."
   },
   {
     title: "Construção",
-    text: "Criamos site, automações, interfaces e experiências alinhadas ao posicionamento."
+    text: "Criamos site, fluxos, automações, IA, sistemas ou páginas conforme a necessidade real."
   },
   {
-    title: "Crescimento",
-    text: "Acompanhamos melhorias, ajustes e evolução da presença digital."
+    title: "Implementação",
+    text: "Colocamos a estrutura em funcionamento de forma clara, prática e profissional."
+  },
+  {
+    title: "Evolução",
+    text: "Ajustamos, melhoramos e ampliamos a estrutura conforme a empresa amadurece."
+  }
+];
+
+const diagnosticBenefits = [
+  "Identificar pontos fracos na presença digital",
+  "Entender gargalos no atendimento",
+  "Avaliar oportunidades de automação",
+  "Encontrar melhorias de processo",
+  "Indicar o caminho mais estratégico antes de qualquer proposta"
+];
+
+const applicationCards = [
+  {
+    title: "Site institucional premium",
+    text: "Para empresas que precisam transmitir confiança, apresentar serviços e conduzir o cliente para contato.",
+    Icon: PanelsTopLeft
+  },
+  {
+    title: "Página de conversão",
+    text: "Para campanhas, serviços específicos e ofertas que precisam de clareza e ação rápida.",
+    Icon: Zap
+  },
+  {
+    title: "Atendimento com IA",
+    text: "Para negócios que recebem contatos pelo WhatsApp e precisam responder melhor, qualificar e direcionar.",
+    Icon: BrainCircuit
+  },
+  {
+    title: "Automação de processos",
+    text: "Para reduzir tarefas manuais, organizar dados e criar fluxos mais previsíveis.",
+    Icon: Workflow
+  },
+  {
+    title: "Sistema sob medida",
+    text: "Para operações que precisam de controle próprio, painéis ou experiências digitais específicas.",
+    Icon: Cpu
+  }
+];
+
+const showcaseCases = [
+  {
+    title: "Presença para empresa de serviço",
+    segment: "Confiança antes do contato",
+    image: "/portfolio/optimized/aurora-prime-imoveis.jpg",
+    text: "Estrutura visual para apresentar autoridade, organizar serviços e conduzir o cliente para uma conversa comercial.",
+    tags: ["Percepção", "Serviços", "WhatsApp"]
+  },
+  {
+    title: "Jornada para clínica",
+    segment: "Clareza e agendamento",
+    image: "/portfolio/optimized/odontovitta-clinic.jpg",
+    text: "Experiência pensada para mostrar especialidades, reduzir dúvidas e facilitar o primeiro contato do paciente.",
+    tags: ["Confiança", "Agendamento", "Mobile"]
+  },
+  {
+    title: "Página para captação local",
+    segment: "Cliente pesquisando",
+    image: "/portfolio/optimized/mendes-valenca-advocacia.jpg",
+    text: "Vitrine digital para elevar percepção, apresentar diferenciais e transformar interesse em oportunidade.",
+    tags: ["Captação", "Busca", "Valor"]
+  },
+  {
+    title: "Painel de atendimento",
+    segment: "Processos internos",
+    image: "/portfolio/optimized/sante-prime-clinic.jpg",
+    text: "Interface conceitual para organizar contatos, acompanhar etapas e reduzir ruído na operação comercial.",
+    tags: ["Fluxos", "Equipe", "IA"]
   }
 ];
 
@@ -171,7 +260,7 @@ function ButtonLink({
   href,
   variant = "primary"
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   href: string;
   variant?: "primary" | "secondary" | "ghost";
 }) {
@@ -193,7 +282,7 @@ function ButtonLink({
   );
 }
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function SectionLabel({ children }: { children: ReactNode }) {
   return (
     <div className="section-label mb-5 inline-flex items-center gap-2 rounded-full border border-cobre/25 bg-cobre/[0.1] px-3 py-1 text-xs font-semibold uppercase text-cobre">
       <Sparkles className="h-3.5 w-3.5" />
@@ -224,57 +313,39 @@ function SectionHeader({
 
 function HeroCommandCenter() {
   return (
-    <div className="interface-shell premium-border relative mx-auto w-full max-w-[560px] rounded-[32px] bg-azul-norte/78 p-3 shadow-panel">
-      <div className="glass-panel overflow-hidden rounded-[25px]">
-        <div className="flex items-center justify-between border-b border-off-white/10 px-5 py-4">
+    <div className="interface-shell premium-border relative mx-auto w-full max-w-[560px] rounded-[26px] bg-azul-norte/78 p-2.5 shadow-panel sm:rounded-[32px] sm:p-3">
+      <div className="glass-panel overflow-hidden rounded-[21px] sm:rounded-[25px]">
+        <div className="flex items-center justify-between gap-3 border-b border-off-white/10 px-4 py-3 sm:px-5 sm:py-4">
           <div className="flex items-center gap-3">
-            <Image src={brandLogoSmall} alt="Logo Norte One" width={40} height={40} className="h-10 w-10 rounded-full border border-cobre/30 object-cover" />
+            <Image src={brandLogoSmall} alt="Logo Norte One" width={40} height={40} className="h-9 w-9 rounded-full border border-cobre/30 object-cover sm:h-10 sm:w-10" />
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-off-white">Norte One</p>
-              <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-cinza-pedra">Digital growth system</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-off-white sm:text-xs sm:tracking-[0.24em]">Estrutura Norte One</p>
+              <p className="mt-1 text-[10px] uppercase tracking-[0.12em] text-cinza-pedra sm:text-[11px] sm:tracking-[0.18em]">Presença • Atendimento • Processos</p>
             </div>
           </div>
-          <div className="flex items-center gap-2 rounded-full border border-cobre/25 bg-cobre/10 px-3 py-1 text-[11px] font-semibold text-cobre">
+          <div className="hidden items-center gap-2 rounded-full border border-cobre/25 bg-cobre/10 px-3 py-1 text-[11px] font-semibold text-cobre min-[420px]:flex">
             <span className="signal-dot" />
-            Ativo
+            Diagnóstico
           </div>
         </div>
 
-        <div className="grid gap-3 p-4 sm:grid-cols-[1fr_0.9fr]">
-          <div className="deep-panel rounded-2xl p-5">
-            <p className="text-xs uppercase tracking-[0.18em] text-cinza-pedra">Percepção digital</p>
-            <p className="mt-3 font-display text-4xl font-semibold text-off-white">+ valor</p>
-            <div className="mt-7 flex h-32 items-end gap-2">
-              {[38, 58, 46, 74, 66, 88, 82, 96].map((height) => (
-                <span key={height} style={{ height }} className="flex-1 rounded-t-md bg-gradient-to-t from-cobre/30 to-cobre" />
-              ))}
-            </div>
-          </div>
-
-          <div className="grid gap-3">
-            {[
-              ["Site premium", "Autoridade", PanelsTopLeft],
-              ["IA no atendimento", "Velocidade", Bot],
-              ["Automação", "Consistência", Workflow]
-            ].map(([label, status, Icon]) => (
-              <div key={label as string} className="deep-panel rounded-2xl p-4">
-                <div className="flex items-center justify-between gap-3">
-                  <div>
-                    <p className="text-sm font-semibold text-off-white">{label as string}</p>
-                    <p className="mt-1 text-xs text-cinza-pedra">{status as string}</p>
-                  </div>
-                  <Icon className="h-5 w-5 text-cobre" />
-                </div>
+        <div className="grid grid-cols-2 gap-2 p-3 sm:gap-3 sm:p-4">
+          {heroSignals.map(({ title, text, Icon }) => (
+            <div key={title} className="deep-panel rounded-2xl p-3 sm:p-4">
+              <div className="flex items-center justify-between gap-2 sm:mb-4 sm:gap-3">
+                <p className="text-[12px] font-semibold text-off-white sm:text-sm">{title}</p>
+                <Icon className="h-4 w-4 shrink-0 text-cobre sm:h-5 sm:w-5" />
               </div>
-            ))}
-          </div>
+              <p className="mt-2 hidden text-xs leading-5 text-azul-nevoa/62 sm:block">{text}</p>
+            </div>
+          ))}
         </div>
 
-        <div className="border-t border-off-white/10 p-4">
-          <div className="rounded-2xl border border-cobre/24 bg-cobre/[0.08] p-4">
-            <p className="text-sm font-semibold text-off-white">Diagnóstico estratégico</p>
-            <p className="mt-2 text-sm leading-6 text-azul-nevoa/72">
-              Presença digital, atendimento e posicionamento conectados para transformar interesse em conversa comercial.
+        <div className="border-t border-off-white/10 p-3 sm:p-4">
+          <div className="rounded-2xl border border-cobre/24 bg-cobre/[0.08] p-3 sm:p-4">
+            <p className="text-sm font-semibold text-off-white">O problema raramente é uma ferramenta isolada.</p>
+            <p className="mt-2 text-xs leading-5 text-azul-nevoa/72 sm:text-sm sm:leading-6">
+              O que muda resultado é conectar percepção, atendimento e processo comercial em uma estrutura prática.
             </p>
           </div>
         </div>
@@ -283,137 +354,30 @@ function HeroCommandCenter() {
   );
 }
 
-function PositioningMap() {
+function MechanismMap() {
   return (
     <div className="network-map premium-border">
       <div className="network-node left-[8%] top-[18%]">
-        <span className="signal-dot" />
-        Marca percebida
+        <Globe2 className="h-4 w-4 text-cobre" />
+        Presença
       </div>
       <div className="network-node right-[8%] top-[24%]">
-        <Globe2 className="h-4 w-4 text-cobre" />
-        Presença digital
+        <MessageSquareText className="h-4 w-4 text-cobre" />
+        Atendimento
       </div>
       <div className="network-node bottom-[20%] left-[14%]">
-        <Bot className="h-4 w-4 text-cobre" />
-        Atendimento IA
+        <Workflow className="h-4 w-4 text-cobre" />
+        Processos
       </div>
       <div className="network-node bottom-[14%] right-[12%]">
         <LineChart className="h-4 w-4 text-cobre" />
         Oportunidades
       </div>
-      <div className="absolute left-1/2 top-1/2 z-[1] flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-cobre/35 bg-azul-norte/80 shadow-gold">
-        <Image src={brandLogoSmall} alt="Logo Norte One" width={74} height={74} className="h-[74px] w-[74px] rounded-full object-cover" />
+      <div className="absolute left-1/2 top-1/2 z-[1] flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-cobre/35 bg-azul-norte/84 text-center shadow-gold">
+        <Image src={brandLogoSmall} alt="Logo Norte One" width={58} height={58} className="h-[58px] w-[58px] rounded-full object-cover" />
+        <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-cobre">Estrutura</p>
       </div>
     </div>
-  );
-}
-
-function AutomationSection() {
-  return (
-    <section id="tecnologia" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid gap-12 lg:grid-cols-[0.84fr_1.16fr] lg:items-end">
-          <SectionHeader
-            eyebrow="IA e automações"
-            title="Automação para não perder oportunidades."
-            text="Fluxos inteligentes respondem, qualificam e entregam contexto para a equipe agir melhor."
-          />
-          <div data-cinematic className="premium-border premium-surface rounded-[32px] bg-azul-norte/72 p-4 sm:p-6">
-            <div className="automation-flow">
-              {automationSteps.map(([label, Icon], index) => (
-                <div key={label as string} className="automation-node interactive-lift">
-                  <div className="mb-5 flex items-center justify-between">
-                    <span className="text-xs font-semibold uppercase tracking-[0.18em] text-cinza-pedra">0{index + 1}</span>
-                    <Icon className="h-5 w-5 text-cobre" />
-                  </div>
-                  <p className="text-sm font-semibold leading-6 text-off-white">{label as string}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-6 rounded-3xl border border-off-white/10 bg-off-white/[0.05] p-5">
-              <div className="flex flex-wrap items-center gap-3 text-sm text-azul-nevoa/72">
-                <Workflow className="h-5 w-5 text-cobre" />
-                Cliente chama → IA responde → lead é qualificado → equipe recebe contexto → venda é acompanhada.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ChatbotExperience() {
-  const [activeId, setActiveId] = useState(chatbotScenarios[0].id);
-  const active = chatbotScenarios.find((scenario) => scenario.id === activeId) ?? chatbotScenarios[0];
-
-  return (
-    <section id="chatbot" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
-        <SectionHeader
-          eyebrow="Chatbot interativo"
-          title="Atendimento inteligente, sem fricção."
-          text="Uma conversa visual que responde, qualifica e encaminha oportunidades com tom profissional."
-        />
-
-        <div data-cinematic className="premium-border overflow-hidden rounded-[34px] bg-azul-norte/78 shadow-panel">
-          <div className="grid border-b border-off-white/10 sm:grid-cols-3">
-            {chatbotScenarios.map((scenario) => (
-              <button
-                key={scenario.id}
-                type="button"
-                onClick={() => setActiveId(scenario.id)}
-                aria-pressed={scenario.id === active.id}
-                className={`flex items-center justify-center gap-2 border-b border-off-white/10 px-4 py-4 text-sm font-semibold transition sm:border-b-0 sm:border-r sm:last:border-r-0 ${
-                  scenario.id === active.id ? "bg-cobre/12 text-off-white" : "text-azul-nevoa/62 hover:bg-off-white/[0.04] hover:text-off-white"
-                }`}
-              >
-                <span className="signal-dot" />
-                {scenario.title}
-              </button>
-            ))}
-          </div>
-          <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="border-b border-off-white/10 p-6 lg:border-b-0 lg:border-r">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cinza-pedra">Fluxo em tempo real</p>
-              <div className="mt-6 grid gap-3">
-                {active.steps.map((step, index) => (
-                  <div key={step} className="flex items-center gap-3 rounded-2xl border border-off-white/10 bg-off-white/[0.045] p-4">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full border border-cobre/30 bg-cobre/10 text-xs text-cobre">0{index + 1}</span>
-                    <p className="text-sm font-semibold text-off-white/78">{step}</p>
-                    <CircleCheck className="ml-auto h-4 w-4 text-cobre" />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="p-6">
-              <div className="mb-5 flex items-center justify-between border-b border-off-white/10 pb-5">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full border border-cobre/30 bg-cobre/10 text-cobre">
-                    <Bot className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold">Assistente Norte One</p>
-                    <p className="mt-1 text-xs text-cinza-pedra">Atendimento com IA</p>
-                  </div>
-                </div>
-                <span className="rounded-full border border-cobre/25 bg-cobre/10 px-3 py-1 text-xs text-cobre">online</span>
-              </div>
-              <div className="space-y-3">
-                <p className="chat-message chat-message--visitor">{active.prompt}</p>
-                <p className="chat-message chat-message--assistant">{active.response}</p>
-              </div>
-              <div className="mt-6 flex items-center gap-2 text-xs text-azul-nevoa/54">
-                <Sparkles className="h-4 w-4 text-cobre" />
-                Conversa preparada para gerar contexto antes do atendimento humano.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -483,24 +447,25 @@ export function NorteOneSite() {
             />
             <div>
               <p className="font-display text-xs font-semibold uppercase tracking-[0.22em] text-off-white sm:text-sm sm:tracking-[0.28em]">Norte One</p>
-              <p className="text-[10px] uppercase tracking-[0.18em] text-cinza-pedra sm:text-[11px] sm:tracking-[0.24em]">Tech Studio</p>
+              <p className="text-[10px] uppercase tracking-[0.18em] text-cinza-pedra sm:text-[11px] sm:tracking-[0.24em]">Tech local</p>
             </div>
           </a>
 
           <div className="hidden items-center gap-1 rounded-full border border-off-white/[0.08] bg-off-white/[0.035] p-1 text-sm text-azul-nevoa/68 lg:flex">
-            <a className="rounded-full px-4 py-2 transition hover:bg-off-white/[0.07] hover:text-off-white" href="#servicos">Soluções</a>
-            <a className="rounded-full px-4 py-2 transition hover:bg-off-white/[0.07] hover:text-off-white" href="#tecnologia">Tecnologia</a>
-            <a className="rounded-full px-4 py-2 transition hover:bg-off-white/[0.07] hover:text-off-white" href="#portfolio">Projetos</a>
+            <a className="rounded-full px-4 py-2 transition hover:bg-off-white/[0.07] hover:text-off-white" href="#problema">Problema</a>
+            <a className="rounded-full px-4 py-2 transition hover:bg-off-white/[0.07] hover:text-off-white" href="#estrutura">Estrutura</a>
+            <a className="rounded-full px-4 py-2 transition hover:bg-off-white/[0.07] hover:text-off-white" href="#solucoes">Soluções</a>
+            <a className="rounded-full px-4 py-2 transition hover:bg-off-white/[0.07] hover:text-off-white" href="#diagnostico">Diagnóstico</a>
             <a className="rounded-full px-4 py-2 transition hover:bg-off-white/[0.07] hover:text-off-white" href="#contato">Contato</a>
           </div>
 
           <a
-            href={whatsappUrl("Olá! Quero falar com a Norte One sobre presença digital e tecnologia.")}
+            href={diagnosisUrl}
             target="_blank"
             rel="noreferrer"
             className="inline-flex min-h-10 items-center justify-center rounded-full border border-off-white/10 bg-off-white px-4 py-2 text-xs font-semibold text-azul-norte shadow-sm transition hover:-translate-y-0.5 hover:bg-cobre hover:text-off-white sm:min-h-11 sm:px-5 sm:text-sm"
           >
-            Falar com a Norte One
+            Fazer diagnóstico
           </a>
         </nav>
       </header>
@@ -509,7 +474,7 @@ export function NorteOneSite() {
         <div className="hero-stage__atmosphere pointer-events-none absolute inset-0" aria-hidden="true" />
         <LazyMotion features={domAnimation}>
           <MotionConfig reducedMotion="user">
-            <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+            <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14">
               <div>
                 <m.div
                   initial={{ opacity: 0, y: 16 }}
@@ -518,16 +483,16 @@ export function NorteOneSite() {
                   className="mb-5 inline-flex items-center gap-3 rounded-full border border-off-white/10 bg-azul-norte/70 px-4 py-2 text-sm text-azul-nevoa/76 shadow-sm sm:mb-6"
                 >
                   <span className="signal-dot" />
-                  Sites • IA • Automações • Sistemas • Posicionamento
+                  Tecnologia estratégica para empresas locais
                 </m.div>
 
                 <m.h1
                   initial={{ opacity: 0, y: 22 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.08, duration: 0.86, ease: [0.16, 1, 0.3, 1] }}
-                  className="max-w-5xl font-display text-[clamp(1.9rem,4.55vw,4.9rem)] font-semibold leading-[1.03] tracking-normal text-off-white"
+                  className="max-w-5xl font-display text-[clamp(2.1rem,5.1vw,5.35rem)] font-semibold leading-[1.02] tracking-normal text-off-white"
                 >
-                  Aumente o faturamento e a performance da sua empresa através da <span className="copper-text">tecnologia.</span>
+                  Sua empresa pode estar perdendo clientes antes mesmo da <span className="copper-text">primeira conversa.</span>
                 </m.h1>
 
                 <m.p
@@ -536,20 +501,27 @@ export function NorteOneSite() {
                   transition={{ delay: 0.16, duration: 0.86, ease: [0.16, 1, 0.3, 1] }}
                   className="mt-5 max-w-2xl text-base leading-7 text-azul-nevoa/78 sm:mt-6 sm:text-lg sm:leading-8"
                 >
-                  Entenda como sua empresa pode aumentar o faturamento em até 54% nos primeiros meses após a implementação de sistemas de performance, gestão e posicionamento com IA, de forma simples, fácil e sem precisar programar ou entender de tecnologia.
+                  A Norte One estrutura presença digital, atendimento e processos para empresas locais transmitirem mais confiança, responderem melhor e venderem com mais organização.
+                </m.p>
+
+                <m.p
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.22, duration: 0.82, ease: [0.16, 1, 0.3, 1] }}
+                  className="mt-4 max-w-2xl border-l border-cobre/40 pl-4 text-sm leading-7 text-azul-nevoa/62 sm:text-base"
+                >
+                  Não se trata apenas de ter um site, uma IA ou uma automação. O que faz diferença é ter uma estrutura digital que conecta percepção, atendimento e processo comercial.
                 </m.p>
 
                 <m.div
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.24, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ delay: 0.28, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                   className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row"
                 >
-                  <ButtonLink href={whatsappUrl("Olá! Quero construir minha presença digital com a Norte One.")}>
-                    Construir minha presença digital
-                  </ButtonLink>
-                  <ButtonLink href="#servicos" variant="secondary">
-                    Ver soluções
+                  <ButtonLink href={diagnosisUrl}>Fazer diagnóstico da minha empresa</ButtonLink>
+                  <ButtonLink href="#estrutura" variant="secondary">
+                    Entender como funciona
                   </ButtonLink>
                 </m.div>
 
@@ -557,13 +529,13 @@ export function NorteOneSite() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.42, duration: 0.9 }}
-                  className="mt-8 grid max-w-3xl grid-cols-2 gap-3 border-t border-off-white/10 pt-5 sm:mt-10 sm:grid-cols-4 sm:pt-6"
+                  className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs text-azul-nevoa/56"
                 >
-                  {heroSignals.map(([title, text]) => (
-                    <div key={title} className="rounded-2xl border border-off-white/10 bg-off-white/[0.04] p-4">
-                      <p className="font-display text-lg font-semibold text-off-white">{title}</p>
-                      <p className="mt-2 text-xs leading-5 text-cinza-pedra">{text}</p>
-                    </div>
+                  {["Diagnóstico rápido", "Estratégia sob medida", "Tecnologia aplicada ao seu negócio"].map((item) => (
+                    <span key={item} className="inline-flex items-center gap-2">
+                      <Check className="h-3.5 w-3.5 text-cobre" />
+                      {item}
+                    </span>
                   ))}
                 </m.div>
               </div>
@@ -580,94 +552,146 @@ export function NorteOneSite() {
         </LazyMotion>
       </section>
 
-      <section id="posicionamento" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
+      <section id="problema" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
         <div className="section-rule mx-auto mb-12 max-w-7xl" />
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.84fr_1.16fr] lg:items-center">
-          <div data-cinematic>
-            <SectionLabel>Posicionamento estratégico</SectionLabel>
-            <h2 className="font-display text-[clamp(1.72rem,3.8vw,4.3rem)] font-semibold leading-[1.08]">
-              Empresas fortes são percebidas como escolha certa.
-            </h2>
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-azul-nevoa/72 sm:mt-5 sm:text-base sm:leading-8">
-              Presença digital, atendimento inteligente e posicionamento mudam como clientes enxergam, confiam e compram.
-            </p>
-            <div className="mt-8 grid gap-3">
-              {positioningPillars.map(([title, text]) => (
-                <div key={title} className="benefit-line pb-5">
-                  <p className="font-display text-xl text-cobre">{title}</p>
-                  <p className="mt-2 text-sm leading-7 text-azul-nevoa/66">{text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div data-cinematic>
-            <PositioningMap />
+        <div className="mx-auto max-w-7xl">
+          <SectionHeader
+            eyebrow="Dor real do negócio"
+            title="O problema não é falta de ferramenta. É falta de estrutura."
+            text="Muitas empresas locais já têm Instagram, WhatsApp, anúncios ou até algum site. Mesmo assim, continuam perdendo oportunidades porque esses pontos não trabalham juntos. A presença não transmite confiança, o atendimento depende de esforço manual e os processos ficam espalhados."
+          />
+
+          <div className="mt-10 grid gap-4 md:grid-cols-2">
+            {painCards.map(({ title, text, Icon }) => (
+              <article key={title} data-cinematic className="deep-panel interactive-lift rounded-[28px] p-6">
+                <Icon className="mb-8 h-6 w-6 text-cobre" />
+                <h3 className="font-display text-xl font-semibold text-off-white sm:text-2xl">{title}</h3>
+                <p className="mt-4 text-sm leading-7 text-azul-nevoa/68">{text}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      <section id="servicos" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
+      <section id="estrutura" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
+          <div data-cinematic>
+            <SectionLabel>Categoria estratégica</SectionLabel>
+            <h2 className="font-display text-[clamp(1.72rem,3.8vw,4.3rem)] font-semibold leading-[1.08]">
+              Tecnologia estratégica para empresas locais que querem vender melhor.
+            </h2>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-azul-nevoa/72 sm:mt-5 sm:text-base sm:leading-8">
+              A Norte One não começa pelo serviço. Começamos pelo diagnóstico do que está travando a percepção, o atendimento e os processos da sua empresa. A partir disso, estruturamos a solução certa com tecnologia.
+            </p>
+
+            <div className="mt-8 rounded-[30px] border border-cobre/24 bg-cobre/[0.08] p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cobre">Mecanismo próprio</p>
+              <h3 className="mt-3 font-display text-3xl font-semibold text-off-white">Estrutura Norte One</h3>
+              <p className="mt-3 text-sm leading-7 text-azul-nevoa/72">Presença, Atendimento e Processos trabalhando juntos.</p>
+            </div>
+          </div>
+
+          <div data-cinematic>
+            <MechanismMap />
+          </div>
+        </div>
+
+        <div className="mx-auto mt-10 grid max-w-7xl gap-4 md:grid-cols-3">
+          {structurePillars.map(({ title, text, Icon }) => (
+            <article key={title} data-cinematic className="service-card premium-border rounded-[30px] bg-azul-norte/74 p-6 shadow-panel">
+              <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-2xl border border-cobre/24 bg-cobre/[0.1] text-cobre">
+                <Icon className="h-6 w-6" />
+              </div>
+              <h3 className="font-display text-2xl font-semibold text-off-white">{title}</h3>
+              <p className="mt-4 text-sm leading-7 text-azul-nevoa/66">{text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="improviso" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-8 flex flex-col justify-between gap-6 sm:mb-12 lg:flex-row lg:items-end">
+          <SectionHeader
+            eyebrow="Contra o improviso"
+            title="O verdadeiro concorrente pode não ser outra empresa. Pode ser o improviso."
+            text="Enquanto muitos negócios procuram apenas um site ou uma automação, o problema real costuma estar na falta de uma estrutura que conecte presença, atendimento e operação."
+            align="center"
+          />
+
+          <div className="mt-10 grid gap-4 lg:grid-cols-2">
+            <article data-cinematic className="rounded-[32px] border border-off-white/10 bg-off-white/[0.045] p-6">
+              <p className="mb-6 font-display text-2xl font-semibold text-off-white">Jeito improvisado</p>
+              <div className="grid gap-3">
+                {improvisedItems.map((item) => (
+                  <div key={item} className="flex items-center gap-3 rounded-2xl border border-off-white/10 bg-azul-norte/55 px-4 py-3 text-sm text-azul-nevoa/72">
+                    <span className="h-1.5 w-1.5 rounded-full bg-cinza-pedra" />
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </article>
+
+            <article data-cinematic className="premium-border premium-surface rounded-[32px] bg-azul-norte/78 p-6 shadow-panel">
+              <p className="mb-6 font-display text-2xl font-semibold text-off-white">Estrutura Norte One</p>
+              <div className="grid gap-3">
+                {structuredItems.map((item) => (
+                  <div key={item} className="flex items-center gap-3 rounded-2xl border border-cobre/20 bg-cobre/[0.07] px-4 py-3 text-sm text-azul-nevoa/78">
+                    <Check className="h-4 w-4 flex-none text-cobre" />
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="solucoes" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
             <SectionHeader
-              eyebrow="Soluções premium"
-              title="Soluções para vender mais confiança."
-              text="Estratégia, design e tecnologia para melhorar percepção, atendimento e clareza comercial."
+              eyebrow="Soluções por resultado"
+              title="A solução certa depende do que está travando o crescimento da sua empresa."
+              text="Por isso, a Norte One não entrega tecnologia solta. Cada solução entra para resolver um ponto específico da jornada do cliente e da operação da empresa."
             />
-            <ButtonLink href={whatsappUrl("Olá! Quero entender qual solução faz mais sentido para minha empresa.")} variant="secondary">
-              Conversar sobre soluções
+            <ButtonLink href={diagnosisUrl} variant="secondary">
+              Fazer diagnóstico
             </ButtonLink>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-12">
-            {services.map((service, index) => {
-              const Icon = serviceIcons[service.slug as keyof typeof serviceIcons] ?? Sparkles;
-              const featured = index === 0 || index === 1 || index === 2;
-
-              return (
-                <article
-                  key={service.title}
-                  data-cinematic
-                  className={`service-card premium-border group rounded-[30px] bg-azul-norte/72 p-6 shadow-panel ${
-                    featured ? "xl:col-span-4" : "xl:col-span-3"
-                  }`}
-                >
-                  <div className="mb-8 flex items-center justify-between">
-                    <div className="rounded-2xl border border-cobre/24 bg-cobre/[0.1] p-3 text-cobre">
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <span className="text-xs text-cinza-pedra">{String(index + 1).padStart(2, "0")}</span>
+          <div className="grid gap-4 lg:grid-cols-2">
+            {solutionGroups.map(({ title, text, includes, Icon }) => (
+              <article key={title} data-cinematic className="service-card premium-border rounded-[30px] bg-azul-norte/74 p-6 shadow-panel">
+                <div className="mb-7 flex items-center justify-between gap-4">
+                  <div className="rounded-2xl border border-cobre/24 bg-cobre/[0.1] p-3 text-cobre">
+                    <Icon className="h-6 w-6" />
                   </div>
-                  <h3 className="font-display text-xl font-semibold text-off-white sm:text-2xl">{service.title}</h3>
-                  <p className="mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-cobre">{service.eyebrow}</p>
-                  <p className="mt-5 text-sm leading-7 text-azul-nevoa/66">{service.summary}</p>
-                  <Link
-                    href={`/servicos/${service.slug}`}
-                    className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-cobre transition hover:text-off-white"
-                    aria-label={`Saiba mais sobre ${service.title}`}
-                  >
-                    Entender solução
-                    <ArrowUpRight className="h-4 w-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                  </Link>
-                </article>
-              );
-            })}
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-cinza-pedra">Resultado</span>
+                </div>
+                <h3 className="font-display text-2xl font-semibold text-off-white">{title}</h3>
+                <p className="mt-4 text-sm leading-7 text-azul-nevoa/68">{text}</p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {includes.map((item) => (
+                    <span key={item} className="rounded-full border border-off-white/10 bg-off-white/[0.045] px-3 py-1.5 text-xs text-azul-nevoa/72">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
-
-      <AutomationSection />
 
       <section id="beneficios" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
-            eyebrow="Benefícios para empresas"
-            title="Uma estrutura melhor reduz esforço manual."
-            text="A presença certa reduz dúvidas, organiza caminhos e deixa o cliente mais seguro para avançar."
+            eyebrow="Para o dono da empresa"
+            title="O que muda quando sua empresa deixa de parecer improvisada."
             align="center"
           />
           <div className="mt-8 grid gap-4 sm:mt-12 md:grid-cols-2 lg:grid-cols-3">
-            {benefits.map(([title, text]) => (
+            {ownerBenefits.map(([title, text]) => (
               <div key={title} data-cinematic className="deep-panel interactive-lift rounded-[28px] p-6">
                 <ShieldCheck className="mb-8 h-6 w-6 text-cobre" />
                 <h3 className="font-display text-xl font-semibold sm:text-2xl">{title}</h3>
@@ -678,13 +702,130 @@ export function NorteOneSite() {
         </div>
       </section>
 
+      <section id="publico" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
+          <SectionHeader
+            eyebrow="Para quem é"
+            title="Para empresas locais que querem ser percebidas com mais valor."
+            text="A Norte One é para negócios que já entenderam que vender melhor não depende apenas de postar mais ou responder mensagens. Depende de construir uma estrutura que transmita confiança, conduza o atendimento e organize os processos certos."
+          />
+          <div data-cinematic className="premium-border premium-surface rounded-[34px] bg-azul-norte/74 p-6 sm:p-8">
+            <div className="grid gap-3 sm:grid-cols-2">
+              {audiences.map((item) => (
+                <div key={item} className="flex items-center gap-3 rounded-2xl border border-off-white/10 bg-off-white/[0.045] px-4 py-3 text-sm text-azul-nevoa/74">
+                  <Store className="h-4 w-4 flex-none text-cobre" />
+                  {item}
+                </div>
+              ))}
+            </div>
+            <div className="mt-6 rounded-3xl border border-cobre/24 bg-cobre/[0.08] p-5">
+              <p className="text-sm leading-7 text-azul-nevoa/78">
+                Não é para empresas que procuram apenas o site mais barato. É para empresas que querem melhorar a forma como são percebidas, atendem e vendem.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sinop" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+          <div data-cinematic>
+            <SectionLabel>Sinop MT e região</SectionLabel>
+            <h2 className="font-display text-[clamp(1.72rem,3.8vw,4.3rem)] font-semibold leading-[1.08]">
+              Empresas locais competem com o padrão das grandes marcas digitais.
+            </h2>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-azul-nevoa/72 sm:mt-5 sm:text-base sm:leading-8">
+              Hoje, o cliente de Sinop e região também pesquisa, compara, avalia e decide com base na percepção digital. Uma empresa local pode entregar muito bem, mas precisa se apresentar com clareza e profissionalismo para não perder espaço.
+            </p>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-azul-nevoa/62">
+              A Norte One nasce com foco em empresas locais que querem usar tecnologia de forma prática, estratégica e acessível, sem depender de equipes complexas ou soluções distantes da realidade do negócio.
+            </p>
+          </div>
+          <div data-cinematic className="premium-border premium-surface rounded-[34px] bg-azul-norte/74 p-6 sm:p-8">
+            <div className="mb-8 flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.18em] text-cobre">
+              <MapPin className="h-5 w-5" />
+              Norte de Mato Grosso
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {sinopHighlights.map((item) => (
+                <div key={item} className="flex gap-3 rounded-2xl border border-off-white/10 bg-off-white/[0.045] p-4">
+                  <CircleCheck className="mt-0.5 h-4 w-4 flex-none text-cobre" />
+                  <p className="text-sm leading-6 text-azul-nevoa/72">{item}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-8 h-32 overflow-hidden rounded-3xl border border-cobre/20 bg-[radial-gradient(circle_at_50%_50%,rgba(184,121,69,0.18),transparent_42%),linear-gradient(135deg,rgba(216,225,232,0.08),rgba(7,22,36,0.72))]">
+              <div className="flex h-full items-center justify-center gap-6 text-cobre/80">
+                <Building2 className="h-7 w-7" />
+                <Network className="h-10 w-10" />
+                <MapPin className="h-7 w-7" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="processo" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+            <SectionHeader
+              eyebrow="Processo Norte One"
+              title="Antes de indicar uma solução, entendemos onde sua empresa está perdendo oportunidades."
+            />
+            <ButtonLink href={diagnosisUrl} variant="secondary">
+              Fazer diagnóstico da minha empresa
+            </ButtonLink>
+          </div>
+
+          <div className="relative mt-8 grid gap-4 sm:mt-12 md:grid-cols-2 lg:grid-cols-5">
+            <div className="absolute left-0 right-0 top-12 hidden h-px bg-gradient-to-r from-transparent via-cobre/50 to-transparent lg:block" />
+            {process.map((step, index) => (
+              <div key={step.title} data-cinematic className="process-step interactive-lift relative rounded-[28px] border border-off-white/10 bg-azul-norte/78 p-6 shadow-sm">
+                <div className="mb-10 flex h-12 w-12 items-center justify-center rounded-full border border-cobre/30 bg-cobre/10 text-cobre">
+                  {index + 1}
+                </div>
+                <h3 className="font-display text-xl font-semibold">{step.title}</h3>
+                <p className="mt-4 text-sm leading-7 text-azul-nevoa/66">{step.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="diagnostico" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
+        <div data-cinematic className="premium-border premium-surface mx-auto grid max-w-7xl gap-8 rounded-[36px] bg-azul-norte/80 p-6 shadow-panel sm:p-8 lg:grid-cols-[0.92fr_1.08fr] lg:p-10">
+          <div>
+            <SectionLabel>Diagnóstico Digital Norte One</SectionLabel>
+            <h2 className="font-display text-[clamp(1.9rem,4vw,4.8rem)] font-semibold leading-[1.06] text-off-white">
+              Descubra onde sua empresa pode estar perdendo oportunidades.
+            </h2>
+            <p className="mt-5 max-w-2xl text-sm leading-7 text-azul-nevoa/72 sm:text-base sm:leading-8">
+              Criamos um diagnóstico rápido para entender como sua empresa está posicionada hoje, como atende seus clientes e quais processos podem ser melhorados com tecnologia.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <ButtonLink href={diagnosisUrl}>Responder diagnóstico agora</ButtonLink>
+            </div>
+            <p className="mt-5 text-xs text-azul-nevoa/52">Leva poucos minutos • Sem compromisso • Análise inicial estratégica</p>
+          </div>
+
+          <div className="grid content-center gap-3">
+            {diagnosticBenefits.map((item) => (
+              <div key={item} className="flex items-center gap-3 rounded-2xl border border-off-white/10 bg-off-white/[0.045] p-4 text-sm text-azul-nevoa/76">
+                <SearchCheck className="h-4 w-4 flex-none text-cobre" />
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="portfolio" className="overflow-hidden px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 flex flex-col justify-between gap-6 sm:mb-10 lg:flex-row lg:items-end">
             <SectionHeader
-              eyebrow="Showcase de sites"
-              title="Showcase visual para negócios reais."
-              text="Mockups premium para demonstrar direção, qualidade e aplicação em diferentes mercados."
+              eyebrow="Aplicações e portfólio"
+              title="Tecnologia aplicada onde a empresa realmente perde ou ganha oportunidades."
+              text="Não são apenas telas bonitas. Cada aplicação precisa resolver uma parte da percepção, do atendimento ou da operação."
             />
             <div className="flex gap-2">
               <button
@@ -707,13 +848,24 @@ export function NorteOneSite() {
               </button>
             </div>
           </div>
+
+          <div className="mb-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+            {applicationCards.map(({ title, text, Icon }) => (
+              <article key={title} data-cinematic className="deep-panel interactive-lift rounded-[26px] p-5">
+                <Icon className="mb-6 h-5 w-5 text-cobre" />
+                <h3 className="font-display text-lg font-semibold text-off-white">{title}</h3>
+                <p className="mt-3 text-sm leading-6 text-azul-nevoa/64">{text}</p>
+              </article>
+            ))}
+          </div>
+
           <p className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-cobre">
             {String(activePortfolio + 1).padStart(2, "0")} / {String(showcaseCases.length).padStart(2, "0")}
           </p>
         </div>
 
         <div className="portfolio-carousel -mx-4 sm:-mx-8">
-          <div ref={portfolioRef} onScroll={syncPortfolioPosition} className="portfolio-carousel__track" aria-label="Showcase de projetos conceito da Norte One">
+          <div ref={portfolioRef} onScroll={syncPortfolioPosition} className="portfolio-carousel__track" aria-label="Showcase de aplicações de negócio da Norte One">
             {showcaseCases.map((item) => (
               <article
                 key={item.title}
@@ -724,7 +876,7 @@ export function NorteOneSite() {
                 <div className="overflow-hidden rounded-[24px] border border-off-white/10 bg-grafite">
                   <Image
                     src={assetPath(item.image)}
-                    alt={`Mockup conceitual de ${item.title}`}
+                    alt={`Aplicação conceitual de ${item.title}`}
                     width={960}
                     height={620}
                     className="aspect-[1.55] w-full object-cover transition duration-700 group-hover:scale-[1.035]"
@@ -751,90 +903,28 @@ export function NorteOneSite() {
         </div>
       </section>
 
-      <section id="sinop" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
-          <div data-cinematic>
-            <SectionLabel>Sinop MT e região</SectionLabel>
-            <h2 className="font-display text-[clamp(1.72rem,3.8vw,4.3rem)] font-semibold leading-[1.08]">
-              Tecnologia premium para Sinop e região.
-            </h2>
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-azul-nevoa/72 sm:mt-5 sm:text-base sm:leading-8">
-              Negócios locais precisam transmitir autoridade, atender melhor e acompanhar o novo comportamento do consumidor.
-            </p>
-          </div>
-          <div data-cinematic className="premium-border premium-surface rounded-[34px] bg-azul-norte/74 p-6 sm:p-8">
-            <div className="mb-8 flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.18em] text-cobre">
-              <MapPin className="h-5 w-5" />
-              Norte de Mato Grosso
-            </div>
-            <div className="grid gap-4">
-              {sinopPoints.map((point, index) => (
-                <div key={point} className="flex gap-4 rounded-2xl border border-off-white/10 bg-off-white/[0.045] p-4">
-                  <span className="font-display text-sm text-cobre">{String(index + 1).padStart(2, "0")}</span>
-                  <p className="text-sm leading-7 text-azul-nevoa/72">{point}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-8 h-32 overflow-hidden rounded-3xl border border-cobre/20 bg-[radial-gradient(circle_at_50%_50%,rgba(184,121,69,0.18),transparent_42%),linear-gradient(135deg,rgba(216,225,232,0.08),rgba(7,22,36,0.72))]">
-              <div className="flex h-full items-center justify-center gap-6 text-cobre/80">
-                <Building2 className="h-7 w-7" />
-                <Network className="h-10 w-10" />
-                <MapPin className="h-7 w-7" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <ChatbotExperience />
-
-      <section id="processo" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeader
-            eyebrow="Processo"
-            title="Do diagnóstico ao crescimento."
-            text="Um processo claro para sair da ideia e chegar a uma presença digital ativa."
-          />
-
-          <div className="relative mt-8 grid gap-4 sm:mt-12 md:grid-cols-2 lg:grid-cols-4">
-            <div className="absolute left-0 right-0 top-12 hidden h-px bg-gradient-to-r from-transparent via-cobre/50 to-transparent lg:block" />
-            {process.map((step, index) => (
-              <div key={step.title} data-cinematic className="process-step interactive-lift relative rounded-[28px] border border-off-white/10 bg-azul-norte/78 p-6 shadow-sm">
-                <div className="mb-10 flex h-12 w-12 items-center justify-center rounded-full border border-cobre/30 bg-cobre/10 text-cobre">
-                  {index + 1}
-                </div>
-                <h3 className="font-display text-xl font-semibold sm:text-2xl">{step.title}</h3>
-                <p className="mt-4 text-sm leading-7 text-azul-nevoa/66">{step.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="contato" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
         <div data-cinematic className="cta-panel premium-border relative mx-auto max-w-7xl overflow-hidden rounded-[34px] bg-azul-norte/86 px-5 py-14 text-center shadow-panel sm:rounded-[42px] sm:px-12 sm:py-20">
           <div className="absolute inset-0 bg-radial-gold opacity-90" />
           <div className="cta-panel__grid absolute inset-0" />
-          <ScanLine className="absolute left-8 top-8 h-6 w-6 text-cobre/70" />
+          <ClipboardCheck className="absolute left-8 top-8 h-6 w-6 text-cobre/70" />
           <div className="relative mx-auto max-w-4xl">
             <Image src={brandLogoSmall} alt="Logo Norte One" width={82} height={82} className="mx-auto mb-8 h-[82px] w-[82px] rounded-full border border-cobre/35 object-cover" />
             <p className="mb-5 text-sm uppercase tracking-[0.32em] text-cobre">Próximo passo</p>
-            <h2 className="font-display text-[clamp(1.82rem,4vw,4.55rem)] font-semibold leading-[1.08]">
-              Sua empresa pode parecer mais confiável e preparada para crescer.
+            <h2 className="font-display text-[clamp(1.9rem,4.2vw,4.8rem)] font-semibold leading-[1.08]">
+              Sua empresa pode ser percebida com o valor que realmente tem.
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-azul-nevoa/72 sm:text-base sm:leading-8">
-              Presença digital, atendimento inteligente e tecnologia para transformar contato em oportunidade.
+              A Norte One une estratégia, presença digital e tecnologia para ajudar empresas locais a atenderem melhor, organizarem processos e venderem com mais confiança.
             </p>
             <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
-              <ButtonLink href={whatsappUrl("Olá! Quero falar com a Norte One sobre presença digital, IA e automações.")}>
-                Falar com a Norte One
-              </ButtonLink>
-              <ButtonLink href="#servicos" variant="secondary">
-                Ver soluções
+              <ButtonLink href={diagnosisUrl}>Fazer diagnóstico da minha empresa</ButtonLink>
+              <ButtonLink href={whatsappUrl("Olá! Quero falar com a Norte One sobre presença digital, atendimento e processos.")} variant="secondary">
+                Falar com a Norte One pelo WhatsApp
               </ButtonLink>
             </div>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-azul-nevoa/56">
-              {["Diagnóstico inicial", "Estratégia sob medida", "WhatsApp direto"].map((item) => (
+              {["Presença digital", "Atendimento", "Processos", "Tecnologia"].map((item) => (
                 <span key={item} className="inline-flex items-center gap-2">
                   <Check className="h-3.5 w-3.5 text-cobre" />
                   {item}
@@ -857,7 +947,8 @@ export function NorteOneSite() {
             />
             <div>
               <p className="font-display text-sm font-semibold uppercase tracking-[0.28em]">Norte One</p>
-              <p className="mt-1 text-sm text-azul-nevoa/58">Tecnologia, posicionamento e presença digital para empresas.</p>
+              <p className="mt-1 text-sm text-azul-nevoa/58">Tecnologia estratégica para empresas locais.</p>
+              <p className="mt-1 text-xs uppercase tracking-[0.18em] text-cinza-pedra">Sinop-MT • Presença digital • Atendimento • Processos • Tecnologia</p>
             </div>
           </div>
           <div className="flex flex-wrap gap-5 text-sm text-azul-nevoa/58">
