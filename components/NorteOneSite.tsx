@@ -1,13 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { domAnimation, LazyMotion, m, MotionConfig } from "framer-motion";
 import {
-  ArrowLeft,
   ArrowRight,
   Bot,
-  BrainCircuit,
   Building2,
   Check,
   CircleCheck,
@@ -26,13 +24,12 @@ import {
   Sparkles,
   Store,
   Workflow,
-  Zap,
   type LucideIcon
 } from "lucide-react";
 import { AmbientTechBackground } from "@/components/AmbientTechBackground";
 import { CinematicMotionEngine } from "@/components/CinematicMotionEngine";
 import { whatsappDisplay, whatsappUrl } from "@/lib/contact";
-import { assetPath, brandLogoSmall } from "@/lib/site";
+import { brandLogoSmall } from "@/lib/site";
 
 const diagnosisUrl = "https://tally.so/r/Bz9gle";
 
@@ -144,18 +141,6 @@ const ownerBenefits = [
   ["Mais base para crescer", "A tecnologia deixa de ser ferramenta solta e passa a sustentar uma operação mais preparada."]
 ];
 
-const audiences = [
-  "Clínicas e consultórios",
-  "Empresas de estética",
-  "Odontologia",
-  "Imobiliárias",
-  "Lojas de celular",
-  "Prestadores de serviço",
-  "Comércios locais",
-  "Empresas que vendem pelo WhatsApp",
-  "Negócios que dependem de confiança para fechar"
-];
-
 const sinopHighlights = [
   "Atuação em Sinop-MT",
   "Visão de mercado local",
@@ -194,65 +179,6 @@ const diagnosticBenefits = [
   "Avaliar oportunidades de automação",
   "Encontrar melhorias de processo",
   "Indicar o caminho mais estratégico antes de qualquer proposta"
-];
-
-const applicationCards = [
-  {
-    title: "Site institucional premium",
-    text: "Para empresas que precisam transmitir confiança, apresentar serviços e conduzir o cliente para contato.",
-    Icon: PanelsTopLeft
-  },
-  {
-    title: "Página de conversão",
-    text: "Para campanhas, serviços específicos e ofertas que precisam de clareza e ação rápida.",
-    Icon: Zap
-  },
-  {
-    title: "Atendimento com IA",
-    text: "Para negócios que recebem contatos pelo WhatsApp e precisam responder melhor, qualificar e direcionar.",
-    Icon: BrainCircuit
-  },
-  {
-    title: "Automação de processos",
-    text: "Para reduzir tarefas manuais, organizar dados e criar fluxos mais previsíveis.",
-    Icon: Workflow
-  },
-  {
-    title: "Sistema sob medida",
-    text: "Para operações que precisam de controle próprio, painéis ou experiências digitais específicas.",
-    Icon: Cpu
-  }
-];
-
-const showcaseCases = [
-  {
-    title: "Presença para empresa de serviço",
-    segment: "Confiança antes do contato",
-    image: "/portfolio/optimized/aurora-prime-imoveis.jpg",
-    text: "Estrutura visual para apresentar autoridade, organizar serviços e conduzir o cliente para uma conversa comercial.",
-    tags: ["Percepção", "Serviços", "WhatsApp"]
-  },
-  {
-    title: "Jornada para clínica",
-    segment: "Clareza e agendamento",
-    image: "/portfolio/optimized/odontovitta-clinic.jpg",
-    text: "Experiência pensada para mostrar especialidades, reduzir dúvidas e facilitar o primeiro contato do paciente.",
-    tags: ["Confiança", "Agendamento", "Mobile"]
-  },
-  {
-    title: "Página para captação local",
-    segment: "Cliente pesquisando",
-    image: "/portfolio/optimized/mendes-valenca-advocacia.jpg",
-    text: "Vitrine digital para elevar percepção, apresentar diferenciais e transformar interesse em oportunidade.",
-    tags: ["Captação", "Busca", "Valor"]
-  },
-  {
-    title: "Painel de atendimento",
-    segment: "Processos internos",
-    image: "/portfolio/optimized/sante-prime-clinic.jpg",
-    text: "Interface conceitual para organizar contatos, acompanhar etapas e reduzir ruído na operação comercial.",
-    tags: ["Fluxos", "Equipe", "IA"]
-  }
 ];
 
 function ButtonLink({
@@ -382,52 +308,6 @@ function MechanismMap() {
 }
 
 export function NorteOneSite() {
-  const portfolioRef = useRef<HTMLDivElement>(null);
-  const [activePortfolio, setActivePortfolio] = useState(0);
-
-  const scrollPortfolio = (direction: "previous" | "next") => {
-    const track = portfolioRef.current;
-
-    if (!track) {
-      return;
-    }
-
-    const cards = Array.from(track.querySelectorAll<HTMLElement>("[data-portfolio-card]"));
-    const targetIndex =
-      direction === "next" ? Math.min(activePortfolio + 1, cards.length - 1) : Math.max(activePortfolio - 1, 0);
-    const target = cards[targetIndex];
-
-    if (!target) {
-      return;
-    }
-
-    track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: "smooth" });
-    setActivePortfolio(targetIndex);
-  };
-
-  const syncPortfolioPosition = () => {
-    const track = portfolioRef.current;
-
-    if (!track) {
-      return;
-    }
-
-    const cards = Array.from(track.querySelectorAll<HTMLElement>("[data-portfolio-card]"));
-
-    if (cards.length === 0) {
-      return;
-    }
-
-    const nearest = cards.reduce((current, card, index) => {
-      const currentDistance = Math.abs(cards[current].offsetLeft - track.offsetLeft - track.scrollLeft);
-      const nextDistance = Math.abs(card.offsetLeft - track.offsetLeft - track.scrollLeft);
-
-      return nextDistance < currentDistance ? index : current;
-    }, 0);
-
-    setActivePortfolio(nearest);
-  };
-
   return (
     <main className="relative overflow-hidden bg-azul-norte text-off-white [&>footer]:relative [&>footer]:z-10 [&>section]:relative [&>section]:z-10">
       <CinematicMotionEngine />
@@ -510,7 +390,7 @@ export function NorteOneSite() {
                   transition={{ delay: 0.22, duration: 0.82, ease: [0.16, 1, 0.3, 1] }}
                   className="mt-4 max-w-2xl border-l border-cobre/40 pl-4 text-sm leading-7 text-azul-nevoa/62 sm:text-base"
                 >
-                  Não se trata apenas de ter um site, uma IA ou uma automação. O que faz diferença é ter uma estrutura digital que conecta percepção, atendimento e processo comercial.
+                  O diferencial está em conectar percepção, atendimento e processo comercial em uma estrutura simples de operar.
                 </m.p>
 
                 <m.div
@@ -558,7 +438,7 @@ export function NorteOneSite() {
           <SectionHeader
             eyebrow="Dor real do negócio"
             title="O problema não é falta de ferramenta. É falta de estrutura."
-            text="Muitas empresas locais já têm Instagram, WhatsApp, anúncios ou até algum site. Mesmo assim, continuam perdendo oportunidades porque esses pontos não trabalham juntos. A presença não transmite confiança, o atendimento depende de esforço manual e os processos ficam espalhados."
+            text="Muitas empresas já têm Instagram, WhatsApp, anúncios ou site. Mesmo assim, perdem oportunidades porque esses pontos não trabalham juntos: a presença não transmite valor, o atendimento depende de esforço manual e os processos ficam espalhados."
           />
 
           <div className="mt-10 grid gap-4 md:grid-cols-2">
@@ -578,10 +458,10 @@ export function NorteOneSite() {
           <div data-cinematic>
             <SectionLabel>Categoria estratégica</SectionLabel>
             <h2 className="font-display text-[clamp(1.72rem,3.8vw,4.3rem)] font-semibold leading-[1.08]">
-              Tecnologia estratégica para empresas locais que querem vender melhor.
+              Tecnologia estratégica para empresas locais venderem melhor.
             </h2>
             <p className="mt-4 max-w-2xl text-sm leading-7 text-azul-nevoa/72 sm:mt-5 sm:text-base sm:leading-8">
-              A Norte One não começa pelo serviço. Começamos pelo diagnóstico do que está travando a percepção, o atendimento e os processos da sua empresa. A partir disso, estruturamos a solução certa com tecnologia.
+              Antes de indicar qualquer solução, entendemos o que está travando a percepção, o atendimento e os processos da sua empresa. A tecnologia entra depois, com função clara.
             </p>
 
             <div className="mt-8 rounded-[30px] border border-cobre/24 bg-cobre/[0.08] p-6">
@@ -614,7 +494,7 @@ export function NorteOneSite() {
           <SectionHeader
             eyebrow="Contra o improviso"
             title="O verdadeiro concorrente pode não ser outra empresa. Pode ser o improviso."
-            text="Enquanto muitos negócios procuram apenas um site ou uma automação, o problema real costuma estar na falta de uma estrutura que conecte presença, atendimento e operação."
+            text="Quando presença, atendimento e operação não conversam entre si, o cliente sente insegurança e oportunidades se perdem no caminho."
             align="center"
           />
 
@@ -651,8 +531,8 @@ export function NorteOneSite() {
           <div className="mb-10 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
             <SectionHeader
               eyebrow="Soluções por resultado"
-              title="A solução certa depende do que está travando o crescimento da sua empresa."
-              text="Por isso, a Norte One não entrega tecnologia solta. Cada solução entra para resolver um ponto específico da jornada do cliente e da operação da empresa."
+              title="A solução certa começa pelo gargalo certo."
+              text="Cada entrega resolve um ponto específico da jornada do cliente ou da operação da empresa, sem tecnologia solta."
             />
             <ButtonLink href={diagnosisUrl} variant="secondary">
               Fazer diagnóstico
@@ -698,31 +578,6 @@ export function NorteOneSite() {
                 <p className="mt-4 text-sm leading-7 text-azul-nevoa/66">{text}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="publico" className="px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
-          <SectionHeader
-            eyebrow="Para quem é"
-            title="Para empresas locais que querem ser percebidas com mais valor."
-            text="A Norte One é para negócios que já entenderam que vender melhor não depende apenas de postar mais ou responder mensagens. Depende de construir uma estrutura que transmita confiança, conduza o atendimento e organize os processos certos."
-          />
-          <div data-cinematic className="premium-border premium-surface rounded-[34px] bg-azul-norte/74 p-6 sm:p-8">
-            <div className="grid gap-3 sm:grid-cols-2">
-              {audiences.map((item) => (
-                <div key={item} className="flex items-center gap-3 rounded-2xl border border-off-white/10 bg-off-white/[0.045] px-4 py-3 text-sm text-azul-nevoa/74">
-                  <Store className="h-4 w-4 flex-none text-cobre" />
-                  {item}
-                </div>
-              ))}
-            </div>
-            <div className="mt-6 rounded-3xl border border-cobre/24 bg-cobre/[0.08] p-5">
-              <p className="text-sm leading-7 text-azul-nevoa/78">
-                Não é para empresas que procuram apenas o site mais barato. É para empresas que querem melhorar a forma como são percebidas, atendem e vendem.
-              </p>
-            </div>
           </div>
         </div>
       </section>
@@ -814,90 +669,6 @@ export function NorteOneSite() {
                 <SearchCheck className="h-4 w-4 flex-none text-cobre" />
                 {item}
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="portfolio" className="overflow-hidden px-4 py-12 sm:px-8 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-8 flex flex-col justify-between gap-6 sm:mb-10 lg:flex-row lg:items-end">
-            <SectionHeader
-              eyebrow="Aplicações e portfólio"
-              title="Tecnologia aplicada onde a empresa realmente perde ou ganha oportunidades."
-              text="Não são apenas telas bonitas. Cada aplicação precisa resolver uma parte da percepção, do atendimento ou da operação."
-            />
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={() => scrollPortfolio("previous")}
-                disabled={activePortfolio === 0}
-                className="interactive-lift inline-flex h-11 w-11 items-center justify-center rounded-full border border-off-white/10 bg-off-white/[0.06] text-off-white transition hover:border-cobre/50 hover:text-cobre disabled:cursor-not-allowed disabled:opacity-35"
-                aria-label="Ver projeto anterior"
-              >
-                <ArrowLeft className="h-4 w-4" />
-              </button>
-              <button
-                type="button"
-                onClick={() => scrollPortfolio("next")}
-                disabled={activePortfolio === showcaseCases.length - 1}
-                className="interactive-lift inline-flex h-11 w-11 items-center justify-center rounded-full border border-off-white/10 bg-off-white text-azul-norte shadow-gold transition hover:bg-cobre hover:text-off-white disabled:cursor-not-allowed disabled:opacity-35"
-                aria-label="Ver próximo projeto"
-              >
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
-
-          <div className="mb-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-            {applicationCards.map(({ title, text, Icon }) => (
-              <article key={title} data-cinematic className="deep-panel interactive-lift rounded-[26px] p-5">
-                <Icon className="mb-6 h-5 w-5 text-cobre" />
-                <h3 className="font-display text-lg font-semibold text-off-white">{title}</h3>
-                <p className="mt-3 text-sm leading-6 text-azul-nevoa/64">{text}</p>
-              </article>
-            ))}
-          </div>
-
-          <p className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-cobre">
-            {String(activePortfolio + 1).padStart(2, "0")} / {String(showcaseCases.length).padStart(2, "0")}
-          </p>
-        </div>
-
-        <div className="portfolio-carousel -mx-4 sm:-mx-8">
-          <div ref={portfolioRef} onScroll={syncPortfolioPosition} className="portfolio-carousel__track" aria-label="Showcase de aplicações de negócio da Norte One">
-            {showcaseCases.map((item) => (
-              <article
-                key={item.title}
-                data-cinematic
-                data-portfolio-card
-                className="group w-[84vw] max-w-[820px] shrink-0 overflow-hidden rounded-[32px] border border-off-white/10 bg-azul-norte/82 p-3 shadow-panel sm:w-[680px] sm:p-4 lg:w-[780px]"
-              >
-                <div className="overflow-hidden rounded-[24px] border border-off-white/10 bg-grafite">
-                  <Image
-                    src={assetPath(item.image)}
-                    alt={`Aplicação conceitual de ${item.title}`}
-                    width={960}
-                    height={620}
-                    className="aspect-[1.55] w-full object-cover transition duration-700 group-hover:scale-[1.035]"
-                  />
-                </div>
-                <div className="grid gap-6 px-2 pb-3 pt-6 sm:grid-cols-[1fr_0.82fr] sm:px-4 sm:pb-5">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cobre">{item.segment}</p>
-                    <h3 className="mt-3 font-display text-2xl font-semibold text-off-white sm:text-3xl">{item.title}</h3>
-                    <p className="mt-4 text-sm leading-7 text-azul-nevoa/66">{item.text}</p>
-                  </div>
-                  <div className="grid content-start gap-2">
-                    {item.tags.map((tag) => (
-                      <div key={tag} className="flex items-center gap-3 rounded-2xl border border-off-white/10 bg-off-white/[0.045] px-4 py-3 text-sm text-azul-nevoa/76">
-                        <span className="h-1.5 w-1.5 rounded-full bg-cobre shadow-[0_0_12px_rgba(184,121,69,0.75)]" />
-                        {tag}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </article>
             ))}
           </div>
         </div>

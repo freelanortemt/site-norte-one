@@ -309,53 +309,6 @@ body {
   border-bottom: 1px solid rgba(216, 225, 232, 0.11);
 }
 
-.portfolio-carousel {
-  position: relative;
-  overflow: hidden;
-  padding: 0.25rem 0 1.5rem;
-}
-
-.portfolio-carousel::before,
-.portfolio-carousel::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 2;
-  width: min(16vw, 180px);
-  pointer-events: none;
-}
-
-.portfolio-carousel::before {
-  left: 0;
-  background: linear-gradient(90deg, rgba(7, 22, 36, 0.98), transparent);
-}
-
-.portfolio-carousel::after {
-  right: 0;
-  background: linear-gradient(270deg, rgba(7, 22, 36, 0.98), transparent);
-}
-
-.portfolio-carousel__track {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  padding-inline: 1rem;
-  scroll-behavior: smooth;
-  scroll-padding-inline: 1rem;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-}
-
-.portfolio-carousel__track::-webkit-scrollbar {
-  display: none;
-}
-
-.portfolio-carousel__track > * {
-  scroll-snap-align: center;
-}
-
 .chat-message {
   max-width: 92%;
   border: 1px solid rgba(216, 225, 232, 0.12);
@@ -414,10 +367,6 @@ body {
     transition-duration: 680ms;
   }
 
-  .portfolio-carousel::before,
-  .portfolio-carousel::after {
-    width: 36px;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
